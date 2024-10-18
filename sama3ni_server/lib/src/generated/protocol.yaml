@@ -1,0 +1,5 @@
+example:
+  - uploadFile:
+task:
+  - getTasks:
+  - createTask:

@@ -1,0 +1,84 @@
+name: sama3ni_flutter
+description: A new Flutter project with Serverpod.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  serverpod_flutter: 2.1.4
+  file_picker: ^5.0.0
+  hexcolor: ^3.0.1
+  sizer: ^3.0.4
+
+  sama3ni_client:
+    path: ../sama3ni_client
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.5
+  get: ^4.6.6
+
+dev_dependencies:
+  flutter_lints: ">=3.0.0 <6.0.0"
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: dancing_script
+      fonts:
+        - asset: assets/fonts/dancing_script/DancingScript-Bold.ttf
+        - asset: assets/fonts/dancing_script/DancingScript-Medium.ttf
+        - asset: assets/fonts/dancing_script/DancingScript-Regular.ttf
+        - asset: assets/fonts/dancing_script/DancingScript-SemiBold.ttf
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/raleway/Raleway-Black.ttf
+        - asset: assets/fonts/raleway/Raleway-Black.ttf
+        - asset: assets/fonts/raleway/Raleway-Black.ttf
+        - asset: assets/fonts/raleway/Raleway-BlackItalic.ttf
+        - asset: assets/fonts/raleway/Raleway-BoldItalic.ttf
+        - asset: assets/fonts/raleway/Raleway-ExtraBold.ttf
+        - asset: assets/fonts/raleway/Raleway-ExtraBoldItalic.ttf
+        - asset: assets/fonts/raleway/Raleway-ExtraLight.ttf
+        - asset: assets/fonts/raleway/Raleway-ExtraLightItalic.ttf
+        - asset: assets/fonts/raleway/Raleway-Italic.ttf
+        - asset: assets/fonts/raleway/Raleway-Light.ttf
+        - asset: assets/fonts/raleway/Raleway-LightItalic.ttf
+        - asset: assets/fonts/raleway/Raleway-Medium.ttf
+        - asset: assets/fonts/raleway/Raleway-MediumItalic.ttf
+        - asset: assets/fonts/raleway/Raleway-Regular.ttf
+        - asset: assets/fonts/raleway/Raleway-SemiBold.ttf
+        - asset: assets/fonts/raleway/Raleway-SemiBoldItalic.ttf
+        - asset: assets/fonts/raleway/Raleway-Thin.ttf
+        - asset: assets/fonts/raleway/Raleway-ThinItalic.ttf

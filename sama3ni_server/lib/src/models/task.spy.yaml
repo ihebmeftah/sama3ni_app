@@ -1,0 +1,8 @@
+table: task
+class: Tasks
+fields:
+  name: String
+  photo: String
+  createdAt: DateTime,default=now,
+  updatedAt: DateTime?
+  deletedAt: DateTime?

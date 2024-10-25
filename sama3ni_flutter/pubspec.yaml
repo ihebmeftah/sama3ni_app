@@ -24,10 +24,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_animate: ^4.5.0
+  animate_do: ^3.3.4
   serverpod_flutter: 2.1.4
   file_picker: ^5.0.0
   hexcolor: ^3.0.1
   sizer: ^3.0.4
+  carousel_slider: ^5.0.0
 
   sama3ni_client:
     path: ../sama3ni_client

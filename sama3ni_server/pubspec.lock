@@ -160,7 +160,7 @@ packages:
       sha256: daa33a09b9922bf0e578a686b99fdc9f357893d6f0a4f616255d1a32bc345fa4
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   serverpod_serialization:
     dependency: transitive
     description:
@@ -168,7 +168,7 @@ packages:
       sha256: b90869587bbad4dc91fb762231790648cd5978d4dca23757a7ae962c0345c879
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   serverpod_shared:
     dependency: transitive
     description:
@@ -176,7 +176,7 @@ packages:
       sha256: "9b68116c2c8bad7c4dff527ed94fbcf0ec633d6ede13a311891972ca20969f97"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   source_span:
     dependency: transitive
     description:

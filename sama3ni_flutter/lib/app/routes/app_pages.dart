@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 
-import '../components/musicplayer/bindings/musicplayer_binding.dart';
-import '../components/musicplayer/views/musicplayer_view.dart';
 import '../modules/authentification/bindings/authentification_binding.dart';
 import '../modules/authentification/views/authentification_view.dart';
 import '../modules/beats/bindings/beats_binding.dart';

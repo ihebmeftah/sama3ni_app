@@ -12,6 +12,8 @@ abstract class Routes {
   static const KITS = _Paths.KITS;
   static const LOOPS = _Paths.LOOPS;
   static const AUTHENTIFICATION = _Paths.AUTHENTIFICATION;
+  static const TRACKS = _Paths.TRACKS;
+  static const ARTISTS = _Paths.ARTISTS;
 }
 
 abstract class _Paths {
@@ -23,4 +25,6 @@ abstract class _Paths {
   static const KITS = '/kits';
   static const LOOPS = '/loops';
   static const AUTHENTIFICATION = '/authentification';
+  static const TRACKS = '/tracks';
+  static const ARTISTS = '/artists';
 }

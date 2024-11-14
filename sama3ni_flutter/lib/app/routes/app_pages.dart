@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
+import 'package:sama3ni_flutter/app/modules/artists/views/artists_profile_view.dart';
 
+import '../modules/artists/bindings/artists_binding.dart';
+import '../modules/artists/bindings/artists_profile_binding.dart';
+import '../modules/artists/views/artists_view.dart';
 import '../modules/authentification/bindings/authentification_binding.dart';
 import '../modules/authentification/views/authentification_view.dart';
 import '../modules/beats/bindings/beats_binding.dart';
@@ -14,6 +18,8 @@ import '../modules/music/bindings/music_binding.dart';
 import '../modules/music/views/music_view.dart';
 import '../modules/setting/bindings/setting_binding.dart';
 import '../modules/setting/views/setting_view.dart';
+import '../modules/tracks/bindings/tracks_binding.dart';
+import '../modules/tracks/views/tracks_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -58,5 +64,20 @@ class AppPages {
       page: () => const AuthentificationView(),
       binding: AuthentificationBinding(),
     ),
+    GetPage(
+      name: _Paths.TRACKS,
+      page: () => const TracksView(),
+      binding: TracksBinding(),
+    ),
+    GetPage(
+        name: _Paths.ARTISTS,
+        page: () => const ArtistsView(),
+        binding: ArtistsBinding(),
+        children: [
+          GetPage(
+              name: "/:id",
+              page: () => const ArtistsProfileView(),
+              binding: ArtistsProfieBinding())
+        ]),
   ];
 }

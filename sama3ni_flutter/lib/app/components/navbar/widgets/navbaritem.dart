@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:sizer/sizer.dart';
 
 class NavBarItem extends StatelessWidget {
   const NavBarItem({
@@ -32,7 +31,7 @@ class NavBarItem extends StatelessWidget {
       onTap: onClick,
       leading: Icon(
         iconData,
-        size: (15).sp,
+        size: (15),
         color: text == "Logout"
             ? Colors.red.shade500
             : isSelected
@@ -45,10 +44,10 @@ class NavBarItem extends StatelessWidget {
               ? FontWeight.bold
               : FontWeight.w400,
           fontSize: text == "Logout"
-              ? (10).sp
+              ? (10)
               : isSelected
-                  ? (12.8).sp
-                  : (11.5).sp,
+                  ? (12.8)
+                  : (11.5),
           color: Colors.white),
       title: Text(
         text.toUpperCase(),

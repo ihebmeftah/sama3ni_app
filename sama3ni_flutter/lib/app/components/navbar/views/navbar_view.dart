@@ -65,7 +65,13 @@ class NavbarView extends GetView<NavbarController> {
                                 }),
                           )))
                 ],
-                Expanded(child: child)
+                Expanded(
+                    child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: MediaQuery.sizeOf(context).height * 0.02,
+                      horizontal: MediaQuery.sizeOf(context).width * 0.08),
+                  child: child,
+                ))
               ],
             ),
           ),

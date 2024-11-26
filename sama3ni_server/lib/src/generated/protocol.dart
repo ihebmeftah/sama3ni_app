@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_library_name
+
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 

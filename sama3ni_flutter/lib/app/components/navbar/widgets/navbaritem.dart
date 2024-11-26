@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 class NavBarItem extends StatelessWidget {
   const NavBarItem({
@@ -17,37 +16,22 @@ class NavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       shape: RoundedRectangleBorder(
-        side: text != "Logout"
-            ? BorderSide.none
-            : BorderSide(color: Colors.grey.shade800),
+        side: BorderSide.none,
         borderRadius: BorderRadius.circular(18),
       ),
       selected: isSelected,
-      contentPadding: text == "Logout"
-          ? const EdgeInsets.symmetric(horizontal: 12, vertical: 0)
-          : null,
-      selectedColor: text == "Logout" ? Colors.white : Colors.black,
-      selectedTileColor: text == "Logout" ? HexColor("#171717") : Colors.white,
+      selectedColor: Colors.black,
+      selectedTileColor: Colors.white,
       onTap: onClick,
       leading: Icon(
         iconData,
         size: (15),
-        color: text == "Logout"
-            ? Colors.red.shade500
-            : isSelected
-                ? Colors.black
-                : Colors.white,
+        color: isSelected ? Colors.black : Colors.white,
       ),
       titleTextStyle: TextStyle(
           letterSpacing: 1.23,
-          fontWeight: isSelected || text != "Logout"
-              ? FontWeight.bold
-              : FontWeight.w400,
-          fontSize: text == "Logout"
-              ? (10)
-              : isSelected
-                  ? (12.8)
-                  : (11.5),
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.w400,
+          fontSize: isSelected ? (12.8) : (11.5),
           color: Colors.white),
       title: Text(
         text.toUpperCase(),

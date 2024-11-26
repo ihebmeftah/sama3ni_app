@@ -28,7 +28,9 @@ class App extends StatelessWidget {
       getPages: AppPages.routes,
       defaultTransition: Transition.fade,
       initialBinding: NavbarBinding(),
-      builder: (_, c) => NavbarView(child: c!),
+      builder: (_, c) => Overlay(initialEntries: [
+        OverlayEntry(builder: (_) => NavbarView(child: c!))
+      ]),
     );
   }
 }

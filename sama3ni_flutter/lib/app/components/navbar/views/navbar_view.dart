@@ -13,68 +13,88 @@ class NavbarView extends GetView<NavbarController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: MediaQuery.of(context).size.height * 0.1,
-        /*  actions: [
-          const SizedBox(width: 25),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.22,
-            child: const TextField(
-              decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.search_rounded,
-                    size: 18,
+      key: controller.scaffoldKey,
+      drawer: !GetPlatform.isMobile
+          ? null
+          : Drawer(
+              child: Column(
+                children: [
+                  UserAccountsDrawerHeader(
+                    currentAccountPicture: const CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/drake.jpeg"),
+                    ),
+                    decoration: BoxDecoration(color: Colors.blue.shade800),
+                    accountName: const Text(
+                      "Iheb meftah",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    accountEmail: const Text(
+                      "iheb@gmail.com",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                    ),
                   ),
-                  hintText: "Try searching track or artist or genre...",
-                  filled: true),
-            ),
-          ),
-          const Spacer(),
-          const SizedBox(width: 25),
-        ], */
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                if (!GetPlatform.isMobile) ...[
-                  Container(
-                      padding: const EdgeInsets.all(20),
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      height: MediaQuery.of(context).size.height,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: List.generate(
-                            controller.navbarItems.length,
-                            (i) => GetBuilder<NavbarController>(
-                                id: controller.navbarItems[i].route,
-                                builder: (context) {
-                                  return FlipInX(
-                                    delay: Duration(milliseconds: i * 200),
-                                    child: NavBarItem(
-                                      onClick: () => controller.navigateTo(
-                                          controller.navbarItems[i]),
-                                      isSelected: controller.navbarItems[i] ==
-                                          controller.currentNavBarItem,
-                                      iconData: controller.navbarItems[i].icon,
-                                      text: controller.navbarItems[i].title,
-                                    ),
-                                  );
-                                }),
-                          )))
+                  ...List.generate(
+                    controller.navbarItems.length,
+                    (i) => GetBuilder<NavbarController>(
+                        id: controller.navbarItems[i].route,
+                        builder: (context) {
+                          return FlipInX(
+                              delay: Duration(milliseconds: i * 200),
+                              child: ListTile(
+                                titleTextStyle: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: controller.navbarItems[i] ==
+                                            controller.currentNavBarItem
+                                        ? (16)
+                                        : (14),
+                                    color: Colors.white),
+                                selected: controller.navbarItems[i] ==
+                                    controller.currentNavBarItem,
+                                onTap: () => controller
+                                    .navigateTo(controller.navbarItems[i]),
+                                title: Text(controller.navbarItems[i].title),
+                                leading: Icon(controller.navbarItems[i].icon),
+                              ));
+                        }),
+                  )
                 ],
-                Expanded(
-                    child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: MediaQuery.sizeOf(context).height * 0.02,
-                      horizontal: MediaQuery.sizeOf(context).width * 0.08),
-                  child: child,
-                ))
-              ],
+              ),
             ),
-          ),
+      appBar: AppBar(
+          toolbarHeight: GetPlatform.isMobile
+              ? null
+              : MediaQuery.sizeOf(context).height * 0.1),
+      body: Row(
+        children: [
+          if (!GetPlatform.isMobile)
+            Container(
+                padding: const EdgeInsets.all(15),
+                width: MediaQuery.of(context).size.width * 0.135,
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: List.generate(
+                      controller.navbarItems.length,
+                      (i) => GetBuilder<NavbarController>(
+                          id: controller.navbarItems[i].route,
+                          builder: (context) {
+                            return FlipInX(
+                              delay: Duration(milliseconds: i * 200),
+                              child: NavBarItem(
+                                onClick: () => controller
+                                    .navigateTo(controller.navbarItems[i]),
+                                isSelected: controller.navbarItems[i] ==
+                                    controller.currentNavBarItem,
+                                iconData: controller.navbarItems[i].icon,
+                                text: controller.navbarItems[i].title,
+                              ),
+                            );
+                          }),
+                    ))),
+          Expanded(child: child)
         ],
       ),
     );

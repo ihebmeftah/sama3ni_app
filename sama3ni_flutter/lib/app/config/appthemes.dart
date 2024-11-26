@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 abstract class AppThemes {
@@ -36,7 +37,7 @@ abstract class AppThemes {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-            fixedSize: const Size(300, 40),
+            fixedSize: Size(300, GetPlatform.isWeb ? 40 : 47),
             backgroundColor: Colors.blue.shade800,
             foregroundColor: Colors.white,
             shape: const RoundedRectangleBorder(

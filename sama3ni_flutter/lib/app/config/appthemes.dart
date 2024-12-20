@@ -21,11 +21,31 @@ abstract class AppThemes {
     brightness: Brightness.dark,
     tabBarTheme: const TabBarTheme(dividerHeight: 0),
     scaffoldBackgroundColor: Colors.black,
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: Colors.black,
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.black,
       surfaceTintColor: Colors.black,
       iconTheme: IconThemeData(color: Colors.white),
       centerTitle: false,
+    ),
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+      foregroundColor: Colors.blue,
+    )),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+      selectedItemColor: Colors.grey.shade300,
+      unselectedItemColor: Colors.grey.shade400,
+      selectedLabelStyle: const TextStyle(
+        fontSize: 14.5,
+        fontWeight: FontWeight.w600,
+      ),
+      unselectedLabelStyle: const TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w500,
+      ),
     ),
     sliderTheme: SliderThemeData(
       activeTrackColor: Colors.blue.shade400,
@@ -61,36 +81,36 @@ abstract class AppThemes {
         borderRadius: BorderRadius.circular(15),
       ),
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: TextStyle(
+        color: HexColor("8193b2"),
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+      filled: true,
+      errorStyle: const TextStyle(color: Colors.red),
+      fillColor: HexColor("#0c162d"),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide.none,
+      ),
+      focusedErrorBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+        color: Colors.red,
+      )),
+      errorBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+        color: Colors.red,
+      )),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: Colors.blue),
+      ),
+    ),
     iconButtonTheme: IconButtonThemeData(
         style: IconButton.styleFrom(
       overlayColor: Colors.grey.shade200,
       foregroundColor: Colors.blue.shade900,
     )),
-    inputDecorationTheme: InputDecorationTheme(
-      hintStyle: const TextStyle(fontSize: (13), fontWeight: FontWeight.w400),
-      hoverColor: Colors.transparent,
-      fillColor: HexColor("#383838"),
-      constraints: const BoxConstraints(
-        maxHeight: 40,
-      ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
-      focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.shade800),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(10),
-          )),
-      border: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey.shade800),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10),
-        ),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey.shade800),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10),
-        ),
-      ),
-    ),
   );
 }

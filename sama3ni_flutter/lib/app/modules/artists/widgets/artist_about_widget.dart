@@ -26,7 +26,7 @@ class ArtistAboutWidget extends StatelessWidget {
                 
                 At the start of 2022, Durk released a new single, "Ahhh Ha," the first song to be shared from his forthcoming seventh studio LP, 7220. The album arrived in March of that year and debuted at the top slot of the Billboard charts. The set featured guest appearances from , , , and . A deluxe version of the album spawned the Hot 100 single "Did Shit to Me," featuring . Later, he joined  and  on the non-album track "Hot Shit." Durk closed out the year with the release of Loyal Bros 2, which showcased  signees alongside guests like , , and . In 2023, Durk first issued Almost Healed, a number three Billboard 200 entry containing "All My Life," a  collaboration that narrowly missed the top of the Hot 100 and won a Grammy for Best Melodic Rap Performance. Durk returned later in the year to spotlight  with Nightmares in the Trenches. The set was promoted with Durk's own charting single "Smurk Carter." After releasing singles like "Old Days" and "Went Hollywood for a Year" in 2024, Durk issued the album Deep Thoughts. ~ Andy Kellman, Rovi
                 """,
-          trimLength: 1000,
+          trimLength: 1400,
         ),
         const SizedBox(height: 20),
         Row(

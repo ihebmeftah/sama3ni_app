@@ -28,6 +28,8 @@ dependencies:
   animate_do: ^3.3.4
   serverpod_flutter: 2.2.0
   file_picker: ^5.0.0
+  animated_text_kit: ^4.2.2
+
   hexcolor: ^3.0.1
   http: ^1.2.2
   #sizer: ^3.0.4

@@ -157,26 +157,26 @@ packages:
     dependency: "direct main"
     description:
       name: serverpod
-      sha256: e313c6df63275a97c828fcefad61465cabbb24992607a82a87a5a8081d299d2c
+      sha256: ee1ffc1f66a4b2c08b3187a64112bbb5a61f7a3c5b4bdefa4cee959dea69f9f2
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   serverpod_serialization:
     dependency: transitive
     description:
       name: serverpod_serialization
-      sha256: "3e6fec996eb78b61c092d73145ddd66a959083abec1d1f074b2c2f1649490afd"
+      sha256: "93fc428786acfd825238f6d10145cc9befc5e53e374ab9498c75c88e7dee8550"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   serverpod_shared:
     dependency: transitive
     description:
       name: serverpod_shared
-      sha256: e46073d593f4f9d29d23ee8823d5f8c73e465cf0efc9645dd6ca785b03bb0a7c
+      sha256: "2fbb73ee911952f88858f22afa30483a14a9457b785f9f242f81a4451cf66e62"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   source_span:
     dependency: transitive
     description:

@@ -10,7 +10,6 @@ class ArtistsView extends GetView<ArtistsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
-      print(constraints.biggest.width);
       return constraints.biggest.width < 800
           ? GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -175,7 +174,7 @@ class ArtistsView extends GetView<ArtistsController> {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   borderRadius: BorderRadius.circular(15),
-                                  hoverColor: Colors.grey.withOpacity(0.2),
+                                  hoverColor: Colors.grey..withValues(alpha : 0.2),
                                   onTap: () {},
                                   child: Padding(
                                     padding: const EdgeInsets.all(12),

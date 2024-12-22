@@ -28,7 +28,7 @@ class TrendingAlbum extends StatelessWidget {
               return ZoomIn(
                 child: InkWell(
                   borderRadius: BorderRadius.circular(15),
-                  hoverColor: Colors.grey.withOpacity(0.2),
+                  hoverColor: Colors.grey.withValues(alpha: 0.2),
                   onTap: () {},
                   child: Padding(
                     padding: const EdgeInsets.all(12),

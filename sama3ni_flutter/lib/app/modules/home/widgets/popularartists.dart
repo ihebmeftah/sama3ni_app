@@ -27,7 +27,7 @@ class PopularArtist extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                 borderRadius: BorderRadius.circular(10),
-                hoverColor: Colors.grey.withOpacity(0.2),
+                hoverColor: Colors.grey.withValues(alpha : 0.2),
                 onTap: () {},
                 child: Container(
                   padding: const EdgeInsets.all(10),

@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_library_name
-
 /* AUTOMATICALLY GENERATED CODE DO NOT MODIFY */
 /*   To generate run: "serverpod generate"    */
 
@@ -10,12 +8,12 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixes
-
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'task.dart' as _i3;
-import 'package:sama3ni_server/src/generated/task.dart' as _i4;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
+import 'task.dart' as _i4;
+import 'package:sama3ni_server/src/generated/task.dart' as _i5;
 export 'task.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
@@ -89,6 +87,7 @@ class Protocol extends _i1.SerializationManagerServer {
       ],
       managed: true,
     ),
+    ..._i3.Protocol.targetTableDefinitions,
     ..._i2.Protocol.targetTableDefinitions,
   ];
 
@@ -98,19 +97,22 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i3.Tasks) {
-      return _i3.Tasks.fromJson(data) as T;
+    if (t == _i4.Tasks) {
+      return _i4.Tasks.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i3.Tasks?>()) {
-      return (data != null ? _i3.Tasks.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i4.Tasks?>()) {
+      return (data != null ? _i4.Tasks.fromJson(data) : null) as T;
     }
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;
     }
-    if (t == List<_i4.Tasks>) {
-      return (data as List).map((e) => deserialize<_i4.Tasks>(e)).toList()
+    if (t == List<_i5.Tasks>) {
+      return (data as List).map((e) => deserialize<_i5.Tasks>(e)).toList()
           as dynamic;
     }
+    try {
+      return _i3.Protocol().deserialize<T>(data, t);
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     try {
       return _i2.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
@@ -121,24 +123,36 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i3.Tasks) {
+    if (data is _i4.Tasks) {
       return 'Tasks';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod.$className';
     }
+    className = _i3.Protocol().getClassNameForObject(data);
+    if (className != null) {
+      return 'serverpod_auth.$className';
+    }
     return null;
   }
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
-    if (data['className'] == 'Tasks') {
-      return deserialize<_i3.Tasks>(data['data']);
+    var dataClassName = data['className'];
+    if (dataClassName is! String) {
+      return super.deserializeByClassName(data);
     }
-    if (data['className'].startsWith('serverpod.')) {
-      data['className'] = data['className'].substring(10);
+    if (dataClassName == 'Tasks') {
+      return deserialize<_i4.Tasks>(data['data']);
+    }
+    if (dataClassName.startsWith('serverpod.')) {
+      data['className'] = dataClassName.substring(10);
       return _i2.Protocol().deserializeByClassName(data);
+    }
+    if (dataClassName.startsWith('serverpod_auth.')) {
+      data['className'] = dataClassName.substring(15);
+      return _i3.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }
@@ -146,14 +160,20 @@ class Protocol extends _i1.SerializationManagerServer {
   @override
   _i1.Table? getTableForType(Type t) {
     {
+      var table = _i3.Protocol().getTableForType(t);
+      if (table != null) {
+        return table;
+      }
+    }
+    {
       var table = _i2.Protocol().getTableForType(t);
       if (table != null) {
         return table;
       }
     }
     switch (t) {
-      case _i3.Tasks:
-        return _i3.Tasks.t;
+      case _i4.Tasks:
+        return _i4.Tasks.t;
     }
     return null;
   }

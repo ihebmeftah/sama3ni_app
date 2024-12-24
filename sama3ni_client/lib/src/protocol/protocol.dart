@@ -8,11 +8,11 @@
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
 
-library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixes
-
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'task.dart' as _i2;
 import 'package:sama3ni_client/src/protocol/task.dart' as _i3;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i4;
 export 'task.dart';
 export 'client.dart';
 
@@ -42,6 +42,9 @@ class Protocol extends _i1.SerializationManager {
       return (data as List).map((e) => deserialize<_i3.Tasks>(e)).toList()
           as dynamic;
     }
+    try {
+      return _i4.Protocol().deserialize<T>(data, t);
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
 
@@ -52,13 +55,25 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i2.Tasks) {
       return 'Tasks';
     }
+    className = _i4.Protocol().getClassNameForObject(data);
+    if (className != null) {
+      return 'serverpod_auth.$className';
+    }
     return null;
   }
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
-    if (data['className'] == 'Tasks') {
+    var dataClassName = data['className'];
+    if (dataClassName is! String) {
+      return super.deserializeByClassName(data);
+    }
+    if (dataClassName == 'Tasks') {
       return deserialize<_i2.Tasks>(data['data']);
+    }
+    if (dataClassName.startsWith('serverpod_auth.')) {
+      data['className'] = dataClassName.substring(15);
+      return _i4.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }

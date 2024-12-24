@@ -4,6 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  final navItems = [
+    "Browse",
+    "How it works",
+    "About",
+    "Contact",
+  ];
+  int currentIndex = 0;
+  void changeIndex(int index) {
+    update([currentIndex]);
+    currentIndex = index;
+    update([index]);
+  }
+
   final category = [
     "Hiphop",
     "Rock",

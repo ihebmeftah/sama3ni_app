@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
-import 'package:sama3ni_flutter/app/modules/artists/views/artists_profile_view.dart';
 
+import '../middlewares/auth_middlewares.dart';
 import '../modules/artists/bindings/artists_binding.dart';
 import '../modules/artists/bindings/artists_profile_binding.dart';
+import '../modules/artists/views/artists_profile_view.dart';
 import '../modules/artists/views/artists_view.dart';
 import '../modules/authentification/bindings/authentification_binding.dart';
 import '../modules/authentification/views/authentification_view.dart';
@@ -25,6 +26,7 @@ class AppPages {
     GetPage(
       name: _Paths.AUTHENTIFICATION,
       page: () => const AuthentificationView(),
+      middlewares: [AuthMiddlewares()],
       binding: AuthentificationBinding(),
     ),
     GetPage(

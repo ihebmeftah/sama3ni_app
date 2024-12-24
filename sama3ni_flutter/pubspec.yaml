@@ -39,6 +39,8 @@ dependencies:
 
   sama3ni_client:
     path: ../sama3ni_client
+  serverpod_auth_shared_flutter: 2.3.0
+  serverpod_auth_email_flutter: 2.3.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

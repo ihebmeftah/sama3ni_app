@@ -41,6 +41,7 @@ class AuthentificationView extends GetView<AuthentificationController> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    controller: controller.email,
                     validator: (value) => value!.isEmpty ? "Enter email" : null,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
@@ -52,6 +53,7 @@ class AuthentificationView extends GetView<AuthentificationController> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    controller: controller.password,
                     validator: (value) =>
                         value!.isEmpty ? "Enter password" : null,
                     decoration: InputDecoration(

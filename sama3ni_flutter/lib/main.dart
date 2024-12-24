@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:sama3ni_flutter/app/components/navbar/bindings/navbar_binding.dart';
-import 'package:sama3ni_flutter/app/components/navbar/views/navbar_view.dart';
 import 'package:sama3ni_flutter/app/config/appthemes.dart';
 
 import 'app/routes/app_pages.dart';
@@ -27,10 +25,6 @@ class App extends StatelessWidget {
       initialRoute: Routes.HOME,
       getPages: AppPages.routes,
       defaultTransition: Transition.fade,
-      initialBinding: NavbarBinding(),
-      builder: (_, c) => Overlay(initialEntries: [
-        OverlayEntry(builder: (_) => NavbarView(child: c!))
-      ]),
     );
   }
 }

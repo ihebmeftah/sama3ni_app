@@ -22,6 +22,8 @@ class AuthentificationController extends GetxController {
       final userInfo = await authController.signIn(email.text, password.text);
       if (userInfo != null) {
         Get.offAllNamed(Routes.HOME);
+      } else {
+        Get.snackbar("Error", "Invalid email or password");
       }
     }
   }

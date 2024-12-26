@@ -11,9 +11,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:sama3ni_client/src/protocol/task.dart' as _i3;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i4;
-import 'protocol.dart' as _i5;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
+import 'protocol.dart' as _i4;
 
 /// {@category Endpoint}
 class EndpointExample extends _i1.EndpointRef {
@@ -36,34 +35,12 @@ class EndpointExample extends _i1.EndpointRef {
       );
 }
 
-/// {@category Endpoint}
-class EndpointTask extends _i1.EndpointRef {
-  EndpointTask(_i1.EndpointCaller caller) : super(caller);
-
-  @override
-  String get name => 'task';
-
-  _i2.Future<List<_i3.Tasks>> getTasks() =>
-      caller.callServerEndpoint<List<_i3.Tasks>>(
-        'task',
-        'getTasks',
-        {},
-      );
-
-  _i2.Future<_i3.Tasks> createTask(_i3.Tasks task) =>
-      caller.callServerEndpoint<_i3.Tasks>(
-        'task',
-        'createTask',
-        {'task': task},
-      );
-}
-
 class Modules {
   Modules(Client client) {
-    auth = _i4.Caller(client);
+    auth = _i3.Caller(client);
   }
 
-  late final _i4.Caller auth;
+  late final _i3.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -82,7 +59,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i5.Protocol(),
+          _i4.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -93,21 +70,15 @@ class Client extends _i1.ServerpodClientShared {
               disconnectStreamsOnLostInternetConnection,
         ) {
     example = EndpointExample(this);
-    task = EndpointTask(this);
     modules = Modules(this);
   }
 
   late final EndpointExample example;
 
-  late final EndpointTask task;
-
   late final Modules modules;
 
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {
-        'example': example,
-        'task': task,
-      };
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {'example': example};
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>

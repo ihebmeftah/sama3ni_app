@@ -12,9 +12,8 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
-import 'task.dart' as _i4;
-import 'package:sama3ni_server/src/generated/task.dart' as _i5;
-export 'task.dart';
+import 'categories.dart' as _i4;
+export 'categories.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -25,8 +24,8 @@ class Protocol extends _i1.SerializationManagerServer {
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
     _i2.TableDefinition(
-      name: 'task',
-      dartName: 'Tasks',
+      name: 'categories',
+      dartName: 'Category',
       schema: 'public',
       module: 'sama3ni',
       columns: [
@@ -35,7 +34,7 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
-          columnDefault: 'nextval(\'task_id_seq\'::regclass)',
+          columnDefault: 'nextval(\'categories_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'name',
@@ -44,10 +43,16 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'String',
         ),
         _i2.ColumnDefinition(
+          name: 'description',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
           name: 'photo',
           columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
+          isNullable: true,
+          dartType: 'String?',
         ),
         _i2.ColumnDefinition(
           name: 'createdAt',
@@ -72,7 +77,7 @@ class Protocol extends _i1.SerializationManagerServer {
       foreignKeys: [],
       indexes: [
         _i2.IndexDefinition(
-          indexName: 'task_pkey',
+          indexName: 'categories_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -97,18 +102,14 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i4.Tasks) {
-      return _i4.Tasks.fromJson(data) as T;
+    if (t == _i4.Category) {
+      return _i4.Category.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i4.Tasks?>()) {
-      return (data != null ? _i4.Tasks.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i4.Category?>()) {
+      return (data != null ? _i4.Category.fromJson(data) : null) as T;
     }
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;
-    }
-    if (t == List<_i5.Tasks>) {
-      return (data as List).map((e) => deserialize<_i5.Tasks>(e)).toList()
-          as dynamic;
     }
     try {
       return _i3.Protocol().deserialize<T>(data, t);
@@ -123,8 +124,8 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i4.Tasks) {
-      return 'Tasks';
+    if (data is _i4.Category) {
+      return 'Category';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -143,8 +144,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
-    if (dataClassName == 'Tasks') {
-      return deserialize<_i4.Tasks>(data['data']);
+    if (dataClassName == 'Category') {
+      return deserialize<_i4.Category>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -172,8 +173,8 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i4.Tasks:
-        return _i4.Tasks.t;
+      case _i4.Category:
+        return _i4.Category.t;
     }
     return null;
   }

@@ -11,9 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/example_endpoint.dart' as _i2;
-import '../endpoints/task_endpoint.dart' as _i3;
-import 'package:sama3ni_server/src/generated/task.dart' as _i4;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i5;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -24,13 +22,7 @@ class Endpoints extends _i1.EndpointDispatch {
           server,
           'example',
           null,
-        ),
-      'task': _i3.TaskEndpoint()
-        ..initialize(
-          server,
-          'task',
-          null,
-        ),
+        )
     };
     connectors['example'] = _i1.EndpointConnector(
       name: 'example',
@@ -62,39 +54,6 @@ class Endpoints extends _i1.EndpointDispatch {
         )
       },
     );
-    connectors['task'] = _i1.EndpointConnector(
-      name: 'task',
-      endpoint: endpoints['task']!,
-      methodConnectors: {
-        'getTasks': _i1.MethodConnector(
-          name: 'getTasks',
-          params: {},
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['task'] as _i3.TaskEndpoint).getTasks(session),
-        ),
-        'createTask': _i1.MethodConnector(
-          name: 'createTask',
-          params: {
-            'task': _i1.ParameterDescription(
-              name: 'task',
-              type: _i1.getType<_i4.Tasks>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['task'] as _i3.TaskEndpoint).createTask(
-            session,
-            params['task'],
-          ),
-        ),
-      },
-    );
-    modules['serverpod_auth'] = _i5.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i3.Endpoints()..initializeEndpoints(server);
   }
 }

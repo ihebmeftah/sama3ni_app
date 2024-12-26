@@ -11,30 +11,33 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class Tasks implements _i1.SerializableModel {
-  Tasks._({
+abstract class Category implements _i1.SerializableModel {
+  Category._({
     this.id,
     required this.name,
-    required this.photo,
+    this.description,
+    this.photo,
     DateTime? createdAt,
     this.updatedAt,
     this.deletedAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
-  factory Tasks({
+  factory Category({
     int? id,
     required String name,
-    required String photo,
+    String? description,
+    String? photo,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
-  }) = _TasksImpl;
+  }) = _CategoryImpl;
 
-  factory Tasks.fromJson(Map<String, dynamic> jsonSerialization) {
-    return Tasks(
+  factory Category.fromJson(Map<String, dynamic> jsonSerialization) {
+    return Category(
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String,
-      photo: jsonSerialization['photo'] as String,
+      description: jsonSerialization['description'] as String?,
+      photo: jsonSerialization['photo'] as String?,
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt: jsonSerialization['updatedAt'] == null
@@ -53,7 +56,9 @@ abstract class Tasks implements _i1.SerializableModel {
 
   String name;
 
-  String photo;
+  String? description;
+
+  String? photo;
 
   DateTime createdAt;
 
@@ -61,9 +66,10 @@ abstract class Tasks implements _i1.SerializableModel {
 
   DateTime? deletedAt;
 
-  Tasks copyWith({
+  Category copyWith({
     int? id,
     String? name,
+    String? description,
     String? photo,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -74,7 +80,8 @@ abstract class Tasks implements _i1.SerializableModel {
     return {
       if (id != null) 'id': id,
       'name': name,
-      'photo': photo,
+      if (description != null) 'description': description,
+      if (photo != null) 'photo': photo,
       'createdAt': createdAt.toJson(),
       if (updatedAt != null) 'updatedAt': updatedAt?.toJson(),
       if (deletedAt != null) 'deletedAt': deletedAt?.toJson(),
@@ -89,17 +96,19 @@ abstract class Tasks implements _i1.SerializableModel {
 
 class _Undefined {}
 
-class _TasksImpl extends Tasks {
-  _TasksImpl({
+class _CategoryImpl extends Category {
+  _CategoryImpl({
     int? id,
     required String name,
-    required String photo,
+    String? description,
+    String? photo,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deletedAt,
   }) : super._(
           id: id,
           name: name,
+          description: description,
           photo: photo,
           createdAt: createdAt,
           updatedAt: updatedAt,
@@ -107,18 +116,20 @@ class _TasksImpl extends Tasks {
         );
 
   @override
-  Tasks copyWith({
+  Category copyWith({
     Object? id = _Undefined,
     String? name,
-    String? photo,
+    Object? description = _Undefined,
+    Object? photo = _Undefined,
     DateTime? createdAt,
     Object? updatedAt = _Undefined,
     Object? deletedAt = _Undefined,
   }) {
-    return Tasks(
+    return Category(
       id: id is int? ? id : this.id,
       name: name ?? this.name,
-      photo: photo ?? this.photo,
+      description: description is String? ? description : this.description,
+      photo: photo is String? ? photo : this.photo,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt is DateTime? ? updatedAt : this.updatedAt,
       deletedAt: deletedAt is DateTime? ? deletedAt : this.deletedAt,

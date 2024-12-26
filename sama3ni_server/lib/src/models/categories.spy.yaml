@@ -1,8 +1,9 @@
-table: task
-class: Tasks
+table: categories
+class: Category
 fields:
   name: String
-  photo: String
+  description: String?
+  photo: String?
   createdAt: DateTime,default=now,
   updatedAt: DateTime?
   deletedAt: DateTime?

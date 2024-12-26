@@ -10,10 +10,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'task.dart' as _i2;
-import 'package:sama3ni_client/src/protocol/task.dart' as _i3;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i4;
-export 'task.dart';
+import 'categories.dart' as _i2;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
+export 'categories.dart';
 export 'client.dart';
 
 class Protocol extends _i1.SerializationManager {
@@ -29,21 +28,17 @@ class Protocol extends _i1.SerializationManager {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i2.Tasks) {
-      return _i2.Tasks.fromJson(data) as T;
+    if (t == _i2.Category) {
+      return _i2.Category.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i2.Tasks?>()) {
-      return (data != null ? _i2.Tasks.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i2.Category?>()) {
+      return (data != null ? _i2.Category.fromJson(data) : null) as T;
     }
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;
     }
-    if (t == List<_i3.Tasks>) {
-      return (data as List).map((e) => deserialize<_i3.Tasks>(e)).toList()
-          as dynamic;
-    }
     try {
-      return _i4.Protocol().deserialize<T>(data, t);
+      return _i3.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
@@ -52,10 +47,10 @@ class Protocol extends _i1.SerializationManager {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i2.Tasks) {
-      return 'Tasks';
+    if (data is _i2.Category) {
+      return 'Category';
     }
-    className = _i4.Protocol().getClassNameForObject(data);
+    className = _i3.Protocol().getClassNameForObject(data);
     if (className != null) {
       return 'serverpod_auth.$className';
     }
@@ -68,12 +63,12 @@ class Protocol extends _i1.SerializationManager {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
-    if (dataClassName == 'Tasks') {
-      return deserialize<_i2.Tasks>(data['data']);
+    if (dataClassName == 'Category') {
+      return deserialize<_i2.Category>(data['data']);
     }
     if (dataClassName.startsWith('serverpod_auth.')) {
       data['className'] = dataClassName.substring(15);
-      return _i4.Protocol().deserializeByClassName(data);
+      return _i3.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }

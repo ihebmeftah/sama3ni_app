@@ -24,10 +24,10 @@ abstract class AppThemes {
     drawerTheme: const DrawerThemeData(
       backgroundColor: Colors.black,
     ),
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: Colors.black,
       surfaceTintColor: Colors.black,
-      iconTheme: IconThemeData(color: Colors.white),
+      iconTheme: IconThemeData(color: Colors.grey.shade400),
       centerTitle: false,
     ),
     textButtonTheme: TextButtonThemeData(
@@ -110,7 +110,7 @@ abstract class AppThemes {
     iconButtonTheme: IconButtonThemeData(
         style: IconButton.styleFrom(
       overlayColor: Colors.grey.shade200,
-      foregroundColor: Colors.blue.shade900,
+      foregroundColor: Colors.grey.shade400,
     )),
   );
 }

@@ -14,6 +14,10 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
+      padding: EdgeInsets.symmetric(
+        horizontal: MediaQuery.sizeOf(context).width * 0.07,
+        vertical: MediaQuery.sizeOf(context).width * 0.015,
+      ),
       child: Center(
         child: Column(
             spacing: 40,
@@ -114,6 +118,58 @@ class HomeView extends GetView<HomeController> {
                                           fit: BoxFit.fill)),
                                 ))),
                   )
+                ],
+              ),
+              Column(
+                spacing: 20,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SectionHead(title: "Top Artists"),
+                  SizedBox(
+                    //color: Colors.white,
+                    height: 160,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          hoverColor: Colors.grey.withValues(alpha: 0.2),
+                          onTap: () {},
+                          child: Container(
+                            width: 160,
+                            padding: const EdgeInsets.all(5),
+                            child: Column(
+                              spacing: 8,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                  radius: 60,
+                                  backgroundImage: AssetImage(index == 1
+                                      ? "assets/images/tyler.jpg"
+                                      : "assets/images/durk.jpg"),
+                                ),
+                                Text(
+                                  index == 1
+                                      ? "Tyler, The Creator"
+                                      : "Lil Durk",
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    color: Colors.grey.shade400,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: (11.5),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
               Column(

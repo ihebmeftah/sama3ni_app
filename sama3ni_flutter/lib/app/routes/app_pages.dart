@@ -7,6 +7,8 @@ import '../modules/artists/views/artists_profile_view.dart';
 import '../modules/artists/views/artists_view.dart';
 import '../modules/authentification/bindings/authentification_binding.dart';
 import '../modules/authentification/views/authentification_view.dart';
+import '../modules/categories/bindings/categories_binding.dart';
+import '../modules/categories/views/categories_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 
@@ -39,5 +41,10 @@ class AppPages {
               page: () => const ArtistsProfileView(),
               binding: ArtistsProfieBinding())
         ]),
+    GetPage(
+      name: _Paths.CATEGORIES,
+      page: () => const CategoriesView(),
+      binding: CategoriesBinding(),
+    ),
   ];
 }

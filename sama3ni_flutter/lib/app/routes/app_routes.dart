@@ -8,6 +8,7 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const AUTHENTIFICATION = _Paths.AUTHENTIFICATION;
   static const ARTISTS = _Paths.ARTISTS;
+  static const CATEGORIES = _Paths.CATEGORIES;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const AUTHENTIFICATION = '/authentification';
   static const ARTISTS = '/artists';
+  static const CATEGORIES = '/categories';
 }

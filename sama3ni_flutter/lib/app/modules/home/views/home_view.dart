@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:sama3ni_flutter/app/modules/categories/controllers/categories_controller.dart';
 
 import '../controllers/home_controller.dart';
 import '../widgets/sectionhead.dart';
@@ -29,15 +30,16 @@ class HomeView extends GetView<HomeController> {
                   viewConstraints: BoxConstraints(
                       minWidth: Get.width * 0.7, maxWidth: Get.width * 0.7),
                   suggestionsBuilder: (c, searchCtr) {
-                    return controller.category
-                        .where((x) => x.contains(searchCtr.text))
-                        .map((e) => ListTile(
-                              onTap: () {
-                                searchCtr.closeView(e);
-                              },
-                              title: Text(e),
-                            ))
-                        .toList();
+                    return [];
+                    // return controller.category
+                    //     .where((x) => x.contains(searchCtr.text))
+                    //     .map((e) => ListTile(
+                    //           onTap: () {
+                    //             searchCtr.closeView(e);
+                    //           },
+                    //           title: Text(e),
+                    //         ))
+                    //     .toList();
                   }),
               Wrap(
                 alignment: WrapAlignment.spaceEvenly,
@@ -239,32 +241,39 @@ class HomeView extends GetView<HomeController> {
                 spacing: 20,
                 children: [
                   const SectionHead(title: "Genre"),
-                  Wrap(
-                      alignment: WrapAlignment.center,
-                      runSpacing: 20,
-                      spacing: 20,
-                      children: List.generate(
-                        controller.category.length,
-                        (i) => Container(
-                          width: 360,
-                          height: 180,
-                          padding: const EdgeInsets.all(20),
-                          decoration: const BoxDecoration(
-                            color: Colors.grey,
-                            image: DecorationImage(
-                                image:
-                                    AssetImage("assets/images/musicians.jpg"),
-                                fit: BoxFit.fill),
-                          ),
-                          child: Text(
-                            controller.category[i],
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )),
+                  GetX<CategoriesController>(
+                      init: CategoriesController(),
+                      builder: (categoriesController) {
+                        return categoriesController.categories.isEmpty
+                            ? const Text("Loading")
+                            : Wrap(
+                                alignment: WrapAlignment.center,
+                                runSpacing: 20,
+                                spacing: 20,
+                                children: List.generate(
+                                  5,
+                                  (i) => Container(
+                                    width: 360,
+                                    height: 180,
+                                    padding: const EdgeInsets.all(20),
+                                    decoration: const BoxDecoration(
+                                      color: Colors.grey,
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/musicians.jpg"),
+                                          fit: BoxFit.fill),
+                                    ),
+                                    child: Text(
+                                      categoriesController
+                                          .categories[i].name.capitalizeFirst!,
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ));
+                      }),
                 ],
               )
             ]),

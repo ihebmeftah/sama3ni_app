@@ -67,22 +67,20 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                   style: TextButton.styleFrom(
                                       textStyle: const TextStyle(
                                         fontSize: 15,
-                                        fontWeight: FontWeight.w700,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                      foregroundColor: Colors.grey.shade400),
-                                  onPressed: () {},
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 16),
+                                      backgroundColor: Colors.grey.shade900,
+                                      foregroundColor: Colors.grey.shade300),
+                                  onPressed: () => Get.toNamed(Routes.PROFILE),
                                   icon: CircleAvatar(
                                     radius: 15,
                                     backgroundImage: NetworkImage(
                                         sessionManager.signedInUser!.imageUrl!),
                                   ),
-                                  label: const Icon(Icons.arrow_drop_down)),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.favorite_border)),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.notifications)),
+                                  label: Text(
+                                      sessionManager.signedInUser!.userName!)),
                             ] else
                               Row(
                                 spacing: 10,
@@ -122,12 +120,7 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                         ),
                       );
               })),
-      body: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.sizeOf(context).width * 0.07,
-            vertical: MediaQuery.sizeOf(context).width * 0.015,
-          ),
-          child: child),
+      body: child,
     );
   }
 }

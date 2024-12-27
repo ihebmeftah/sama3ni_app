@@ -13,6 +13,7 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 import 'categories.dart' as _i4;
+import 'package:sama3ni_server/src/generated/categories.dart' as _i5;
 export 'categories.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
@@ -107,6 +108,10 @@ class Protocol extends _i1.SerializationManagerServer {
     }
     if (t == _i1.getType<_i4.Category?>()) {
       return (data != null ? _i4.Category.fromJson(data) : null) as T;
+    }
+    if (t == List<_i5.Category>) {
+      return (data as List).map((e) => deserialize<_i5.Category>(e)).toList()
+          as dynamic;
     }
     if (t == List<int>) {
       return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;

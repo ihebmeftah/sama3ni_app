@@ -9,6 +9,10 @@ abstract class Routes {
   static const AUTHENTIFICATION = _Paths.AUTHENTIFICATION;
   static const ARTISTS = _Paths.ARTISTS;
   static const CATEGORIES = _Paths.CATEGORIES;
+  static const PROFILE = _Paths.PROFILE;
+  static const REGISTER = _Paths.AUTHENTIFICATION + _Paths.REGISTER;
+  static const LOGIN = _Paths.AUTHENTIFICATION + _Paths.LOGIN;
+  static const VERIFCATION = REGISTER + _Paths.VERIFCATION;
 }
 
 abstract class _Paths {
@@ -17,4 +21,8 @@ abstract class _Paths {
   static const AUTHENTIFICATION = '/authentification';
   static const ARTISTS = '/artists';
   static const CATEGORIES = '/categories';
+  static const PROFILE = '/profile';
+  static const REGISTER = '/register';
+  static const LOGIN = '/login';
+  static const VERIFCATION = '/verifcation';
 }

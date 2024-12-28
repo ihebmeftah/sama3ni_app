@@ -31,7 +31,7 @@ class DefaultLayoutController extends GetxController {
 
   bool showNav = true;
   void onChangeRoute(Routing? r) {
-    if (r!.current == Routes.AUTHENTIFICATION) {
+    if (r!.current.contains(Routes.AUTHENTIFICATION)) {
       showNav = false;
     } else {
       showNav = true;

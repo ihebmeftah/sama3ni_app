@@ -99,8 +99,8 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                           ),
                                           foregroundColor:
                                               Colors.grey.shade200),
-                                      onPressed: () => Get.offAllNamed(
-                                          Routes.AUTHENTIFICATION),
+                                      onPressed: () =>
+                                          Get.offAllNamed(Routes.REGISTER),
                                       child: const Text("Sign up")),
                                   TextButton(
                                       style: TextButton.styleFrom(
@@ -112,7 +112,8 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                           backgroundColor: Colors.blue.shade900,
                                           foregroundColor:
                                               Colors.grey.shade200),
-                                      onPressed: () {},
+                                      onPressed: () =>
+                                          Get.offAllNamed(Routes.LOGIN),
                                       child: const Text("Log in")),
                                 ],
                               ),

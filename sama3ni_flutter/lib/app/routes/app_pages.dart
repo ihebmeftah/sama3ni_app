@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sama3ni_flutter/app/modules/authentification/views/verifcation_view.dart';
 
 import '../middlewares/auth_middlewares.dart';
 import '../modules/artists/bindings/artists_binding.dart';
@@ -6,11 +7,17 @@ import '../modules/artists/bindings/artists_profile_binding.dart';
 import '../modules/artists/views/artists_profile_view.dart';
 import '../modules/artists/views/artists_view.dart';
 import '../modules/authentification/bindings/authentification_binding.dart';
+import '../modules/authentification/bindings/register_binding.dart';
 import '../modules/authentification/views/authentification_view.dart';
+import '../modules/authentification/views/register_view.dart';
 import '../modules/categories/bindings/categories_binding.dart';
 import '../modules/categories/views/categories_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/authentification/bindings/login_binding.dart';
+import '../modules/authentification/views/login_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -26,11 +33,28 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.AUTHENTIFICATION,
-      page: () => const AuthentificationView(),
-      middlewares: [AuthMiddlewares()],
-      binding: AuthentificationBinding(),
-    ),
+        name: _Paths.AUTHENTIFICATION,
+        page: () => const AuthentificationView(),
+        middlewares: [AuthMiddlewares()],
+        binding: AuthentificationBinding(),
+        children: [
+          GetPage(
+              name: _Paths.REGISTER,
+              page: () => const RegisterView(),
+              binding: RegisterBinding(),
+              children: [
+                GetPage(
+                  name: _Paths.VERIFCATION,
+                  page: () => const VerifcationView(),
+                  binding: RegisterBinding(),
+                )
+              ]),
+          GetPage(
+            name: _Paths.LOGIN,
+            page: () => const LoginView(),
+            binding: LoginBinding(),
+          ),
+        ]),
     GetPage(
         name: _Paths.ARTISTS,
         page: () => const ArtistsView(),
@@ -45,6 +69,11 @@ class AppPages {
       name: _Paths.CATEGORIES,
       page: () => const CategoriesView(),
       binding: CategoriesBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

@@ -39,7 +39,7 @@ class App extends StatelessWidget {
       darkTheme: AppThemes.dark,
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.HOME,
+      initialRoute: Routes.AUTHENTIFICATION,
       getPages: AppPages.routes,
       defaultTransition: Transition.fade,
       routingCallback: controller.onChangeRoute,

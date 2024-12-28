@@ -16,8 +16,6 @@ class RegisterController extends GetxController {
     if (formKey.currentState!.validate()) {
       final sendValidationCode = await authCtr.authController
           .createAccountRequest(username.text, email.text, password.text);
-      print(Routes.VERIFCATION);
-      print(sendValidationCode);
       if (sendValidationCode) {
         Get.toNamed(Routes.VERIFCATION, parameters: {'email': email.text});
       } else {

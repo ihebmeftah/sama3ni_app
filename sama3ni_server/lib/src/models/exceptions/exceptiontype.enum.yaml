@@ -1,0 +1,23 @@
+enum: ExceptionType
+serialized: byName
+values:
+ - userNotFoundException
+ - authenticationRequiredException
+ - unauthorizedAccessException
+ - duplicateKeyException
+ - notFound
+ - notImplemented
+ - badRequest
+ - forbidden
+ - internalServerError
+ - validationException
+ - notAcceptable
+ - unprocessableEntity
+ - conflict
+ - preconditionFailed
+ - preconditionRequired
+ - tooManyRequests
+ - gatewayTimeout
+ - serviceUnavailable
+ - badGateway
+ - unknown

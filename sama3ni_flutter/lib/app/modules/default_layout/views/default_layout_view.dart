@@ -39,18 +39,18 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                       return TextButton(
                                           style: TextButton.styleFrom(
                                               textStyle: TextStyle(
-                                                  fontWeight: controller.currentIndex ==
+                                                  fontWeight: controller.current ==
                                                           controller
                                                               .navItems[index]
                                                       ? FontWeight.w600
                                                       : FontWeight.w400,
-                                                  fontSize: controller.currentIndex ==
+                                                  fontSize: controller.current ==
                                                           controller
                                                               .navItems[index]
                                                       ? 16.5
                                                       : 14.5),
                                               foregroundColor: controller
-                                                          .currentIndex ==
+                                                          .current ==
                                                       controller.navItems[index]
                                                   ? Colors.blue
                                                   : Colors.grey.shade400),
@@ -65,6 +65,7 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                             if (sessionManager.isSignedIn) ...[
                               TextButton.icon(
                                   style: TextButton.styleFrom(
+                                      minimumSize: const Size(160, 40),
                                       textStyle: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
@@ -79,8 +80,28 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                     backgroundImage: NetworkImage(
                                         sessionManager.signedInUser!.imageUrl!),
                                   ),
-                                  label: Text(
-                                      sessionManager.signedInUser!.userName!)),
+                                  label: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(sessionManager
+                                          .signedInUser!.userName!.capitalize!),
+                                      Icon(Icons.keyboard_arrow_down_sharp,
+                                          color: Colors.grey.shade300),
+                                    ],
+                                  )),
+                              const SizedBox(width: 5),
+                              TextButton.icon(
+                                  style: TextButton.styleFrom(
+                                      textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      iconColor: Colors.red,
+                                      foregroundColor: Colors.red),
+                                  onPressed: controller.logout,
+                                  icon: const Icon(Icons.logout),
+                                  label: const Text("Log out")),
                             ] else
                               Row(
                                 spacing: 10,
@@ -99,8 +120,8 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                           ),
                                           foregroundColor:
                                               Colors.grey.shade200),
-                                      onPressed: () =>
-                                          Get.offAllNamed(Routes.REGISTER),
+                                      onPressed: () => Get.offAllNamed(
+                                          Routes.AUTHENTIFICATION),
                                       child: const Text("Sign up")),
                                   TextButton(
                                       style: TextButton.styleFrom(
@@ -112,8 +133,8 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                           backgroundColor: Colors.blue.shade900,
                                           foregroundColor:
                                               Colors.grey.shade200),
-                                      onPressed: () =>
-                                          Get.offAllNamed(Routes.LOGIN),
+                                      onPressed: () => Get.offAllNamed(
+                                          Routes.AUTHENTIFICATION),
                                       child: const Text("Log in")),
                                 ],
                               ),

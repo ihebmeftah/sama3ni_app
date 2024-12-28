@@ -11,14 +11,13 @@ class DefaultLayoutController extends GetxController {
     (title: "Tracks", route: null),
     (title: "Sound kits", route: null),
   ];
-  ({String title, String? route}) currentIndex =
-      (title: "Home", route: Routes.HOME);
+  ({String title, String? route}) current = (title: "Home", route: Routes.HOME);
   void changeIndex(({String title, String? route}) data) {
-    if (data.route != null) {
-      update([currentIndex.route!]);
-      currentIndex = data;
+    if (data.route != null && data != current) {
+      update([current.route!]);
+      current = data;
       update([data.route!]);
-      Get.toNamed(data.route!);
+      Get.offNamed(data.route!);
     }
   }
 

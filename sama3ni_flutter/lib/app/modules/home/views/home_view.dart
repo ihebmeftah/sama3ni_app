@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:sama3ni_flutter/app/modules/artists/controllers/artists_controller.dart';
 import 'package:sama3ni_flutter/app/modules/categories/controllers/categories_controller.dart';
 
 import '../controllers/home_controller.dart';
@@ -128,47 +129,52 @@ class HomeView extends GetView<HomeController> {
                   SizedBox(
                     //color: Colors.white,
                     height: 160,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          borderRadius: BorderRadius.circular(10),
-                          hoverColor: Colors.grey.withValues(alpha: 0.2),
-                          onTap: () {},
-                          child: Container(
-                            width: 160,
-                            padding: const EdgeInsets.all(5),
-                            child: Column(
-                              spacing: 8,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CircleAvatar(
-                                  radius: 60,
-                                  backgroundImage: AssetImage(index == 1
-                                      ? "assets/images/tyler.jpg"
-                                      : "assets/images/durk.jpg"),
-                                ),
-                                Text(
-                                  index == 1
-                                      ? "Tyler, The Creator"
-                                      : "Lil Durk",
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Colors.grey.shade400,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: (11.5),
+                    child: GetX<ArtistsController>(
+                        init: ArtistsController(),
+                        builder: (artistsCtr) {
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: artistsCtr.artists.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                borderRadius: BorderRadius.circular(10),
+                                hoverColor: Colors.grey.withValues(alpha: 0.2),
+                                onTap: () {},
+                                child: Container(
+                                  width: 160,
+                                  padding: const EdgeInsets.all(5),
+                                  child: Column(
+                                    spacing: 8,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 55,
+                                        backgroundImage: NetworkImage(artistsCtr
+                                            .artists[index]
+                                            .userInfo!
+                                            .imageUrl!),
+                                      ),
+                                      Text(
+                                        artistsCtr.artists[index].displayName
+                                            .capitalize!,
+                                        textAlign: TextAlign.center,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          color: Colors.grey.shade400,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: (13.5),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                              );
+                            },
+                          );
+                        }),
                   ),
                 ],
               ),

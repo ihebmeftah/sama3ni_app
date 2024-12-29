@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:sama3ni_flutter/app/components/appempty.dart';
 import 'package:sama3ni_flutter/app/modules/artists/controllers/artists_controller.dart';
 import 'package:sama3ni_flutter/app/modules/categories/controllers/categories_controller.dart';
 import 'package:sama3ni_flutter/app/routes/app_pages.dart';
@@ -135,49 +136,52 @@ class HomeView extends GetView<HomeController> {
                         autoRemove: false,
                         init: ArtistsController(),
                         builder: (artistsCtr) {
-                          return ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: artistsCtr.artists.length,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                borderRadius: BorderRadius.circular(10),
-                                hoverColor: Colors.grey.withValues(alpha: 0.2),
-                                onTap: () => Get.toNamed(
-                                    "${Routes.ARTISTS}/${artistsCtr.artists[index].id}"),
-                                child: Container(
-                                  width: 160,
-                                  padding: const EdgeInsets.all(5),
-                                  child: Column(
-                                    spacing: 8,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 55,
-                                        backgroundImage: NetworkImage(artistsCtr
-                                            .artists[index]
-                                            .userInfo!
-                                            .imageUrl!),
-                                      ),
-                                      Text(
-                                        artistsCtr.artists[index].displayName
-                                            .capitalize!,
-                                        textAlign: TextAlign.center,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                          color: Colors.grey.shade400,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: (13.5),
+                          return artistsCtr.artists.isEmpty
+                              ? const AppEmpty()
+                              : ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: artistsCtr.artists.length,
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      borderRadius: BorderRadius.circular(10),
+                                      hoverColor:
+                                          Colors.grey.withValues(alpha: 0.2),
+                                      onTap: () => Get.toNamed(
+                                          "${Routes.ARTISTS}/${artistsCtr.artists[index].id}"),
+                                      child: Container(
+                                        width: 160,
+                                        padding: const EdgeInsets.all(5),
+                                        child: Column(
+                                          spacing: 8,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 55,
+                                              backgroundImage: NetworkImage(
+                                                  artistsCtr.artists[index]
+                                                      .userInfo!.imageUrl!),
+                                            ),
+                                            Text(
+                                              artistsCtr.artists[index]
+                                                  .displayName.capitalize!,
+                                              textAlign: TextAlign.center,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: TextStyle(
+                                                color: Colors.grey.shade400,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: (13.5),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
+                                    );
+                                  },
+                                );
                         }),
                   ),
                 ],
@@ -311,7 +315,7 @@ class HomeView extends GetView<HomeController> {
                       init: CategoriesController(),
                       builder: (categoriesController) {
                         return categoriesController.categories.isEmpty
-                            ? const Text("Loading")
+                            ? const AppEmpty()
                             : Wrap(
                                 alignment: WrapAlignment.center,
                                 runSpacing: 20,

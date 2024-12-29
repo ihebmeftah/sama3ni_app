@@ -15,7 +15,7 @@ class ArtistAboutWidget extends GetView<ArtistsProfileController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 15,
       children: [
-        if (controller.isClosed)
+        if (controller.isMe)
           Row(
             spacing: 10,
             children: [

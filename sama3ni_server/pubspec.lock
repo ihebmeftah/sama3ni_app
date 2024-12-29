@@ -313,6 +313,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
+  sama3ni_client:
+    dependency: "direct main"
+    description:
+      path: "../sama3ni_client"
+      relative: true
+    source: path
+    version: "0.0.0"
   sasl_scram:
     dependency: transitive
     description:
@@ -337,11 +344,27 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
+  serverpod_auth_client:
+    dependency: transitive
+    description:
+      name: serverpod_auth_client
+      sha256: "1f0254b6efe8283a9dbc363cf215e0a407be1bf18224d6a44475f4c631c35595"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
   serverpod_auth_server:
     dependency: "direct main"
     description:
       name: serverpod_auth_server
       sha256: "48c7bf32361e0759d1f345219791ac23076cd234b8e0b9be33c7b4b5c703ebd7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
+  serverpod_client:
+    dependency: transitive
+    description:
+      name: serverpod_client
+      sha256: d5ca5bebb3812da1e55f09a4acb8b51c7559efc27342355b78fdae11b478141a
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
@@ -481,6 +504,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  web_socket:
+    dependency: transitive
+    description:
+      name: web_socket
+      sha256: "3c12d96c0c9a4eec095246debcea7b86c0324f22df69893d538fcc6f1b8cce83"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
+  web_socket_channel:
+    dependency: transitive
+    description:
+      name: web_socket_channel
+      sha256: "9f187088ed104edd8662ca07af4b124465893caf063ba29758f97af57e61da8f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   x509:
     dependency: transitive
     description:

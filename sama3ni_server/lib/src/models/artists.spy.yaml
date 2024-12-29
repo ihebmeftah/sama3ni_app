@@ -1,0 +1,17 @@
+table: artists
+class: Artist
+fields:
+  userInfo: module:auth:UserInfo?, relation
+  displayName: String
+  address: String?
+  bio: String?
+  tags: List<String>
+  iglink: String?
+  soundcloudlink: String?
+  youtubelink: String?
+  coverphoto: String?
+
+indexes:
+  user_info_id_unique_idx:
+    fields: userInfoId
+    unique: true

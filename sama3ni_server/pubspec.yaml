@@ -9,6 +9,7 @@ environment:
 dependencies:
   serverpod: 2.3.0
   serverpod_auth_server: 2.3.0
-
+  sama3ni_client:
+    path: ../sama3ni_client
 dev_dependencies:
   lints: ">=3.0.0 <6.0.0"

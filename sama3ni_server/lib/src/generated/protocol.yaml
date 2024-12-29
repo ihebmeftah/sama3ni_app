@@ -1,4 +1,8 @@
+artists:
+  - getLoggedArtist:
+  - getArtistById:
+  - getArtists:
+  - updateCoverPhoto:
+  - updateLoggedArtist:
 categories:
   - getCategories:
-example:
-  - uploadFile:

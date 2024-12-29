@@ -28,6 +28,17 @@ void run(List<String> args) async {
   );
 
   auth.AuthConfig.set(auth.AuthConfig(
+    onUserCreated: (session, userInfo) async {
+      await Artist.db.insertRow(
+        session,
+        Artist(
+          userInfoId: userInfo.id!,
+          displayName: userInfo.userName!,
+          tags: ["artist"],
+        ),
+      );
+      return Future.value();
+    },
     sendValidationEmail: (session, email, validationCode) async {
       print('Sending email to $email with code $validationCode');
       return true;

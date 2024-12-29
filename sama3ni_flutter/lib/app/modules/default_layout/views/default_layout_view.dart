@@ -65,19 +65,17 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                             if (sessionManager.isSignedIn) ...[
                               TextButton.icon(
                                   style: TextButton.styleFrom(
-                                      minimumSize: const Size(160, 40),
+                                      minimumSize: const Size(140, 46),
                                       textStyle: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                       ),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 16),
                                       backgroundColor: Colors.grey.shade900,
                                       foregroundColor: Colors.grey.shade300),
                                   onPressed: () =>
                                       Get.toNamed("${Routes.ARTISTS}/me"),
                                   icon: CircleAvatar(
-                                    radius: 15,
+                                    radius: 12,
                                     backgroundImage: NetworkImage(
                                         sessionManager.signedInUser!.imageUrl!),
                                   ),

@@ -15,53 +15,55 @@ class ArtistAboutWidget extends GetView<ArtistsProfileController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 15,
       children: [
-        Row(
-          children: [
-            TextButton.icon(
-              style: TextButton.styleFrom(
+        if (controller.isClosed)
+          Row(
+            spacing: 10,
+            children: [
+              TextButton.icon(
+                style: TextButton.styleFrom(
+                    foregroundColor: Colors.grey.shade200,
+                    iconColor: Colors.grey.shade200,
+                    backgroundColor: Colors.blue.shade900),
+                onPressed: controller.updateCoverPhoto,
+                icon: const Icon(Icons.photo),
+                label: const Text("Upload new cover"),
+              ),
+              TextButton.icon(
+                style: TextButton.styleFrom(
+                  side: BorderSide(
+                    color: Colors.grey.shade200,
+                    width: 1,
+                  ),
                   foregroundColor: Colors.grey.shade200,
                   iconColor: Colors.grey.shade200,
-                  backgroundColor: Colors.blue.shade900),
-              onPressed: controller.updateCoverPhoto,
-              icon: const Icon(Icons.photo),
-              label: const Text("Upload new cover"),
-            ),
-            TextButton.icon(
-              style: TextButton.styleFrom(
-                side: BorderSide(
-                  color: Colors.grey.shade200,
-                  width: 1,
                 ),
-                foregroundColor: Colors.grey.shade200,
-                iconColor: Colors.grey.shade200,
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        backgroundColor: Colors.black,
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Edit Profile'),
+                            IconButton(
+                                onPressed: Get.back,
+                                icon: const Icon(Icons.clear)),
+                          ],
+                        ),
+                        content: SizedBox(
+                            width: Get.width * 0.6, child: const ProfileView()),
+                      );
+                    },
+                  );
+                },
+                label: const Text('Edit Profile'),
+                icon: const Icon(Icons.edit),
               ),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      backgroundColor: Colors.black,
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('Edit Profile'),
-                          IconButton(
-                              onPressed: Get.back,
-                              icon: const Icon(Icons.clear)),
-                        ],
-                      ),
-                      content: SizedBox(
-                          width: Get.width * 0.6, child: const ProfileView()),
-                    );
-                  },
-                );
-              },
-              label: const Text('Edit Profile'),
-              icon: const Icon(Icons.edit),
-            ),
-          ],
-        ),
+            ],
+          ),
         Text(
           controller.artist.displayName.capitalize!,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),

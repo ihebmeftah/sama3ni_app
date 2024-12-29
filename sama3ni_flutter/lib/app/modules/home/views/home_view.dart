@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sama3ni_flutter/app/modules/artists/controllers/artists_controller.dart';
 import 'package:sama3ni_flutter/app/modules/categories/controllers/categories_controller.dart';
+import 'package:sama3ni_flutter/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 import '../widgets/sectionhead.dart';
@@ -130,6 +132,7 @@ class HomeView extends GetView<HomeController> {
                     //color: Colors.white,
                     height: 160,
                     child: GetX<ArtistsController>(
+                        autoRemove: false,
                         init: ArtistsController(),
                         builder: (artistsCtr) {
                           return ListView.builder(
@@ -139,7 +142,8 @@ class HomeView extends GetView<HomeController> {
                               return InkWell(
                                 borderRadius: BorderRadius.circular(10),
                                 hoverColor: Colors.grey.withValues(alpha: 0.2),
-                                onTap: () {},
+                                onTap: () => Get.toNamed(
+                                    "${Routes.ARTISTS}/${artistsCtr.artists[index].id}"),
                                 child: Container(
                                   width: 160,
                                   padding: const EdgeInsets.all(5),
@@ -201,7 +205,7 @@ class HomeView extends GetView<HomeController> {
                                 child: Image.asset(
                                   "assets/images/vinyl.png",
                                   scale: 3,
-                                ),
+                                ).animate().rotate(duration: 20000.ms),
                               ),
                               Container(
                                 padding: const EdgeInsets.all(8),

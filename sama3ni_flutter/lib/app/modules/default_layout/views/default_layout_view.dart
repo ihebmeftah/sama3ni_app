@@ -74,7 +74,8 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                           horizontal: 10, vertical: 16),
                                       backgroundColor: Colors.grey.shade900,
                                       foregroundColor: Colors.grey.shade300),
-                                  onPressed: () => Get.toNamed(Routes.PROFILE),
+                                  onPressed: () =>
+                                      Get.toNamed("${Routes.ARTISTS}/me"),
                                   icon: CircleAvatar(
                                     radius: 15,
                                     backgroundImage: NetworkImage(

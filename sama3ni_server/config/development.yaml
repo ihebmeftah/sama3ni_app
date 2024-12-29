@@ -5,9 +5,6 @@
 #
 # When running your server locally, the server ports are the same as the public
 # facing ports.
-maxRequestSize: 5368709120
-server:
-  maxRequestSize: 5368709120
 # Configuration for the main API server.
 apiServer:
   port: 8080
@@ -41,3 +38,5 @@ redis:
   enabled: false
   host: localhost
   port: 8091
+
+maxRequestSize: 5368709120

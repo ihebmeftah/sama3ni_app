@@ -26,7 +26,9 @@ class AppInput extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 5,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(name!.capitalizeFirst!,
                     style: TextStyle(
@@ -34,11 +36,9 @@ class AppInput extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: Colors.grey.shade400)),
                 if (isRequired)
-                  Text("*",
-                      style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.red.shade400)),
+                  Text("required",
+                      style:
+                          TextStyle(fontSize: 10, color: Colors.red.shade400)),
               ],
             ),
           ),
@@ -46,7 +46,7 @@ class AppInput extends StatelessWidget {
           initialValue: intialV,
           controller: ctr,
           maxLength: maxLength,
-          maxLines: maxLines,
+          maxLines: maxLines ?? 1,
           validator: (value) {
             if (isRequired && value!.isEmpty) {
               return 'This field is required';

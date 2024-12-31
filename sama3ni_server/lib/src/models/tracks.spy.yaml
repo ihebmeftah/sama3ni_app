@@ -1,0 +1,10 @@
+table: tracks
+class: Track
+fields:
+  title: String
+  bpm: int?
+  key: String?
+  photo: String,
+  audio: String,
+  artistId: int, relation(name=artist_tracks, parent=artists)
+  genre: Category?, relation(onDelete=SetNull)

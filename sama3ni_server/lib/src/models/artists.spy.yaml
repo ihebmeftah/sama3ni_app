@@ -10,6 +10,7 @@ fields:
   soundcloudlink: String?
   youtubelink: String?
   coverphoto: String?
+  tracks: List<Track>?, relation(name=artist_tracks)
 
 indexes:
   user_info_id_unique_idx:

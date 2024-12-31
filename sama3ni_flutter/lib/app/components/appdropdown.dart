@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AppInput extends StatelessWidget {
-  const AppInput({
+class AppDropDown<T> extends StatelessWidget {
+  const AppDropDown({
     super.key,
     required this.name,
     this.ctr,
     this.hint,
     this.intialV,
-    this.enabled = true,
-    this.onTap,
-    this.maxLength,
-    this.maxLines,
+    this.items,
+    this.onChange,
     this.isRequired = false,
   });
-  final String? name, intialV, hint;
+  final String? name, hint;
+  final T? intialV;
   final TextEditingController? ctr;
-  final bool isRequired, enabled;
-  final int? maxLines, maxLength;
-  final Function()? onTap;
-
+  final bool isRequired;
+  final List<DropdownMenuItem<T>>? items;
+  final void Function(T?)? onChange;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,15 +44,10 @@ class AppInput extends StatelessWidget {
               ],
             ),
           ),
-        TextFormField(
-          enabled: enabled,
-          onTap: onTap,
-          initialValue: intialV,
-          controller: ctr,
-          maxLength: maxLength,
-          maxLines: maxLines ?? 1,
+        DropdownButtonFormField<T>(
+          value: intialV,
           validator: (value) {
-            if (isRequired && value!.isEmpty) {
+            if (isRequired && value == null) {
               return 'This field $name is required';
             }
             return null;
@@ -62,6 +55,8 @@ class AppInput extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hint ?? name,
           ),
+          onChanged: onChange,
+          items: items,
         ),
       ],
     );

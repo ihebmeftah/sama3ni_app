@@ -91,8 +91,12 @@ abstract class AppThemes {
       errorStyle: const TextStyle(color: Colors.red),
       fillColor: HexColor("#0c162d"),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: Colors.grey.shade400, width: 0.8),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: Colors.grey.shade400, width: 0.8),
       ),
       focusedErrorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(

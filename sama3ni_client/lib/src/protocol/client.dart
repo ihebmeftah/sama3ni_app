@@ -45,17 +45,11 @@ class EndpointArtists extends _i1.EndpointRef {
         {},
       );
 
-  _i2.Future<_i3.Artist> updateCoverPhoto(
-    String filename,
-    _i4.ByteData coverPhoto,
-  ) =>
+  _i2.Future<_i3.Artist> updateCoverPhoto(_i4.ByteData coverPhoto) =>
       caller.callServerEndpoint<_i3.Artist>(
         'artists',
         'updateCoverPhoto',
-        {
-          'filename': filename,
-          'coverPhoto': coverPhoto,
-        },
+        {'coverPhoto': coverPhoto},
       );
 
   _i2.Future<_i3.Artist> updateLoggedArtist({

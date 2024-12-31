@@ -55,9 +55,8 @@ class ArtistsEndpoint extends Endpoint with Fileuploader {
     );
   }
 
-  Future<Artist> updateCoverPhoto(
-      Session session, String filename, ByteData coverPhoto) async {
-    final Uri? uri = await uploadByteData(session, filename, coverPhoto);
+  Future<Artist> updateCoverPhoto(Session session, ByteData coverPhoto) async {
+    final Uri? uri = await uploadByteData(session, coverPhoto);
     if (uri == null) {
       throw AppException(
         message: "Failed to upload cover photo",

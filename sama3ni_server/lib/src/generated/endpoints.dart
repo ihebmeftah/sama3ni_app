@@ -76,16 +76,11 @@ class Endpoints extends _i1.EndpointDispatch {
         'updateCoverPhoto': _i1.MethodConnector(
           name: 'updateCoverPhoto',
           params: {
-            'filename': _i1.ParameterDescription(
-              name: 'filename',
-              type: _i1.getType<String>(),
-              nullable: false,
-            ),
             'coverPhoto': _i1.ParameterDescription(
               name: 'coverPhoto',
               type: _i1.getType<_i4.ByteData>(),
               nullable: false,
-            ),
+            )
           },
           call: (
             _i1.Session session,
@@ -93,7 +88,6 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['artists'] as _i2.ArtistsEndpoint).updateCoverPhoto(
             session,
-            params['filename'],
             params['coverPhoto'],
           ),
         ),

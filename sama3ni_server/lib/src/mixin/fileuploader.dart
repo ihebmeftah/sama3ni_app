@@ -4,8 +4,13 @@ import 'package:sama3ni_client/sama3ni_client.dart';
 import 'package:serverpod/serverpod.dart';
 
 mixin Fileuploader {
-  Future<Uri?> uploadByteData(
-      Session session, String fileName, ByteData file) async {
+  Future<Uri?> uploadByteData(Session session, ByteData file) async {
+    // Generate a random and unique file name
+    Uuid uuid = Uuid();
+    String randomId = uuid.v4(); // Generates a unique UUID
+    String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    String fileName = '$randomId-$timestamp';
+
     var uploadDesc = await session.storage
         .createDirectFileUploadDescription(storageId: 'public', path: fileName);
     if (uploadDesc != null) {
@@ -23,8 +28,13 @@ mixin Fileuploader {
     return null;
   }
 
-  Future<String?> uploadStream(Session session, String fileName,
-      Stream<List<int>> stream, int length) async {
+  Future<String?> uploadStream(
+      Session session, Stream<List<int>> stream, int length) async {
+    // Generate a random and unique file name
+    Uuid uuid = Uuid();
+    String randomId = uuid.v4(); // Generates a unique UUID
+    String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    String fileName = '$randomId-$timestamp';
     var uploadDesc = await session.storage
         .createDirectFileUploadDescription(storageId: 'public', path: fileName);
     if (uploadDesc != null) {

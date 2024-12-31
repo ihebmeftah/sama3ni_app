@@ -14,8 +14,9 @@ import 'dart:async' as _i2;
 import 'package:sama3ni_client/src/protocol/artists.dart' as _i3;
 import 'dart:typed_data' as _i4;
 import 'package:sama3ni_client/src/protocol/categories.dart' as _i5;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i6;
-import 'protocol.dart' as _i7;
+import 'package:sama3ni_client/src/protocol/tracks.dart' as _i6;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i7;
+import 'protocol.dart' as _i8;
 
 /// {@category Endpoint}
 class EndpointArtists extends _i1.EndpointRef {
@@ -45,11 +46,17 @@ class EndpointArtists extends _i1.EndpointRef {
         {},
       );
 
-  _i2.Future<_i3.Artist> updateCoverPhoto(_i4.ByteData coverPhoto) =>
+  _i2.Future<_i3.Artist> updateCoverPhoto(
+    _i4.ByteData coverPhoto,
+    dynamic fileName,
+  ) =>
       caller.callServerEndpoint<_i3.Artist>(
         'artists',
         'updateCoverPhoto',
-        {'coverPhoto': coverPhoto},
+        {
+          'coverPhoto': coverPhoto,
+          'fileName': fileName,
+        },
       );
 
   _i2.Future<_i3.Artist> updateLoggedArtist({
@@ -87,14 +94,63 @@ class EndpointCategories extends _i1.EndpointRef {
         'getCategories',
         {},
       );
+
+  _i2.Future<_i5.Category> getCategoryById(int id) =>
+      caller.callServerEndpoint<_i5.Category>(
+        'categories',
+        'getCategoryById',
+        {'id': id},
+      );
+}
+
+/// {@category Endpoint}
+class EndpointTracks extends _i1.EndpointRef {
+  EndpointTracks(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'tracks';
+
+  _i2.Future<List<_i6.Track>> getMyTracks() =>
+      caller.callServerEndpoint<List<_i6.Track>>(
+        'tracks',
+        'getMyTracks',
+        {},
+      );
+
+  _i2.Future<List<_i6.Track>> getTracksByArtist(int artistId) =>
+      caller.callServerEndpoint<List<_i6.Track>>(
+        'tracks',
+        'getTracksByArtist',
+        {'artistId': artistId},
+      );
+
+  _i2.Future<List<_i6.Track>> getTracksByCategory(int categoryId) =>
+      caller.callServerEndpoint<List<_i6.Track>>(
+        'tracks',
+        'getTracksByCategory',
+        {'categoryId': categoryId},
+      );
+
+  _i2.Future<_i6.Track> createTrack(
+    _i6.Track track,
+    _i4.ByteData trackFile,
+  ) =>
+      caller.callServerEndpoint<_i6.Track>(
+        'tracks',
+        'createTrack',
+        {
+          'track': track,
+          'trackFile': trackFile,
+        },
+      );
 }
 
 class Modules {
   Modules(Client client) {
-    auth = _i6.Caller(client);
+    auth = _i7.Caller(client);
   }
 
-  late final _i6.Caller auth;
+  late final _i7.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -113,7 +169,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i7.Protocol(),
+          _i8.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -125,6 +181,7 @@ class Client extends _i1.ServerpodClientShared {
         ) {
     artists = EndpointArtists(this);
     categories = EndpointCategories(this);
+    tracks = EndpointTracks(this);
     modules = Modules(this);
   }
 
@@ -132,12 +189,15 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointCategories categories;
 
+  late final EndpointTracks tracks;
+
   late final Modules modules;
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
         'artists': artists,
         'categories': categories,
+        'tracks': tracks,
       };
 
   @override

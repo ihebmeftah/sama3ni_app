@@ -1,16 +1,30 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:sama3ni_client/sama3ni_client.dart';
 import 'package:serverpod/serverpod.dart';
 
 mixin Fileuploader {
-  Future<Uri?> uploadByteData(Session session, ByteData file) async {
-    // Generate a random and unique file name
-    Uuid uuid = Uuid();
-    String randomId = uuid.v4(); // Generates a unique UUID
-    String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-    String fileName = '$randomId-$timestamp';
+  Future<String?> uploadLocaly(
+      Session session, ByteData f, String fileName) async {
+    final filePath = 'uploads/$fileName';
 
+    final dir = Directory('uploads');
+    if (!dir.existsSync()) {
+      dir.createSync();
+    }
+    session.log("// Create the 'uploads' directory if it doesn't exist");
+    final file = File(filePath);
+    await file.writeAsBytes(f.buffer.asUint8List());
+    session.log(" Save the file to the 'uploads' directory ");
+
+    final url = "${Directory.current.path}/$filePath";
+    session.log('File uploaded: $url');
+    return url;
+  }
+
+  Future<Uri?> uploadByteData(
+      Session session, ByteData file, String fileName) async {
     var uploadDesc = await session.storage
         .createDirectFileUploadDescription(storageId: 'public', path: fileName);
     if (uploadDesc != null) {
@@ -28,13 +42,8 @@ mixin Fileuploader {
     return null;
   }
 
-  Future<String?> uploadStream(
-      Session session, Stream<List<int>> stream, int length) async {
-    // Generate a random and unique file name
-    Uuid uuid = Uuid();
-    String randomId = uuid.v4(); // Generates a unique UUID
-    String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-    String fileName = '$randomId-$timestamp';
+  Future<String?> uploadStream(Session session, Stream<List<int>> stream,
+      int length, String fileName) async {
     var uploadDesc = await session.storage
         .createDirectFileUploadDescription(storageId: 'public', path: fileName);
     if (uploadDesc != null) {

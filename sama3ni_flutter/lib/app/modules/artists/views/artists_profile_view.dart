@@ -12,6 +12,7 @@ class ArtistsProfileView extends GetView<ArtistsProfileController> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex: Get.arguments ?? 0,
       length: 3,
       child: Scaffold(body: controller.obx((s) {
         return NestedScrollView(

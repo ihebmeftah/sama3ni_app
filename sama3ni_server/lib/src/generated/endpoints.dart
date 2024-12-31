@@ -12,8 +12,10 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/artists_endpoint.dart' as _i2;
 import '../endpoints/categories_enpoint.dart' as _i3;
-import 'dart:typed_data' as _i4;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i5;
+import '../endpoints/tracks_endpoint.dart' as _i4;
+import 'dart:typed_data' as _i5;
+import 'package:sama3ni_server/src/generated/tracks.dart' as _i6;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i7;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -29,6 +31,12 @@ class Endpoints extends _i1.EndpointDispatch {
         ..initialize(
           server,
           'categories',
+          null,
+        ),
+      'tracks': _i4.TracksEndpoint()
+        ..initialize(
+          server,
+          'tracks',
           null,
         ),
     };
@@ -78,9 +86,14 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'coverPhoto': _i1.ParameterDescription(
               name: 'coverPhoto',
-              type: _i1.getType<_i4.ByteData>(),
+              type: _i1.getType<_i5.ByteData>(),
               nullable: false,
-            )
+            ),
+            'fileName': _i1.ParameterDescription(
+              name: 'fileName',
+              type: _i1.getType<dynamic>(),
+              nullable: false,
+            ),
           },
           call: (
             _i1.Session session,
@@ -89,6 +102,7 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['artists'] as _i2.ArtistsEndpoint).updateCoverPhoto(
             session,
             params['coverPhoto'],
+            params['fileName'],
           ),
         ),
         'updateLoggedArtist': _i1.MethodConnector(
@@ -154,9 +168,103 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['categories'] as _i3.CategoriesEndpoint)
                   .getCategories(session),
-        )
+        ),
+        'getCategoryById': _i1.MethodConnector(
+          name: 'getCategoryById',
+          params: {
+            'id': _i1.ParameterDescription(
+              name: 'id',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['categories'] as _i3.CategoriesEndpoint)
+                  .getCategoryById(
+            session,
+            params['id'],
+          ),
+        ),
       },
     );
-    modules['serverpod_auth'] = _i5.Endpoints()..initializeEndpoints(server);
+    connectors['tracks'] = _i1.EndpointConnector(
+      name: 'tracks',
+      endpoint: endpoints['tracks']!,
+      methodConnectors: {
+        'getMyTracks': _i1.MethodConnector(
+          name: 'getMyTracks',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['tracks'] as _i4.TracksEndpoint).getMyTracks(session),
+        ),
+        'getTracksByArtist': _i1.MethodConnector(
+          name: 'getTracksByArtist',
+          params: {
+            'artistId': _i1.ParameterDescription(
+              name: 'artistId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['tracks'] as _i4.TracksEndpoint).getTracksByArtist(
+            session,
+            params['artistId'],
+          ),
+        ),
+        'getTracksByCategory': _i1.MethodConnector(
+          name: 'getTracksByCategory',
+          params: {
+            'categoryId': _i1.ParameterDescription(
+              name: 'categoryId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['tracks'] as _i4.TracksEndpoint).getTracksByCategory(
+            session,
+            params['categoryId'],
+          ),
+        ),
+        'createTrack': _i1.MethodConnector(
+          name: 'createTrack',
+          params: {
+            'track': _i1.ParameterDescription(
+              name: 'track',
+              type: _i1.getType<_i6.Track>(),
+              nullable: false,
+            ),
+            'trackFile': _i1.ParameterDescription(
+              name: 'trackFile',
+              type: _i1.getType<_i5.ByteData>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['tracks'] as _i4.TracksEndpoint).createTrack(
+            session,
+            params['track'],
+            params['trackFile'],
+          ),
+        ),
+      },
+    );
+    modules['serverpod_auth'] = _i7.Endpoints()..initializeEndpoints(server);
   }
 }

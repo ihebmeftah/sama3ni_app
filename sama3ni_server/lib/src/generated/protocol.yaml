@@ -6,3 +6,9 @@ artists:
   - updateLoggedArtist:
 categories:
   - getCategories:
+  - getCategoryById:
+tracks:
+  - getMyTracks:
+  - getTracksByArtist:
+  - getTracksByCategory:
+  - createTrack:

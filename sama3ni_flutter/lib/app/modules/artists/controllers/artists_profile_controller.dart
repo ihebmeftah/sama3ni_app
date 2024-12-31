@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:sama3ni_client/sama3ni_client.dart';
 
 import '../../../../main.dart';

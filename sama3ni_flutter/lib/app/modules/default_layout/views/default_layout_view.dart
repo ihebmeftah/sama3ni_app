@@ -91,16 +91,23 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                   )),
                               const SizedBox(width: 5),
                               TextButton.icon(
-                                  style: TextButton.styleFrom(
-                                      textStyle: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      iconColor: Colors.red,
+                                style: TextButton.styleFrom(
+                                    textStyle: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    iconColor: Colors.grey.shade300,
+                                    foregroundColor: Colors.grey.shade300),
+                                onPressed: () => Get.toNamed(Routes.UPLOAD),
+                                icon: const Icon(Icons.add),
+                                label: const Text("Upload"),
+                              ),
+                              const SizedBox(width: 5),
+                              IconButton(
+                                  style: IconButton.styleFrom(
                                       foregroundColor: Colors.red),
                                   onPressed: controller.logout,
-                                  icon: const Icon(Icons.logout),
-                                  label: const Text("Log out")),
+                                  icon: const Icon(Icons.logout)),
                             ] else
                               Row(
                                 spacing: 10,

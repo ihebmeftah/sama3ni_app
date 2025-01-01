@@ -5,21 +5,13 @@ import '../../../routes/app_pages.dart';
 
 class DefaultLayoutController extends GetxController {
   final user = sessionManager.signedInUser;
-  final navItems = <({String title, String? route})>[
+  final navItems = <({String title, String route})>[
     (title: "Home", route: Routes.HOME),
     (title: "Artists", route: Routes.ARTISTS),
-    (title: "Tracks", route: null),
-    (title: "Sound kits", route: null),
+    (title: "Tracks", route: Routes.TRACKS),
+    // (title: "Sound kits", route: null),
   ];
-  ({String title, String? route}) current = (title: "Home", route: Routes.HOME);
-  void changeIndex(({String title, String? route}) data) {
-    if (data.route != null && data != current) {
-      update([current.route!]);
-      current = data;
-      update([data.route!]);
-      Get.offNamed(data.route!);
-    }
-  }
+  ({String title, String? route})? current = (title: "Home", route: Routes.HOME);
 
   void logout() async {
     final isLoggedOut = await sessionManager.signOutDevice();
@@ -34,6 +26,11 @@ class DefaultLayoutController extends GetxController {
       showNav = false;
     } else {
       showNav = true;
+    }
+    if (navItems.any((element) => element.route == r.current)) {
+      current = navItems.firstWhere((element) => element.route == r.current);
+    } else {
+      current = null;
     }
     update(["showNav"]);
   }

@@ -33,32 +33,25 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                               child: Row(
                                 children: List.generate(
                                     controller.navItems.length, (index) {
-                                  return GetBuilder<DefaultLayoutController>(
-                                    id: controller.navItems[index].route,
-                                    builder: (_) {
-                                      return TextButton(
-                                          style: TextButton.styleFrom(
-                                              textStyle: TextStyle(
-                                                  fontWeight: controller.current ==
-                                                          controller
-                                                              .navItems[index]
-                                                      ? FontWeight.w600
-                                                      : FontWeight.w400,
-                                                  fontSize: controller.current ==
-                                                          controller
-                                                              .navItems[index]
-                                                      ? 16.5
-                                                      : 14.5),
-                                              foregroundColor: controller
-                                                          .current ==
+                                  return TextButton(
+                                      style: TextButton.styleFrom(
+                                          textStyle: TextStyle(
+                                              fontWeight: controller.current ==
                                                       controller.navItems[index]
-                                                  ? Colors.blue
-                                                  : Colors.grey.shade400),
-                                          onPressed: () => controller.changeIndex(
-                                              controller.navItems[index]),
-                                          child: Text(controller.navItems[index].title));
-                                    },
-                                  );
+                                                  ? FontWeight.w600
+                                                  : FontWeight.w400,
+                                              fontSize: controller.current ==
+                                                      controller.navItems[index]
+                                                  ? 16.5
+                                                  : 14.5),
+                                          foregroundColor: controller.current ==
+                                                  controller.navItems[index]
+                                              ? Colors.blue
+                                              : Colors.grey.shade400),
+                                      onPressed: () => Get.offNamed(
+                                            controller.navItems[index].route),
+                                      child: Text(
+                                          controller.navItems[index].title));
                                 }),
                               ),
                             ),

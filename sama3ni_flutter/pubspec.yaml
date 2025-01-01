@@ -65,7 +65,6 @@ flutter:
   assets:
     - assets/images/
     - assets/videos/
-    - 
 
   fonts:
     - family: dancing_script

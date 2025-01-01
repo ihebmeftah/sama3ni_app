@@ -14,6 +14,7 @@ abstract class Routes {
   static const LOGIN = _Paths.AUTHENTIFICATION + _Paths.LOGIN;
   static const VERIFCATION = REGISTER + _Paths.VERIFCATION;
   static const UPLOAD = _Paths.UPLOAD;
+  static const TRACKS = _Paths.TRACKS;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const VERIFCATION = '/verifcation';
   static const UPLOAD = '/upload';
+  static const TRACKS = '/tracks';
 }

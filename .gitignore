@@ -1,2 +1,7 @@
 .vscode/easycode.ignore
 sama3ni_server/uploads/
+sama3ni_server/migrations/
+sama3ni_server/lib/src/generated
+sama3ni_servermigrations/migration_registry.txt
+
+sama3ni_client/lib/src/protocol

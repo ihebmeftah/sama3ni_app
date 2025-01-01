@@ -47,6 +47,7 @@ class AppInput extends StatelessWidget {
             ),
           ),
         TextFormField(
+          onTapOutside: (event) => FocusScope.of(context).unfocus(),
           enabled: enabled,
           onTap: onTap,
           initialValue: intialV,

@@ -21,10 +21,10 @@ class ProfileController extends GetxController {
       soundcloud =
           TextEditingController(text: _artistProfileCtr.artist.soundcloudlink);
   void pickImage() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(type: FileType.image);
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.image, withData: true);
     if (result != null) {
-      sessionManager
+      await sessionManager
           .uploadUserImage(ByteData.view(result.files.single.bytes!.buffer));
       sessionManager.addListener(() {
         update();

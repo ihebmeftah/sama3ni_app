@@ -1,0 +1,7 @@
+enum: TrackType
+serialized: byName
+values:
+  - song
+  - sample
+  - loop
+  - beat

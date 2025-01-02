@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:sama3ni_flutter/app/components/appinput.dart';
 import 'package:sama3ni_flutter/app/modules/authentification/controllers/verifcation_controller.dart';
 
 class VerifcationView extends GetView<VerifcationController> {
@@ -22,12 +23,11 @@ class VerifcationView extends GetView<VerifcationController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFormField(
-                    controller: controller.validationCode,
-                    validator: (value) => value!.isEmpty ? "Enter code" : null,
-                    decoration: const InputDecoration(
-                      hintText: "Enter your verfication code",
-                    ),
+                  AppInput(
+                    name: "Validation Code",
+                    hint: "Enter your validation code",
+                    isRequired: true,
+                    ctr: controller.validationCode,
                   ),
                   ElevatedButton(
                       onPressed: controller.onVerifi,

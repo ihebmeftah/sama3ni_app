@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:sama3ni_flutter/app/components/appinput.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -10,7 +10,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+        appBar: AppBar(),
         resizeToAvoidBottomInset: false,
         body: Center(
           child: Padding(
@@ -25,33 +25,19 @@ class LoginView extends GetView<LoginController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFormField(
-                    controller: controller.email,
-                    validator: (value) => value!.isEmpty ? "Enter email" : null,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.email,
-                        color: HexColor("8193b2"),
-                      ),
-                      hintText: "Enter your email",
-                    ),
+                  AppInput(
+                    isEmail: true,
+                    name: "Email",
+                    hint: "Enter your email",
+                    ctr: controller.email,
+                    isRequired: true,
                   ),
-                  TextFormField(
-                    controller: controller.password,
-                    validator: (value) =>
-                        value!.isEmpty ? "Enter password" : null,
-                    decoration: InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.visibility_off_outlined,
-                        size: 18,
-                        color: Colors.grey.shade400,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.password,
-                        color: HexColor("8193b2"),
-                      ),
-                      hintText: "Enter your password",
-                    ),
+                  AppInput(
+                    isPasssword: true,
+                    name: "password",
+                    hint: "Enter your password",
+                    ctr: controller.password,
+                    isRequired: true,
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(

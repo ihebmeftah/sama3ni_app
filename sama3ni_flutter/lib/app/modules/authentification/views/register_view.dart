@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:sama3ni_flutter/app/components/appinput.dart';
 
 import '../controllers/register_controller.dart';
 
@@ -25,45 +25,25 @@ class RegisterView extends GetView<RegisterController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFormField(
-                    controller: controller.username,
-                    validator: (value) =>
-                        value!.isEmpty ? "Enter username" : null,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.email,
-                        color: HexColor("8193b2"),
-                      ),
-                      hintText: "Enter your username",
-                    ),
+                  AppInput(
+                    name: "Username",
+                    hint: "Enter your username",
+                    isRequired: true,
+                    ctr: controller.username,
                   ),
-                  TextFormField(
-                    controller: controller.email,
-                    validator: (value) => value!.isEmpty ? "Enter email" : null,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.email,
-                        color: HexColor("8193b2"),
-                      ),
-                      hintText: "Enter your email",
-                    ),
+                  AppInput(
+                    name: "Email",
+                    isEmail: true,
+                    hint: "Enter your email",
+                    ctr: controller.email,
+                    isRequired: true,
                   ),
-                  TextFormField(
-                    controller: controller.password,
-                    validator: (value) =>
-                        value!.isEmpty ? "Enter password" : null,
-                    decoration: InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.visibility_off_outlined,
-                        size: 18,
-                        color: Colors.grey.shade400,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.password,
-                        color: HexColor("8193b2"),
-                      ),
-                      hintText: "Enter your password",
-                    ),
+                  AppInput(
+                    name: "Password",
+                    isPasssword: true,
+                    ctr: controller.password,
+                    hint: "Enter your password",
+                    isRequired: true,
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(

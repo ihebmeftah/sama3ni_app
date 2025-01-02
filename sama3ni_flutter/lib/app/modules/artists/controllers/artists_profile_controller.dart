@@ -24,7 +24,7 @@ class ArtistsProfileController extends GetxController with StateMixin {
         tracks.value = await client.tracks.getTracksByArtist(int.parse(id));
       } else {
         artist = await client.artists.getLoggedArtist();
-        tracks.value = await client.tracks.getMyTracks();
+        tracks.value = await client.tracks.getTracksByArtist();
       }
       change(null, status: RxStatus.success());
     } catch (e) {

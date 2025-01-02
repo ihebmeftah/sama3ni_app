@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:sama3ni_flutter/app/modules/artists/controllers/artists_profile_controller.dart';
 import 'package:sama3ni_flutter/app/modules/artists/widgets/artist_about_widget.dart';
 
-import '../widgets/artist_discography_widget.dart';
 import '../widgets/artist_releases_widget.dart';
 
 class ArtistsProfileView extends GetView<ArtistsProfileController> {
@@ -13,7 +12,7 @@ class ArtistsProfileView extends GetView<ArtistsProfileController> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: Get.arguments ?? 0,
-      length: 3,
+      length: 2,
       child: Scaffold(body: controller.obx((s) {
         return NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -115,7 +114,6 @@ class ArtistsProfileView extends GetView<ArtistsProfileController> {
                             fontSize: 16),
                         tabs: [
                           Tab(text: "About"),
-                          Tab(text: "Discography"),
                           Tab(text: "Releases"),
                         ]),
                   ),
@@ -130,7 +128,6 @@ class ArtistsProfileView extends GetView<ArtistsProfileController> {
                       : null,
                   children: const [
                     ArtistAboutWidget(),
-                    ArtistDiscoGraphyWidget(),
                     ArtistRealeasesWidget(),
                   ]),
             ));

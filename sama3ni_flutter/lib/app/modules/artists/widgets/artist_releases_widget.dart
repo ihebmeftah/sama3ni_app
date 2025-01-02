@@ -38,32 +38,32 @@ class ArtistRealeasesWidget extends GetView<ArtistsProfileController> {
                         const SizedBox(height: 30),
                     itemBuilder: (context, index) => Row(
                       children: [
-                        Image.asset(
-                          "assets/images/grandson.jpg",
+                        Image.network(
+                          controller.tracks[index].photoUrl!,
                           width: 120,
                           height: 120,
                         ),
                         const SizedBox(width: 20),
                         Expanded(
                           child: Column(
+                            spacing: 10,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Grandson",
-                                style: TextStyle(
+                              Text(
+                                "${controller.artist.displayName} - ${controller.tracks[index].title}",
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                               Text(
-                                "${index == 1 ? "Album" : "Single"} . 2022 . 10 Tracks",
+                                "${controller.tracks[index].genre?.name} . ${controller.tracks[index].playtime} Plays",
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.grey.shade500,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              const SizedBox(height: 10),
                               Row(
                                 children: [
                                   IconButton(

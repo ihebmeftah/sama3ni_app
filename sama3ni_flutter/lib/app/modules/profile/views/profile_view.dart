@@ -105,7 +105,7 @@ class ProfileView extends GetView<ProfileController> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              TextButton(
+              /*  TextButton(
                   style: TextButton.styleFrom(
                       textStyle: const TextStyle(
                         fontSize: 15,
@@ -113,7 +113,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       foregroundColor: Colors.red),
                   onPressed: Get.back,
-                  child: const Text("Close")),
+                  child: const Text("Close")) */
               TextButton(
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(

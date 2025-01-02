@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
+import 'package:sama3ni_flutter/app/routes/app_pages.dart';
 
 import '../../profile/views/profile_view.dart';
 import '../controllers/artists_profile_controller.dart';
@@ -38,26 +39,31 @@ class ArtistAboutWidget extends GetView<ArtistsProfileController> {
                   iconColor: Colors.grey.shade200,
                 ),
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        backgroundColor: Colors.black,
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('Edit Profile'),
-                            IconButton(
-                                onPressed: Get.back,
-                                icon: const Icon(Icons.clear)),
-                          ],
-                        ),
-                        content: SizedBox(
-                            width: Get.width * 0.6, child: const ProfileView()),
-                      );
-                    },
-                  );
+                  if (GetPlatform.isMobile) {
+                    Get.toNamed(Routes.PROFILE);
+                  } else {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: Colors.black,
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Edit Profile'),
+                              IconButton(
+                                  onPressed: Get.back,
+                                  icon: const Icon(Icons.clear)),
+                            ],
+                          ),
+                          content: SizedBox(
+                              width: Get.width * 0.6,
+                              child: const ProfileView()),
+                        );
+                      },
+                    );
+                  }
                 },
                 label: const Text('Edit Profile'),
                 icon: const Icon(Icons.edit),

@@ -44,6 +44,7 @@ class UploadController extends GetxController with StateMixin {
               price: price.text.isEmpty ? null : double.parse(price.text),
             );
             track = await client.tracks.createTrack(track);
+            AppSnackbar("Track uploaded successfully").sucess();
             Get.offAllNamed("${Routes.ARTISTS}/me", arguments: 1);
           }
         } else {

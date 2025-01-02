@@ -17,12 +17,13 @@ class AppSnackbar {
             color: Colors.red,
           )),
       icon: const Icon(Icons.warning),
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       colorText: Colors.white,
       backgroundColor: Colors.blueAccent,
       margin: GetPlatform.isMobile
           ? null
-          : EdgeInsets.only(right: Get.width * 0.75, left: Get.height * 0.02),
+          : EdgeInsets.only(
+              top: 5, right: Get.width * 0.75, left: Get.height * 0.02),
     );
   }
 
@@ -38,12 +39,13 @@ class AppSnackbar {
             color: Colors.red,
           )),
       icon: const Icon(Icons.done_all),
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       colorText: Colors.white,
       backgroundColor: Colors.green,
       margin: GetPlatform.isMobile
           ? null
-          : EdgeInsets.only(right: Get.width * 0.75, left: Get.height * 0.02),
+          : EdgeInsets.only(
+              top: 5, right: Get.width * 0.75, left: Get.height * 0.02),
     );
   }
 
@@ -59,12 +61,13 @@ class AppSnackbar {
             color: Colors.red,
           )),
       icon: const Icon(Icons.error),
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       colorText: Colors.white,
       backgroundColor: Colors.red,
       margin: GetPlatform.isMobile
           ? null
-          : EdgeInsets.only(right: Get.width * 0.75, left: Get.height * 0.02),
+          : EdgeInsets.only(
+              top: 5, right: Get.width * 0.75, left: Get.height * 0.02),
     );
   }
 }

@@ -14,15 +14,17 @@ import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 import 'artists.dart' as _i4;
 import 'categories.dart' as _i5;
-import 'enums/track_type.dart' as _i6;
-import 'exceptions/appexception.dart' as _i7;
-import 'exceptions/exceptiontype.enum.dart' as _i8;
-import 'tracks.dart' as _i9;
-import 'package:sama3ni_server/src/generated/artists.dart' as _i10;
-import 'package:sama3ni_server/src/generated/categories.dart' as _i11;
-import 'package:sama3ni_server/src/generated/tracks.dart' as _i12;
+import 'enums/keys.dart' as _i6;
+import 'enums/track_type.dart' as _i7;
+import 'exceptions/appexception.dart' as _i8;
+import 'exceptions/exceptiontype.enum.dart' as _i9;
+import 'tracks.dart' as _i10;
+import 'package:sama3ni_server/src/generated/artists.dart' as _i11;
+import 'package:sama3ni_server/src/generated/categories.dart' as _i12;
+import 'package:sama3ni_server/src/generated/tracks.dart' as _i13;
 export 'artists.dart';
 export 'categories.dart';
+export 'enums/keys.dart';
 export 'enums/track_type.dart';
 export 'exceptions/appexception.dart';
 export 'exceptions/exceptiontype.enum.dart';
@@ -250,7 +252,7 @@ class Protocol extends _i1.SerializationManagerServer {
           name: 'key',
           columnType: _i2.ColumnType.text,
           isNullable: true,
-          dartType: 'String?',
+          dartType: 'protocol:Keys?',
         ),
         _i2.ColumnDefinition(
           name: 'playtime',
@@ -358,17 +360,20 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i5.Category) {
       return _i5.Category.fromJson(data) as T;
     }
-    if (t == _i6.TrackType) {
-      return _i6.TrackType.fromJson(data) as T;
+    if (t == _i6.Keys) {
+      return _i6.Keys.fromJson(data) as T;
     }
-    if (t == _i7.AppException) {
-      return _i7.AppException.fromJson(data) as T;
+    if (t == _i7.TrackType) {
+      return _i7.TrackType.fromJson(data) as T;
     }
-    if (t == _i8.ExceptionType) {
-      return _i8.ExceptionType.fromJson(data) as T;
+    if (t == _i8.AppException) {
+      return _i8.AppException.fromJson(data) as T;
     }
-    if (t == _i9.Track) {
-      return _i9.Track.fromJson(data) as T;
+    if (t == _i9.ExceptionType) {
+      return _i9.ExceptionType.fromJson(data) as T;
+    }
+    if (t == _i10.Track) {
+      return _i10.Track.fromJson(data) as T;
     }
     if (t == _i1.getType<_i4.Artist?>()) {
       return (data != null ? _i4.Artist.fromJson(data) : null) as T;
@@ -376,37 +381,40 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i5.Category?>()) {
       return (data != null ? _i5.Category.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i6.TrackType?>()) {
-      return (data != null ? _i6.TrackType.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i6.Keys?>()) {
+      return (data != null ? _i6.Keys.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i7.AppException?>()) {
-      return (data != null ? _i7.AppException.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i7.TrackType?>()) {
+      return (data != null ? _i7.TrackType.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i8.ExceptionType?>()) {
-      return (data != null ? _i8.ExceptionType.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i8.AppException?>()) {
+      return (data != null ? _i8.AppException.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i9.Track?>()) {
-      return (data != null ? _i9.Track.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i9.ExceptionType?>()) {
+      return (data != null ? _i9.ExceptionType.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i10.Track?>()) {
+      return (data != null ? _i10.Track.fromJson(data) : null) as T;
     }
     if (t == List<String>) {
       return (data as List).map((e) => deserialize<String>(e)).toList()
           as dynamic;
     }
-    if (t == _i1.getType<List<_i9.Track>?>()) {
+    if (t == _i1.getType<List<_i10.Track>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i9.Track>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i10.Track>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i10.Artist>) {
-      return (data as List).map((e) => deserialize<_i10.Artist>(e)).toList()
+    if (t == List<_i11.Artist>) {
+      return (data as List).map((e) => deserialize<_i11.Artist>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i11.Category>) {
-      return (data as List).map((e) => deserialize<_i11.Category>(e)).toList()
+    if (t == List<_i12.Category>) {
+      return (data as List).map((e) => deserialize<_i12.Category>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i12.Track>) {
-      return (data as List).map((e) => deserialize<_i12.Track>(e)).toList()
+    if (t == List<_i13.Track>) {
+      return (data as List).map((e) => deserialize<_i13.Track>(e)).toList()
           as dynamic;
     }
     try {
@@ -428,16 +436,19 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i5.Category) {
       return 'Category';
     }
-    if (data is _i6.TrackType) {
+    if (data is _i6.Keys) {
+      return 'Keys';
+    }
+    if (data is _i7.TrackType) {
       return 'TrackType';
     }
-    if (data is _i7.AppException) {
+    if (data is _i8.AppException) {
       return 'AppException';
     }
-    if (data is _i8.ExceptionType) {
+    if (data is _i9.ExceptionType) {
       return 'ExceptionType';
     }
-    if (data is _i9.Track) {
+    if (data is _i10.Track) {
       return 'Track';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -463,17 +474,20 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'Category') {
       return deserialize<_i5.Category>(data['data']);
     }
+    if (dataClassName == 'Keys') {
+      return deserialize<_i6.Keys>(data['data']);
+    }
     if (dataClassName == 'TrackType') {
-      return deserialize<_i6.TrackType>(data['data']);
+      return deserialize<_i7.TrackType>(data['data']);
     }
     if (dataClassName == 'AppException') {
-      return deserialize<_i7.AppException>(data['data']);
+      return deserialize<_i8.AppException>(data['data']);
     }
     if (dataClassName == 'ExceptionType') {
-      return deserialize<_i8.ExceptionType>(data['data']);
+      return deserialize<_i9.ExceptionType>(data['data']);
     }
     if (dataClassName == 'Track') {
-      return deserialize<_i9.Track>(data['data']);
+      return deserialize<_i10.Track>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -505,8 +519,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i4.Artist.t;
       case _i5.Category:
         return _i5.Category.t;
-      case _i9.Track:
-        return _i9.Track.t;
+      case _i10.Track:
+        return _i10.Track.t;
     }
     return null;
   }

@@ -12,7 +12,7 @@ class UploadController extends GetxController with StateMixin {
   final form = GlobalKey<FormState>();
   Category? category;
   TrackType? trackType;
-  String? key;
+  Keys? key;
   final title = TextEditingController();
   final bpm = TextEditingController();
   final price = TextEditingController();
@@ -79,7 +79,7 @@ class UploadController extends GetxController with StateMixin {
     this.category = category;
   }
 
-  void selectKey(String? k) {
+  void selectKey(Keys? k) {
     key = k;
   }
 

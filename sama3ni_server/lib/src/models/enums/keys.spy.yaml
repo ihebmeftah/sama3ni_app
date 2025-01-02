@@ -1,0 +1,18 @@
+enum: Keys
+serialized: byName
+values:
+  - c
+  - c_
+  - d
+  - d_
+  - e
+  - e_
+  - f
+  - f_
+  - g
+  - g_
+  - a
+  - a_
+  - E
+  - b
+  - b_

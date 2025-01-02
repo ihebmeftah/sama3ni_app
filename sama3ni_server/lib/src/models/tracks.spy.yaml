@@ -4,7 +4,7 @@ fields:
   title: String
   type: TrackType
   bpm: int?
-  key: String?
+  key: Keys?
   playtime: int, default=0
   price: double?
   tags: List<String> = []

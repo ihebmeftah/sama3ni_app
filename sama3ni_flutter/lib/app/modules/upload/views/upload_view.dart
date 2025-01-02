@@ -100,15 +100,14 @@ class UploadView extends GetView<UploadController> {
                         ),
                         GetX<CategoriesController>(
                             init: CategoriesController(),
-                            builder: (_) {
+                            builder: (c) {
                               return AppDropDown<Category>(
                                 onChange: controller.selectCategoryy,
                                 intialV: controller.category,
                                 isRequired: true,
                                 name: "category",
                                 hint: "e.g. Hip-Hop",
-                                items: Get.find<CategoriesController>()
-                                    .categories
+                                items: c.categories
                                     .map((e) => DropdownMenuItem(
                                         value: e, child: Text(e.name)))
                                     .toList(),
@@ -129,28 +128,18 @@ class UploadView extends GetView<UploadController> {
                               ),
                             ),
                             Expanded(
-                              child: AppDropDown<String>(
+                              child: AppDropDown<Keys>(
                                 onChange: controller.selectKey,
                                 intialV: controller.key,
                                 isRequired: true,
                                 name: "Key",
                                 hint: "e.g. C# ",
-                                items: [
-                                  'C',
-                                  'C#',
-                                  'D',
-                                  'D#',
-                                  'E',
-                                  'F',
-                                  'F#',
-                                  'G',
-                                  'G#',
-                                  'A',
-                                  'A#',
-                                  'B'
-                                ]
+                                items: Keys.values
                                     .map((e) => DropdownMenuItem(
-                                        value: e, child: Text(e)))
+                                        value: e,
+                                        child: Text(e.name
+                                            .toUpperCase()
+                                            .replaceFirst("_", "#"))))
                                     .toList(),
                               ),
                             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sama3ni_flutter/app/modules/authentification/controllers/authentification_controller.dart';
 
+import '../../../components/appsnackbar.dart';
 import '../../../routes/app_pages.dart';
 
 class RegisterController extends GetxController {
@@ -19,7 +20,7 @@ class RegisterController extends GetxController {
       if (sendValidationCode) {
         Get.toNamed(Routes.VERIFCATION, parameters: {'email': email.text});
       } else {
-        Get.snackbar("Error", "Email already exists or password is weak");
+        AppSnackbar("Email already exists or password is weak").error();
       }
     }
   }

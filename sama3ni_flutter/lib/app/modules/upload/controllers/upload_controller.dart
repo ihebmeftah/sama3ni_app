@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sama3ni_client/sama3ni_client.dart';
+import 'package:sama3ni_flutter/app/components/appsnackbar.dart';
 import 'package:sama3ni_flutter/app/routes/app_pages.dart';
 import 'package:sama3ni_flutter/main.dart';
 import 'package:textfield_tags/textfield_tags.dart';
@@ -25,7 +26,7 @@ class UploadController extends GetxController with StateMixin {
   void uploadTrack() async {
     try {
       if (trackPhoto == null) {
-        Get.snackbar("Error", "Please upload a cover photo");
+        AppSnackbar("Please upload a cover photo").alert();
       } else {
         if (trackAudio != null) {
           if (form.currentState!.validate()) {
@@ -46,7 +47,7 @@ class UploadController extends GetxController with StateMixin {
             Get.offAllNamed("${Routes.ARTISTS}/me", arguments: 1);
           }
         } else {
-          Get.snackbar("Error", "Please upload the audio file");
+          AppSnackbar("Please upload the audio file").alert();
         }
       }
     } catch (e) {
@@ -58,7 +59,7 @@ class UploadController extends GetxController with StateMixin {
   void pickAudio() async {
     trackAudio = await FilePicker.platform.pickFiles(type: FileType.audio);
     if (trackAudio == null) {
-      Get.snackbar("Error", "No file selected");
+      AppSnackbar("No file selected").alert();
     }
     update(["audio"]);
   }
@@ -68,7 +69,7 @@ class UploadController extends GetxController with StateMixin {
     trackPhoto = await FilePicker.platform
         .pickFiles(type: FileType.image, allowCompression: false);
     if (trackPhoto == null) {
-      Get.snackbar("Error", "No file selected");
+      AppSnackbar("No file selected").alert();
     }
     update(["photo"]);
   }

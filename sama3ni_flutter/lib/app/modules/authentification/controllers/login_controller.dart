@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sama3ni_flutter/app/components/appsnackbar.dart';
 import '../../../routes/app_pages.dart';
 import 'authentification_controller.dart';
 
@@ -17,7 +18,7 @@ class LoginController extends GetxController {
       if (userInfo != null) {
         Get.offAllNamed(Routes.HOME);
       } else {
-        Get.snackbar("Error", "Invalid email or password");
+        AppSnackbar("Invalid email or password").error();
       }
     }
   }

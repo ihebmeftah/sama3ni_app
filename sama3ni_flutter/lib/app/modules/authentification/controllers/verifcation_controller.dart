@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../components/appsnackbar.dart';
 import '../../../routes/app_pages.dart';
 import 'authentification_controller.dart';
 
@@ -19,7 +20,8 @@ class VerifcationController extends GetxController {
         Get.back();
         Get.offAllNamed(Routes.LOGIN);
       } else {
-        Get.snackbar("Error", "Invalid verification code");
+        AppSnackbar("Invalid verification code").error();
+
       }
     }
   }

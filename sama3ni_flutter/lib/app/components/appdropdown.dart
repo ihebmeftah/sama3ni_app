@@ -52,8 +52,9 @@ class AppDropDown<T> extends StatelessWidget {
             }
             return null;
           },
-          decoration: InputDecoration(
-            hintText: hint ?? name,
+          hint: Text(
+            hint ?? name!,
+            style: Theme.of(context).inputDecorationTheme.hintStyle,
           ),
           onChanged: onChange,
           items: items,

@@ -34,10 +34,14 @@ dependencies:
   http: ^1.2.2
   #sizer: ^3.0.4
   carousel_slider: ^5.0.0
+  path: ^1.9.0
+  path_provider: ^2.1.5
+  dotted_border: ^2.1.0
   readmore: ^3.0.0
   font_awesome_flutter: ^10.8.0
   just_audio: ^0.9.42
-
+  easy_stepper: ^0.8.5+1
+  textfield_tags: ^3.0.1
   sama3ni_client:
     path: ../sama3ni_client
   serverpod_auth_shared_flutter: 2.3.0

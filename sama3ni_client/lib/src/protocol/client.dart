@@ -110,14 +110,15 @@ class EndpointTracks extends _i1.EndpointRef {
   @override
   String get name => 'tracks';
 
-  _i2.Future<List<_i6.Track>> getMyTracks() =>
-      caller.callServerEndpoint<List<_i6.Track>>(
-        'tracks',
-        'getMyTracks',
-        {},
-      );
-
-  _i2.Future<List<_i6.Track>> getTracksByArtist(int artistId) =>
+  /// Retrieves a list of tracks by a specific artist.
+  ///
+  /// If [artistId] is provided, it fetches tracks associated with the given artist ID.
+  /// If [artistId] is not provided, it retrieves tracks for the currently logged-in artist.
+  ///
+  /// [session] is the current session used for database operations and authentication.
+  ///
+  /// Returns a [Future] containing a list of [Track] objects associated with the artist.
+  _i2.Future<List<_i6.Track>> getTracksByArtist([int? artistId]) =>
       caller.callServerEndpoint<List<_i6.Track>>(
         'tracks',
         'getTracksByArtist',
@@ -131,17 +132,11 @@ class EndpointTracks extends _i1.EndpointRef {
         {'categoryId': categoryId},
       );
 
-  _i2.Future<_i6.Track> createTrack(
-    _i6.Track track,
-    _i4.ByteData trackFile,
-  ) =>
+  _i2.Future<_i6.Track> createTrack(_i6.Track track) =>
       caller.callServerEndpoint<_i6.Track>(
         'tracks',
         'createTrack',
-        {
-          'track': track,
-          'trackFile': trackFile,
-        },
+        {'track': track},
       );
 }
 

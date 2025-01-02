@@ -194,22 +194,13 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'tracks',
       endpoint: endpoints['tracks']!,
       methodConnectors: {
-        'getMyTracks': _i1.MethodConnector(
-          name: 'getMyTracks',
-          params: {},
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['tracks'] as _i4.TracksEndpoint).getMyTracks(session),
-        ),
         'getTracksByArtist': _i1.MethodConnector(
           name: 'getTracksByArtist',
           params: {
             'artistId': _i1.ParameterDescription(
               name: 'artistId',
-              type: _i1.getType<int>(),
-              nullable: false,
+              type: _i1.getType<int?>(),
+              nullable: true,
             )
           },
           call: (
@@ -246,12 +237,7 @@ class Endpoints extends _i1.EndpointDispatch {
               name: 'track',
               type: _i1.getType<_i6.Track>(),
               nullable: false,
-            ),
-            'trackFile': _i1.ParameterDescription(
-              name: 'trackFile',
-              type: _i1.getType<_i5.ByteData>(),
-              nullable: false,
-            ),
+            )
           },
           call: (
             _i1.Session session,
@@ -260,7 +246,6 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['tracks'] as _i4.TracksEndpoint).createTrack(
             session,
             params['track'],
-            params['trackFile'],
           ),
         ),
       },

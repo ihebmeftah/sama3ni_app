@@ -49,9 +49,9 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                               ? Colors.blue
                                               : Colors.grey.shade400),
                                       onPressed: () => Get.offNamed(
-                                            controller.navItems[index].route),
-                                      child: Text(
-                                          controller.navItems[index].title));
+                                          controller.navItems[index].route),
+                                      child:
+                                          Text(controller.navItems[index].title));
                                 }),
                               ),
                             ),
@@ -141,7 +141,10 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                         ),
                       );
               })),
-      body: child,
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: child,
+      ),
     );
   }
 }

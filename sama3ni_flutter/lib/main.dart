@@ -7,7 +7,6 @@ import 'package:sama3ni_flutter/app/modules/default_layout/controllers/default_l
 import 'package:sama3ni_flutter/app/modules/default_layout/views/default_layout_view.dart';
 import 'package:serverpod_auth_shared_flutter/serverpod_auth_shared_flutter.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
-import 'package:sizer/sizer.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -34,23 +33,21 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(DefaultLayoutController());
-    return Sizer(builder: (context, orientation, screenType) {
-      return GetMaterialApp(
-        title: "Sama3ni",
-        theme: AppThemes.light,
-        darkTheme: AppThemes.dark,
-        themeMode: ThemeMode.dark,
-        debugShowCheckedModeBanner: false,
-        initialRoute: Routes.AUTHENTIFICATION,
-        getPages: AppPages.routes,
-        defaultTransition: Transition.fade,
-        routingCallback: controller.onChangeRoute,
-        builder: (context, c) {
-          return Overlay(initialEntries: [
-            OverlayEntry(builder: (_) => DefaultLayoutView(child: c!))
-          ]);
-        },
-      );
-    });
+    return GetMaterialApp(
+      title: "Sama3ni",
+      theme: AppThemes.light,
+      darkTheme: AppThemes.dark,
+      themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
+      initialRoute: Routes.AUTHENTIFICATION,
+      getPages: AppPages.routes,
+      defaultTransition: Transition.fade,
+      routingCallback: controller.onChangeRoute,
+      builder: (context, c) {
+        return Overlay(initialEntries: [
+          OverlayEntry(builder: (_) => DefaultLayoutView(child: c!))
+        ]);
+      },
+    );
   }
 }

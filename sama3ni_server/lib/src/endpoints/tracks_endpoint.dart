@@ -9,8 +9,12 @@ class TracksEndpoint extends Endpoint with Fileuploader {
   Future<List<Track>> getTopsTracks(Session session) async {
     return await Track.db.find(
       session,
-      include: Track.include(genre: Category.include()),
+      include: Track.include(
+        artist: Artist.include(),
+        genre: Category.include(),
+      ),
       orderBy: (p) => p.playtime,
+      orderDescending: true,
     );
   }
 
@@ -19,7 +23,8 @@ class TracksEndpoint extends Endpoint with Fileuploader {
     if (artistId == null) {
       final artist = await ArtistsEndpoint().getLoggedArtist(session);
       return await Track.db.find(session,
-          include: Track.include(genre: Category.include()),
+          include: Track.include(
+              artist: Artist.include(), genre: Category.include()),
           where: (x) => x.artistId.equals(artist.id!));
     }
     return await Track.db.find(session,

@@ -363,8 +363,8 @@ class Protocol extends _i1.SerializationManagerServer {
         _i2.ColumnDefinition(
           name: 'artistId',
           columnType: _i2.ColumnType.bigint,
-          isNullable: true,
-          dartType: 'int?',
+          isNullable: false,
+          dartType: 'int',
         ),
         _i2.ColumnDefinition(
           name: 'genreId',
@@ -480,11 +480,6 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == List<String>) {
       return (data as List).map((e) => deserialize<String>(e)).toList()
           as dynamic;
-    }
-    if (t == _i1.getType<List<_i11.Track>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<_i11.Track>(e)).toList()
-          : null) as dynamic;
     }
     if (t == _i1.getType<List<_i10.Follower>?>()) {
       return (data != null

@@ -195,7 +195,7 @@ class HomeView extends GetView<HomeController> {
                                 physics: GetPlatform.isWeb
                                     ? const NeverScrollableScrollPhysics()
                                     : null,
-                                itemCount: 5,
+                                itemCount: controller.topTracks.length,
                                 scrollDirection: Axis.horizontal,
                                 separatorBuilder: (c, i) =>
                                     const SizedBox(width: 10),
@@ -220,10 +220,11 @@ class HomeView extends GetView<HomeController> {
                                           children: [
                                             Container(
                                               height: 180,
-                                              decoration: const BoxDecoration(
+                                              decoration: BoxDecoration(
                                                 image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "assets/images/foralldog.jpg"),
+                                                    image: NetworkImage(
+                                                        controller.topTracks[i]
+                                                            .photoUrl!),
                                                     fit: BoxFit.fill),
                                               ),
                                             ),
@@ -233,33 +234,19 @@ class HomeView extends GetView<HomeController> {
                                                     CrossAxisAlignment.start,
                                                 spacing: 5,
                                                 children: [
-                                                  const Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        "My mind ",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w700),
-                                                      ),
-                                                      Text(
-                                                        "130 BPM",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                      ),
-                                                    ],
+                                                  Text(
+                                                    controller
+                                                        .topTracks[i].title,
+                                                    maxLines: 1,
+                                                    style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w700),
                                                   ),
                                                   Text(
-                                                    "Iheb music ",
+                                                    controller.topTracks[i]
+                                                        .artist!.displayName,
                                                     style: TextStyle(
                                                         color: Colors
                                                             .grey.shade400,
@@ -269,14 +256,15 @@ class HomeView extends GetView<HomeController> {
                                                   ),
                                                   Row(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      const Text(
-                                                        "5 Credits",
-                                                        style: TextStyle(
+                                                      Text(
+                                                        "${controller.topTracks[i].price!}\$",
+                                                        style: const TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 16,
                                                             fontWeight:

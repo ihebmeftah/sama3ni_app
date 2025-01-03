@@ -98,11 +98,6 @@ class Protocol extends _i1.SerializationManager {
       return (data as List).map((e) => deserialize<String>(e)).toList()
           as dynamic;
     }
-    if (t == _i1.getType<List<_i9.Track>?>()) {
-      return (data != null
-          ? (data as List).map((e) => deserialize<_i9.Track>(e)).toList()
-          : null) as dynamic;
-    }
     if (t == _i1.getType<List<_i8.Follower>?>()) {
       return (data != null
           ? (data as List).map((e) => deserialize<_i8.Follower>(e)).toList()

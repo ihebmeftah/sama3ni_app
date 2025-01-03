@@ -11,6 +11,8 @@ fields:
   youtubelink: String?
   coverphoto: String?
   tracks: List<Track>?, relation(name=artist_tracks)
+  follower: List<Follower>?, relation(name=artist_follower)
+  following: List<Follower>?, relation(name=artist_following)
 
 indexes:
   user_info_id_unique_idx:

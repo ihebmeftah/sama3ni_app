@@ -1,7 +1,6 @@
 class: Follower
 table: followers
 fields:
-  follower: Artist?, relation, scope=serverOnly
-  following: Artist?, relation
+  follower: Artist?, relation(name=artist_follower)
+  following: Artist?, relation(name=artist_following)
   createdAt: DateTime, default=now
-  

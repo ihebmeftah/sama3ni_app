@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class SectionHead extends StatelessWidget {
   const SectionHead({
     super.key,
@@ -14,12 +13,15 @@ class SectionHead extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       spacing: 20,
       children: [
-        Text(
-          title.capitalizeFirst!,
-          style: const TextStyle(
-              color: Colors.white, fontSize: 32, fontWeight: FontWeight.w600),
+        Flexible(
+          child: Text(
+            title.capitalizeFirst!,
+            style: const TextStyle(
+                color: Colors.white, fontSize: 32, fontWeight: FontWeight.w600),
+          ),
         ),
         TextButton(
             style: TextButton.styleFrom(
@@ -34,32 +36,6 @@ class SectionHead extends StatelessWidget {
                 foregroundColor: Colors.grey.shade200),
             onPressed: () {},
             child: const Text("View all")),
-        const Spacer(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 10,
-          children: [
-            IconButton(
-                style: IconButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: const BorderSide(color: Colors.white),
-                    )),
-                onPressed: () {},
-                icon: const Icon(Icons.navigate_before)),
-            IconButton(
-                style: IconButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      side: const BorderSide(color: Colors.white),
-                    )),
-                onPressed: () {},
-                icon: const Icon(Icons.navigate_next))
-          ],
-        )
       ],
     );
   }

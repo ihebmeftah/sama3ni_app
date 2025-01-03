@@ -327,8 +327,12 @@ class HomeView extends GetView<HomeController> {
                                     height: 180,
                                     padding: const EdgeInsets.all(20),
                                     decoration: const BoxDecoration(
-                                      color: Colors.blue,
-                                    ),
+                                        color: Colors.blue,
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              "assets/images/bg.jpg"),
+                                        )),
                                     child: Text(
                                       categoriesController
                                           .categories[i].name.capitalizeFirst!,

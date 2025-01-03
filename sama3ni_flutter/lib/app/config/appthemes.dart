@@ -24,6 +24,26 @@ abstract class AppThemes {
     drawerTheme: const DrawerThemeData(
       backgroundColor: Colors.black,
     ),
+    chipTheme: const ChipThemeData(
+        backgroundColor: Colors.black,
+        labelStyle: TextStyle(color: Colors.white)),
+    checkboxTheme: CheckboxThemeData(
+        fillColor: WidgetStateProperty.resolveWith((v) {
+          return Colors.white;
+        }),
+        checkColor:
+            WidgetStateProperty.resolveWith((v) => Colors.blue.shade900)),
+    popupMenuTheme: PopupMenuThemeData(
+        iconColor: Colors.grey.shade400,
+        textStyle: TextStyle(
+          color: Colors.grey.shade400,
+        ),
+        labelTextStyle: WidgetStateProperty.resolveWith((v) { 
+          return TextStyle(
+            color: Colors.grey.shade400,
+          );
+        }),
+        color: Colors.black),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.black,
       surfaceTintColor: Colors.black,

@@ -1,0 +1,7 @@
+class: Follower
+table: followers
+fields:
+  follower: Artist?, relation, scope=serverOnly
+  following: Artist?, relation
+  createdAt: DateTime, default=now
+  

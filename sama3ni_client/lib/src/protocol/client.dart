@@ -14,9 +14,10 @@ import 'dart:async' as _i2;
 import 'package:sama3ni_client/src/protocol/artists.dart' as _i3;
 import 'dart:typed_data' as _i4;
 import 'package:sama3ni_client/src/protocol/categories.dart' as _i5;
-import 'package:sama3ni_client/src/protocol/tracks.dart' as _i6;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i7;
-import 'protocol.dart' as _i8;
+import 'package:sama3ni_client/src/protocol/follower.dart' as _i6;
+import 'package:sama3ni_client/src/protocol/tracks.dart' as _i7;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i8;
+import 'protocol.dart' as _i9;
 
 /// {@category Endpoint}
 class EndpointArtists extends _i1.EndpointRef {
@@ -104,6 +105,42 @@ class EndpointCategories extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointFollower extends _i1.EndpointRef {
+  EndpointFollower(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'follower';
+
+  _i2.Future<List<_i6.Follower>> getFollowing([int? artistId]) =>
+      caller.callServerEndpoint<List<_i6.Follower>>(
+        'follower',
+        'getFollowing',
+        {'artistId': artistId},
+      );
+
+  _i2.Future<_i6.Follower> followArtist(int artistId) =>
+      caller.callServerEndpoint<_i6.Follower>(
+        'follower',
+        'followArtist',
+        {'artistId': artistId},
+      );
+
+  _i2.Future<_i6.Follower> unfollowArtist(_i6.Follower follower) =>
+      caller.callServerEndpoint<_i6.Follower>(
+        'follower',
+        'unfollowArtist',
+        {'follower': follower},
+      );
+
+  _i2.Future<List<_i6.Follower>> unfollowArtistByArtistId(int artistId) =>
+      caller.callServerEndpoint<List<_i6.Follower>>(
+        'follower',
+        'unfollowArtistByArtistId',
+        {'artistId': artistId},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointTracks extends _i1.EndpointRef {
   EndpointTracks(_i1.EndpointCaller caller) : super(caller);
 
@@ -118,22 +155,22 @@ class EndpointTracks extends _i1.EndpointRef {
   /// [session] is the current session used for database operations and authentication.
   ///
   /// Returns a [Future] containing a list of [Track] objects associated with the artist.
-  _i2.Future<List<_i6.Track>> getTracksByArtist([int? artistId]) =>
-      caller.callServerEndpoint<List<_i6.Track>>(
+  _i2.Future<List<_i7.Track>> getTracksByArtist([int? artistId]) =>
+      caller.callServerEndpoint<List<_i7.Track>>(
         'tracks',
         'getTracksByArtist',
         {'artistId': artistId},
       );
 
-  _i2.Future<List<_i6.Track>> getTracksByCategory(int categoryId) =>
-      caller.callServerEndpoint<List<_i6.Track>>(
+  _i2.Future<List<_i7.Track>> getTracksByCategory(int categoryId) =>
+      caller.callServerEndpoint<List<_i7.Track>>(
         'tracks',
         'getTracksByCategory',
         {'categoryId': categoryId},
       );
 
-  _i2.Future<_i6.Track> createTrack(_i6.Track track) =>
-      caller.callServerEndpoint<_i6.Track>(
+  _i2.Future<_i7.Track> createTrack(_i7.Track track) =>
+      caller.callServerEndpoint<_i7.Track>(
         'tracks',
         'createTrack',
         {'track': track},
@@ -142,10 +179,10 @@ class EndpointTracks extends _i1.EndpointRef {
 
 class Modules {
   Modules(Client client) {
-    auth = _i7.Caller(client);
+    auth = _i8.Caller(client);
   }
 
-  late final _i7.Caller auth;
+  late final _i8.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -164,7 +201,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i8.Protocol(),
+          _i9.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -176,6 +213,7 @@ class Client extends _i1.ServerpodClientShared {
         ) {
     artists = EndpointArtists(this);
     categories = EndpointCategories(this);
+    follower = EndpointFollower(this);
     tracks = EndpointTracks(this);
     modules = Modules(this);
   }
@@ -183,6 +221,8 @@ class Client extends _i1.ServerpodClientShared {
   late final EndpointArtists artists;
 
   late final EndpointCategories categories;
+
+  late final EndpointFollower follower;
 
   late final EndpointTracks tracks;
 
@@ -192,6 +232,7 @@ class Client extends _i1.ServerpodClientShared {
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
         'artists': artists,
         'categories': categories,
+        'follower': follower,
         'tracks': tracks,
       };
 

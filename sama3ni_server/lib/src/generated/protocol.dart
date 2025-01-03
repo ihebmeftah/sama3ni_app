@@ -18,16 +18,19 @@ import 'enums/keys.dart' as _i6;
 import 'enums/track_type.dart' as _i7;
 import 'exceptions/appexception.dart' as _i8;
 import 'exceptions/exceptiontype.enum.dart' as _i9;
-import 'tracks.dart' as _i10;
-import 'package:sama3ni_server/src/generated/artists.dart' as _i11;
-import 'package:sama3ni_server/src/generated/categories.dart' as _i12;
-import 'package:sama3ni_server/src/generated/tracks.dart' as _i13;
+import 'follower.dart' as _i10;
+import 'tracks.dart' as _i11;
+import 'package:sama3ni_server/src/generated/artists.dart' as _i12;
+import 'package:sama3ni_server/src/generated/categories.dart' as _i13;
+import 'package:sama3ni_server/src/generated/follower.dart' as _i14;
+import 'package:sama3ni_server/src/generated/tracks.dart' as _i15;
 export 'artists.dart';
 export 'categories.dart';
 export 'enums/keys.dart';
 export 'enums/track_type.dart';
 export 'exceptions/appexception.dart';
 export 'exceptions/exceptiontype.enum.dart';
+export 'follower.dart';
 export 'tracks.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
@@ -218,6 +221,78 @@ class Protocol extends _i1.SerializationManagerServer {
       managed: true,
     ),
     _i2.TableDefinition(
+      name: 'followers',
+      dartName: 'Follower',
+      schema: 'public',
+      module: 'sama3ni',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'followers_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'followerId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'followingId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'createdAt',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+          columnDefault: 'CURRENT_TIMESTAMP',
+        ),
+      ],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'followers_fk_0',
+          columns: ['followerId'],
+          referenceTable: 'artists',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'followers_fk_1',
+          columns: ['followingId'],
+          referenceTable: 'artists',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'followers_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
       name: 'tracks',
       dartName: 'Track',
       schema: 'public',
@@ -372,8 +447,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i9.ExceptionType) {
       return _i9.ExceptionType.fromJson(data) as T;
     }
-    if (t == _i10.Track) {
-      return _i10.Track.fromJson(data) as T;
+    if (t == _i10.Follower) {
+      return _i10.Follower.fromJson(data) as T;
+    }
+    if (t == _i11.Track) {
+      return _i11.Track.fromJson(data) as T;
     }
     if (t == _i1.getType<_i4.Artist?>()) {
       return (data != null ? _i4.Artist.fromJson(data) : null) as T;
@@ -393,28 +471,35 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i9.ExceptionType?>()) {
       return (data != null ? _i9.ExceptionType.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i10.Track?>()) {
-      return (data != null ? _i10.Track.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i10.Follower?>()) {
+      return (data != null ? _i10.Follower.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i11.Track?>()) {
+      return (data != null ? _i11.Track.fromJson(data) : null) as T;
     }
     if (t == List<String>) {
       return (data as List).map((e) => deserialize<String>(e)).toList()
           as dynamic;
     }
-    if (t == _i1.getType<List<_i10.Track>?>()) {
+    if (t == _i1.getType<List<_i11.Track>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i10.Track>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i11.Track>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i11.Artist>) {
-      return (data as List).map((e) => deserialize<_i11.Artist>(e)).toList()
+    if (t == List<_i12.Artist>) {
+      return (data as List).map((e) => deserialize<_i12.Artist>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i12.Category>) {
-      return (data as List).map((e) => deserialize<_i12.Category>(e)).toList()
+    if (t == List<_i13.Category>) {
+      return (data as List).map((e) => deserialize<_i13.Category>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i13.Track>) {
-      return (data as List).map((e) => deserialize<_i13.Track>(e)).toList()
+    if (t == List<_i14.Follower>) {
+      return (data as List).map((e) => deserialize<_i14.Follower>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i15.Track>) {
+      return (data as List).map((e) => deserialize<_i15.Track>(e)).toList()
           as dynamic;
     }
     try {
@@ -448,7 +533,10 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i9.ExceptionType) {
       return 'ExceptionType';
     }
-    if (data is _i10.Track) {
+    if (data is _i10.Follower) {
+      return 'Follower';
+    }
+    if (data is _i11.Track) {
       return 'Track';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -486,8 +574,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'ExceptionType') {
       return deserialize<_i9.ExceptionType>(data['data']);
     }
+    if (dataClassName == 'Follower') {
+      return deserialize<_i10.Follower>(data['data']);
+    }
     if (dataClassName == 'Track') {
-      return deserialize<_i10.Track>(data['data']);
+      return deserialize<_i11.Track>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -519,8 +610,10 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i4.Artist.t;
       case _i5.Category:
         return _i5.Category.t;
-      case _i10.Track:
-        return _i10.Track.t;
+      case _i10.Follower:
+        return _i10.Follower.t;
+      case _i11.Track:
+        return _i11.Track.t;
     }
     return null;
   }

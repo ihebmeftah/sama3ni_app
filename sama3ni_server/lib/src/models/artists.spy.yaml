@@ -9,7 +9,7 @@ fields:
   iglink: String?
   soundcloudlink: String?
   youtubelink: String?
-  coverphoto: String?
+  coverphotoUrl: String?
   follower: List<Follower>?, relation(name=artist_follower)
   following: List<Follower>?, relation(name=artist_following)
 

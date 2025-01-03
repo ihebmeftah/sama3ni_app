@@ -86,11 +86,11 @@ class ArtistsProfileView extends GetView<ArtistsProfileController> {
                         ),
                         background: Container(
                           decoration: BoxDecoration(
-                              image: controller.artist.coverphoto == null
+                              image: controller.artist.coverphotoUrl == null
                                   ? null
                                   : DecorationImage(
                                       image: NetworkImage(
-                                          controller.artist.coverphoto!),
+                                          controller.artist.coverphotoUrl!),
                                       fit: BoxFit.cover)),
                           child: Container(
                             decoration: const BoxDecoration(

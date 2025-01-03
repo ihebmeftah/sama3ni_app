@@ -77,13 +77,6 @@ class ArtistsEndpoint extends Endpoint with Fileuploader {
 
   Future<Artist> updateCoverPhoto(
       Session session, ByteData coverPhoto, fileName) async {
-    final Uri? uri = await uploadByteData(session, coverPhoto, fileName);
-    if (uri == null) {
-      throw AppException(
-        message: "Failed to upload cover photo",
-        errorType: ExceptionType.forbidden,
-      );
-    }
     if (!await session.isUserSignedIn) {
       throw AppException(
         message: "This endpoint requires authentication",
@@ -100,7 +93,14 @@ class ArtistsEndpoint extends Endpoint with Fileuploader {
         errorType: ExceptionType.notFound,
       );
     }
-    artist.coverphoto = uri.toString();
+    final uri = await uploadByteData(session, coverPhoto, fileName);
+    if (uri == null) {
+      throw AppException(
+        message: "Failed to upload cover photo",
+        errorType: ExceptionType.forbidden,
+      );
+    }
+    artist.coverphotoUrl = uri.toString();
     return Artist.db.updateRow(session, artist);
   }
 

@@ -29,8 +29,8 @@ class ArtistsProfileController extends GetxController with StateMixin {
   }
 
   void updateCoverPhoto() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(type: FileType.image);
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.image, withData: true);
     if (result != null) {
       artist = await client.artists.updateCoverPhoto(
         ByteData.view(result.files.single.bytes!.buffer),

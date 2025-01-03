@@ -222,8 +222,8 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'follower',
       endpoint: endpoints['follower']!,
       methodConnectors: {
-        'getFollowing': _i1.MethodConnector(
-          name: 'getFollowing',
+        'getFollowers': _i1.MethodConnector(
+          name: 'getFollowers',
           params: {
             'artistId': _i1.ParameterDescription(
               name: 'artistId',
@@ -235,7 +235,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['follower'] as _i4.FollowerEndpoint).getFollowing(
+              (endpoints['follower'] as _i4.FollowerEndpoint).getFollowers(
             session,
             params['artistId'],
           ),

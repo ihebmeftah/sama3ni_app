@@ -1,27 +1,19 @@
 import 'package:sama3ni_server/src/endpoints/artists_endpoint.dart';
 import 'package:sama3ni_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
-import 'package:serverpod_auth_server/serverpod_auth_server.dart';
 
 class FollowerEndpoint extends Endpoint {
   @override
   bool get requireLogin => true;
-  Future<List<Follower>> getFollowing(Session session, [int? artistId]) async {
+  Future<List<Follower>> getFollowers(Session session, [int? artistId]) async {
     if (artistId != null) {
       final artist = await ArtistsEndpoint().getArtistById(session, artistId);
-      return await Follower.db.find(session,
-          include: Follower.include(
-            following: Artist.include(
-              userInfo: UserInfo.include(),
-            ),
-          ),
-          where: (ww) => ww.followerId.equals(artist.id));
-    } else {
-      final artist = await ArtistsEndpoint().getLoggedArtist(session);
-      return await Follower.db.find(session,
-          include: Follower.include(following: Artist.include()),
-          where: (ww) => ww.followerId.equals(artist.id));
+      return await Follower.db
+          .find(session, where: (x) => x.followerId.equals(artist.id!));
     }
+    final artist = await ArtistsEndpoint().getLoggedArtist(session);
+    return await Follower.db
+        .find(session, where: (x) => x.followerId.equals(artist.id!));
   }
 
   Future<Follower> followArtist(Session session, int artistId) async {
@@ -38,8 +30,7 @@ class FollowerEndpoint extends Endpoint {
   }
 
   Future<Follower> unfollowArtist(Session session, Follower follower) async {
-    final f = await Follower.db.findFirstRow(session,
-        where: (ww) => ww.followingId.equals(follower.id));
+    final f = await Follower.db.findById(session, follower.id!);
     if (f == null) {
       throw AppException(
           message: "follower not found", errorType: ExceptionType.notFound);

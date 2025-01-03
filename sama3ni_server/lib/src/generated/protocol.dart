@@ -486,6 +486,16 @@ class Protocol extends _i1.SerializationManagerServer {
           ? (data as List).map((e) => deserialize<_i11.Track>(e)).toList()
           : null) as dynamic;
     }
+    if (t == _i1.getType<List<_i10.Follower>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.Follower>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i10.Follower>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.Follower>(e)).toList()
+          : null) as dynamic;
+    }
     if (t == List<_i12.Artist>) {
       return (data as List).map((e) => deserialize<_i12.Artist>(e)).toList()
           as dynamic;

@@ -14,6 +14,8 @@ import '../modules/authentification/views/register_view.dart';
 import '../modules/authentification/views/verifcation_view.dart';
 import '../modules/categories/bindings/categories_binding.dart';
 import '../modules/categories/views/categories_view.dart';
+import '../modules/follower/bindings/follower_binding.dart';
+import '../modules/follower/views/follower_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -88,6 +90,11 @@ class AppPages {
       name: _Paths.TRACKS,
       page: () => const TracksView(),
       binding: TracksBinding(),
+    ),
+    GetPage(
+      name: _Paths.FOLLOWER,
+      page: () => const FollowerView(),
+      binding: FollowerBinding(),
     ),
   ];
 }

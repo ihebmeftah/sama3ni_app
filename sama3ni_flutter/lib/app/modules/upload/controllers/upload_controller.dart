@@ -45,7 +45,9 @@ class UploadController extends GetxController with StateMixin {
             );
             track = await client.tracks.createTrack(track);
             AppSnackbar("Track uploaded successfully").sucess();
-            Get.offAllNamed("${Routes.ARTISTS}/me", arguments: 1);
+            Get.offAllNamed(
+                "${Routes.ARTISTS}/${sessionManager.signedInUser!.id}",
+                arguments: 1);
           }
         } else {
           AppSnackbar("Please upload the audio file").alert();

@@ -6,6 +6,14 @@ class CategoriesEndpoint extends Endpoint {
     return Category.db.find(session);
   }
 
+  /// Get the top 5 categories, sorted by their name in ascending order.
+  Future<List<Category>> getTopCategories(Session session) async {
+    return Category.db.find(
+      session,
+      limit: 5,
+    );
+  }
+
   Future<Category> getCategoryById(Session session, int id) async {
     final category = await Category.db.findById(session, id);
     if (category == null) {

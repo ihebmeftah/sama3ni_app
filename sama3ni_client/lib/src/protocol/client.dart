@@ -47,6 +47,15 @@ class EndpointArtists extends _i1.EndpointRef {
         {},
       );
 
+  /// Get the top 10 artists (based on the number of followers) in
+  /// descending order.
+  _i2.Future<List<_i3.Artist>> getTopArtists() =>
+      caller.callServerEndpoint<List<_i3.Artist>>(
+        'artists',
+        'getTopArtists',
+        {},
+      );
+
   _i2.Future<_i3.Artist> updateCoverPhoto(
     _i4.ByteData coverPhoto,
     dynamic fileName,
@@ -93,6 +102,14 @@ class EndpointCategories extends _i1.EndpointRef {
       caller.callServerEndpoint<List<_i5.Category>>(
         'categories',
         'getCategories',
+        {},
+      );
+
+  /// Get the top 5 categories, sorted by their name in ascending order.
+  _i2.Future<List<_i5.Category>> getTopCategories() =>
+      caller.callServerEndpoint<List<_i5.Category>>(
+        'categories',
+        'getTopCategories',
         {},
       );
 
@@ -147,14 +164,13 @@ class EndpointTracks extends _i1.EndpointRef {
   @override
   String get name => 'tracks';
 
-  /// Retrieves a list of tracks by a specific artist.
-  ///
-  /// If [artistId] is provided, it fetches tracks associated with the given artist ID.
-  /// If [artistId] is not provided, it retrieves tracks for the currently logged-in artist.
-  ///
-  /// [session] is the current session used for database operations and authentication.
-  ///
-  /// Returns a [Future] containing a list of [Track] objects associated with the artist.
+  _i2.Future<List<_i7.Track>> getTopsTracks() =>
+      caller.callServerEndpoint<List<_i7.Track>>(
+        'tracks',
+        'getTopsTracks',
+        {},
+      );
+
   _i2.Future<List<_i7.Track>> getTracksByArtist([int? artistId]) =>
       caller.callServerEndpoint<List<_i7.Track>>(
         'tracks',

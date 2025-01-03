@@ -89,6 +89,16 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['artists'] as _i2.ArtistsEndpoint).getArtists(session),
         ),
+        'getTopArtists': _i1.MethodConnector(
+          name: 'getTopArtists',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['artists'] as _i2.ArtistsEndpoint)
+                  .getTopArtists(session),
+        ),
         'updateCoverPhoto': _i1.MethodConnector(
           name: 'updateCoverPhoto',
           params: {
@@ -176,6 +186,16 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['categories'] as _i3.CategoriesEndpoint)
                   .getCategories(session),
+        ),
+        'getTopCategories': _i1.MethodConnector(
+          name: 'getTopCategories',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['categories'] as _i3.CategoriesEndpoint)
+                  .getTopCategories(session),
         ),
         'getCategoryById': _i1.MethodConnector(
           name: 'getCategoryById',
@@ -281,6 +301,16 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'tracks',
       endpoint: endpoints['tracks']!,
       methodConnectors: {
+        'getTopsTracks': _i1.MethodConnector(
+          name: 'getTopsTracks',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['tracks'] as _i5.TracksEndpoint)
+                  .getTopsTracks(session),
+        ),
         'getTracksByArtist': _i1.MethodConnector(
           name: 'getTracksByArtist',
           params: {

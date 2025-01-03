@@ -2,10 +2,12 @@ artists:
   - getLoggedArtist:
   - getArtistById:
   - getArtists:
+  - getTopArtists:
   - updateCoverPhoto:
   - updateLoggedArtist:
 categories:
   - getCategories:
+  - getTopCategories:
   - getCategoryById:
 follower:
   - getFollowing:
@@ -13,6 +15,7 @@ follower:
   - unfollowArtist:
   - unfollowArtistByArtistId:
 tracks:
+  - getTopsTracks:
   - getTracksByArtist:
   - getTracksByCategory:
   - createTrack:

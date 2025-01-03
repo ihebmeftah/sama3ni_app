@@ -6,14 +6,13 @@ import 'package:serverpod/server.dart';
 import '../mixin/fileuploader.dart';
 
 class TracksEndpoint extends Endpoint with Fileuploader {
-  /// Retrieves a list of tracks by a specific artist.
-  ///
-  /// If [artistId] is provided, it fetches tracks associated with the given artist ID.
-  /// If [artistId] is not provided, it retrieves tracks for the currently logged-in artist.
-  ///
-  /// [session] is the current session used for database operations and authentication.
-  ///
-  /// Returns a [Future] containing a list of [Track] objects associated with the artist.
+  Future<List<Track>> getTopsTracks(Session session) async {
+    return await Track.db.find(
+      session,
+      include: Track.include(genre: Category.include()),
+      orderBy: (p) => p.playtime,
+    );
+  }
 
   Future<List<Track>> getTracksByArtist(Session session,
       [int? artistId]) async {

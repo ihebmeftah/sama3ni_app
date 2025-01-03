@@ -27,8 +27,15 @@ class ArtistsEndpoint extends Endpoint with Fileuploader {
   }
 
   Future<Artist> getArtistById(Session session, int id) async {
-    final artist = await Artist.db.findById(session, id,
-        include: Artist.include(userInfo: UserInfo.include()));
+    final artist = await Artist.db.findById(
+      session,
+      id,
+      include: Artist.include(
+        follower: Follower.includeList(),
+        following: Follower.includeList(),
+        userInfo: UserInfo.include(),
+      ),
+    );
     if (artist == null) {
       throw AppException(
         message: "Artist not found",
@@ -44,7 +51,10 @@ class ArtistsEndpoint extends Endpoint with Fileuploader {
       return await Artist.db.find(
         session,
         where: (p0) => p0.userInfo.id.notEquals(authInfo!.userId),
-        include: Artist.include(userInfo: UserInfo.include()),
+        include: Artist.include(
+            follower: Follower.includeList(),
+            following: Follower.includeList(),
+            userInfo: UserInfo.include()),
       );
     }
     return await Artist.db.find(

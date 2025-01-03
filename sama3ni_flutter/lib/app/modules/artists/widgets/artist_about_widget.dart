@@ -16,10 +16,20 @@ class ArtistAboutWidget extends GetView<ArtistsProfileController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 15,
       children: [
-        if (controller.isMe)
-          Row(
-            spacing: 10,
-            children: [
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            TextButton(
+              onPressed: () => Get.toNamed(Routes.FOLLOWER,
+                  parameters: {'is': "follower", 'id': controller.id}),
+              child: Text("Followers ${controller.artist.following?.length}"),
+            ),
+            TextButton(
+                onPressed: () => Get.toNamed(Routes.FOLLOWER,
+                    parameters: {'is': "following", 'id': controller.id}),
+                child: Text("Following ${controller.artist.follower?.length}")),
+            if (controller.isMe)
               TextButton.icon(
                 style: TextButton.styleFrom(
                     foregroundColor: Colors.grey.shade200,
@@ -29,6 +39,7 @@ class ArtistAboutWidget extends GetView<ArtistsProfileController> {
                 icon: const Icon(Icons.photo),
                 label: const Text("Upload new cover"),
               ),
+            if (controller.isMe)
               TextButton.icon(
                 style: TextButton.styleFrom(
                   side: BorderSide(
@@ -68,8 +79,8 @@ class ArtistAboutWidget extends GetView<ArtistsProfileController> {
                 label: const Text('Edit Profile'),
                 icon: const Icon(Icons.edit),
               ),
-            ],
-          ),
+          ],
+        ),
         Text(
           controller.artist.displayName.capitalize!,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),

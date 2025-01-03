@@ -1,19 +1,43 @@
 import 'package:sama3ni_server/src/endpoints/artists_endpoint.dart';
 import 'package:sama3ni_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
+import 'package:serverpod_auth_server/serverpod_auth_server.dart';
 
 class FollowerEndpoint extends Endpoint {
   @override
   bool get requireLogin => true;
+  Future<List<Follower>> getFollowing(Session session, [int? artistId]) async {
+    if (artistId != null) {
+      final artist = await ArtistsEndpoint().getArtistById(session, artistId);
+      return await Follower.db.find(session,
+          include: Follower.include(
+              following: Artist.include(userInfo: UserInfo.include()),
+              follower: Artist.include(userInfo: UserInfo.include())),
+          where: (x) => x.followingId.equals(artist.id!));
+    }
+    final artist = await ArtistsEndpoint().getLoggedArtist(session);
+    return await Follower.db.find(session,
+        include: Follower.include(
+            following: Artist.include(userInfo: UserInfo.include()),
+            follower: Artist.include(userInfo: UserInfo.include())),
+        where: (x) => x.followingId.equals(artist.id!));
+  }
+
   Future<List<Follower>> getFollowers(Session session, [int? artistId]) async {
     if (artistId != null) {
       final artist = await ArtistsEndpoint().getArtistById(session, artistId);
-      return await Follower.db
-          .find(session, where: (x) => x.followerId.equals(artist.id!));
+      return await Follower.db.find(session,
+          include: Follower.include(
+              following: Artist.include(userInfo: UserInfo.include()),
+              follower: Artist.include(userInfo: UserInfo.include())),
+          where: (x) => x.followerId.equals(artist.id!));
     }
     final artist = await ArtistsEndpoint().getLoggedArtist(session);
-    return await Follower.db
-        .find(session, where: (x) => x.followerId.equals(artist.id!));
+    return await Follower.db.find(session,
+        include: Follower.include(
+            following: Artist.include(userInfo: UserInfo.include()),
+            follower: Artist.include(userInfo: UserInfo.include())),
+        where: (x) => x.followerId.equals(artist.id!));
   }
 
   Future<Follower> followArtist(Session session, int artistId) async {

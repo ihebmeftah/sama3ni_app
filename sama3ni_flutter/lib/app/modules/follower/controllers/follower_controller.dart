@@ -5,7 +5,7 @@ import '../../../../main.dart';
 
 class FollowerController extends GetxController with StateMixin {
   final following = <Follower>[].obs;
-  final follower = <Follower>[].obs;
+  final followers = <Follower>[].obs;
   @override
   Future<void> onInit() async {
     await getFollowing();
@@ -16,25 +16,9 @@ class FollowerController extends GetxController with StateMixin {
   Future<void> getFollowing() async {
     try {
       following(await client.follower
+          .getFollowers(int.tryParse(Get.parameters["id"]!)));
+      followers(await client.follower
           .getFollowing(int.tryParse(Get.parameters["id"]!)));
-    } catch (e) {
-      change(null, status: RxStatus.error(e.toString()));
-    }
-  }
-
-  Future<void> followArtist(int artistId) async {
-    try {
-      await getFollowing();
-      final exist =
-          following.firstWhereOrNull((a) => a.followingId == artistId);
-      if (exist != null) {
-        await client.follower.unfollowArtistByArtistId(artistId);
-        following.removeWhere((a) => a.followingId == artistId);
-      } else {
-        final follower = await client.follower.followArtist(artistId);
-        following.add(follower);
-      }
-      update([artistId]);
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
     }

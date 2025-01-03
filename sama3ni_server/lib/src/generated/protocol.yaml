@@ -10,6 +10,7 @@ categories:
   - getTopCategories:
   - getCategoryById:
 follower:
+  - getFollowing:
   - getFollowers:
   - followArtist:
   - unfollowArtist:

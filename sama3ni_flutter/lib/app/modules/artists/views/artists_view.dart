@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:sama3ni_flutter/app/routes/app_pages.dart';
+import 'package:sama3ni_flutter/main.dart';
 
 import '../controllers/artists_controller.dart';
 
@@ -121,15 +122,16 @@ class ArtistsView extends GetView<ArtistsController> {
                               fontWeight: FontWeight.w400),
                         ),
                       const SizedBox(height: 10),
-                       if (controller.artists[index].bio != null)  Text(
-                        controller.artists[index].bio ??
-                            "This artist has no bio yet",
-                        maxLines: 3,
-                        style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
-                      ),
+                      if (controller.artists[index].bio != null)
+                        Text(
+                          controller.artists[index].bio ??
+                              "This artist has no bio yet",
+                          maxLines: 3,
+                          style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400),
+                        ),
                       const SizedBox(height: 10),
                       Row(
                         children: [
@@ -150,12 +152,35 @@ class ArtistsView extends GetView<ArtistsController> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: index == 0 ? Colors.grey : null),
-                          onPressed: () {},
-                          icon: Icon(index == 0 ? Icons.remove : Icons.add),
-                          label: Text(index == 0 ? "Unfollow" : 'Follow')),
+                      GetBuilder<ArtistsController>(
+                          id: index,
+                          builder: (_) {
+                            return ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                  iconColor: Colors.white,
+                                  backgroundColor: controller
+                                          .artists[index].following!
+                                          .any((a) =>
+                                              a.followerId ==
+                                              sessionManager.signedInUser?.id)
+                                      ? Colors.grey
+                                      : null),
+                              onPressed: () => controller.folllowArtist(index),
+                              icon: Icon(controller.artists[index].following!
+                                      .any((a) =>
+                                          a.followerId ==
+                                          sessionManager.signedInUser?.id)
+                                  ? Icons.remove
+                                  : Icons.add),
+                              label: Text(
+                                controller.artists[index].following!.any((a) =>
+                                        a.followerId ==
+                                        sessionManager.signedInUser?.id)
+                                    ? "Unfollow"
+                                    : 'Follow',
+                              ),
+                            );
+                          }),
                     ],
                   ),
                 ),

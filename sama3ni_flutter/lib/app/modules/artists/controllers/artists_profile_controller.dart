@@ -8,25 +8,21 @@ import '../../../../main.dart';
 
 class ArtistsProfileController extends GetxController with StateMixin {
   final String id = Get.parameters["id"]!;
-  bool isMe = Get.parameters["id"]! == "me";
+  bool isMe =
+      Get.parameters["id"]! == sessionManager.signedInUser!.id.toString();
   late Artist artist;
   final tracks = <Track>[].obs;
   @override
-  void onInit() {
-    getArtistById();
+  void onInit() async {
+    await getArtistById();
+    change(null, status: RxStatus.success());
     super.onInit();
   }
 
   Future<void> getArtistById() async {
     try {
-      if (!isMe) {
-        artist = await client.artists.getArtistById(int.parse(id));
-        tracks.value = await client.tracks.getTracksByArtist(int.parse(id));
-      } else {
-        artist = await client.artists.getLoggedArtist();
-        tracks.value = await client.tracks.getTracksByArtist();
-      }
-      change(null, status: RxStatus.success());
+      artist = await client.artists.getArtistById(int.parse(id));
+      tracks.value = await client.tracks.getTracksByArtist(int.parse(id));
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
     }

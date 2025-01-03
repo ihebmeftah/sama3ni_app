@@ -12,6 +12,6 @@ fields:
   photoUrl: String?
   audioByte: ByteData?, !persist
   audioUrl: String
-  artistId: int?, relation(name=artist_tracks, parent=artists), scope=serverOnly
+  artist: Artist?, relation
   genre: Category?, relation(onDelete=SetNull)
   createdAt: DateTime, default=now

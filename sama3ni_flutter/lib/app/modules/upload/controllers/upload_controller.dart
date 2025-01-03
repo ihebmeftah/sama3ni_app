@@ -32,6 +32,7 @@ class UploadController extends GetxController with StateMixin {
           if (form.currentState!.validate()) {
             change(null, status: RxStatus.loading());
             Track track = Track(
+              artistId: sessionManager.signedInUser!.id!,
               title: title.text,
               audioUrl: title.text,
               type: trackType!,

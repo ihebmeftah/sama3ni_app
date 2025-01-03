@@ -10,7 +10,6 @@ fields:
   soundcloudlink: String?
   youtubelink: String?
   coverphoto: String?
-  tracks: List<Track>?, relation(name=artist_tracks)
   follower: List<Follower>?, relation(name=artist_follower)
   following: List<Follower>?, relation(name=artist_following)
 

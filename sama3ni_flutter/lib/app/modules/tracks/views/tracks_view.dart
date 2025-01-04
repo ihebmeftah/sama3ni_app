@@ -51,191 +51,187 @@ class TracksView extends GetView<TracksController> {
                       hintText: "Search by tags, track, artist, or album",
                     ),
                   ),
-                  Wrap(
-                    spacing: 20,
-                    children: [
-                      GetX<TracksController>(builder: (_) {
-                        return PopupMenuButton<Category>(
-                          enabled: controller.categories.isNotEmpty,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Text("Genre"),
-                              Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.grey.shade400,
-                              ),
-                            ],
-                          ),
-                          onSelected: (Category item) {},
-                          itemBuilder: (BuildContext context) => List.generate(
-                            controller.categories.length,
-                            (index) => PopupMenuItem<Category>(
-                              value: controller.categories[index],
-                              child: GetBuilder<TracksController>(
-                                  id: controller.categories[index].id,
-                                  builder: (_) {
-                                    return CheckboxListTile(
-                                        title: Text(
-                                            controller.categories[index].name),
-                                        value: controller.selectedCategory.any(
-                                            (cat) =>
-                                                cat.id ==
-                                                controller
-                                                    .categories[index].id),
-                                        onChanged: (v) {
-                                          controller.selectCategory(
-                                              controller.categories[index]);
-                                        });
-                                  }),
-                            ),
-                          ),
-                        );
-                      }),
-                      PopupMenuButton<TrackType>(
-                        constraints: BoxConstraints(
-                          minHeight: Get.height * 0.5,
-                          minWidth: Get.width * 0.18,
-                        ),
-                        enabled: controller.trackTypes.isNotEmpty,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text("Track types"),
-                            Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.grey.shade400,
-                            ),
-                          ],
-                        ),
-                        itemBuilder: (BuildContext context) => List.generate(
-                          controller.trackTypes.length,
-                          (index) => PopupMenuItem<TrackType>(
-                            value: controller.trackTypes[index],
-                            child: GetBuilder<TracksController>(
-                                id: controller.trackTypes[index].name,
-                                builder: (_) {
-                                  return CheckboxListTile(
-                                      title: Text(
-                                          controller.trackTypes[index].name),
-                                      value: controller.selectedTrackTypes.any(
-                                          (trackType) =>
-                                              trackType ==
-                                              controller.trackTypes[index]),
-                                      onChanged: (v) {
-                                        controller.selectTrackType(
-                                            controller.trackTypes[index]);
-                                      });
-                                }),
-                          ),
-                        ),
-                      ),
-                      PopupMenuButton<Keys>(
+                  Wrap(spacing: 20, children: [
+                    GetX<TracksController>(builder: (_) {
+                      return PopupMenuButton<Category>(
                         constraints: BoxConstraints(
                           maxHeight: Get.height * 0.5,
                           minWidth: Get.width * 0.18,
                         ),
-                        enabled: controller.trackTypes.isNotEmpty,
+                        enabled: controller.categories.isNotEmpty,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Text("Keys"),
+                            const Text("Genre"),
                             Icon(
                               Icons.arrow_drop_down,
                               color: Colors.grey.shade400,
                             ),
                           ],
                         ),
+                        onSelected: (Category item) {},
                         itemBuilder: (BuildContext context) => List.generate(
-                          controller.keys.length,
-                          (index) => PopupMenuItem<Keys>(
-                            value: controller.keys[index],
+                          controller.categories.length,
+                          (index) => PopupMenuItem<Category>(
+                            value: controller.categories[index],
                             child: GetBuilder<TracksController>(
-                                id: controller.keys[index].name,
+                                id: controller.categories[index].id,
                                 builder: (_) {
                                   return CheckboxListTile(
-                                      title: Text(controller.keys[index].name
-                                          .toUpperCase()
-                                          .replaceFirst("_", "#")),
-                                      value: controller.selectedKey.any(
-                                          (k) => k == controller.keys[index]),
+                                      title: Text(
+                                          controller.categories[index].name),
+                                      value: controller.selectedCategory.any(
+                                          (cat) =>
+                                              cat.id ==
+                                              controller.categories[index].id),
                                       onChanged: (v) {
-                                        controller
-                                            .selectKey(controller.keys[index]);
+                                        controller.selectCategory(
+                                            controller.categories[index]);
                                       });
                                 }),
                           ),
                         ),
+                      );
+                    }),
+                    PopupMenuButton<TrackType>(
+                      constraints: BoxConstraints(
+                        maxHeight: Get.height * 0.5,
+                        minWidth: Get.width * 0.18,
                       ),
-                      PopupMenuButton(
-                          enabled: true,
-                          constraints: BoxConstraints(
-                            maxHeight: Get.height * 0.5,
-                            minWidth: Get.width * 0.18,
+                      enabled: controller.trackTypes.isNotEmpty,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text("Track types"),
+                          Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.grey.shade400,
                           ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Text("Bpm"),
-                              Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.grey.shade400,
-                              ),
-                            ],
+                        ],
+                      ),
+                      itemBuilder: (BuildContext context) => List.generate(
+                        controller.trackTypes.length,
+                        (index) => PopupMenuItem<TrackType>(
+                          value: controller.trackTypes[index],
+                          child: GetBuilder<TracksController>(
+                              id: controller.trackTypes[index].name,
+                              builder: (_) {
+                                return CheckboxListTile(
+                                    title:
+                                        Text(controller.trackTypes[index].name),
+                                    value: controller.selectedTrackTypes.any(
+                                        (trackType) =>
+                                            trackType ==
+                                            controller.trackTypes[index]),
+                                    onChanged: (v) {
+                                      controller.selectTrackType(
+                                          controller.trackTypes[index]);
+                                    });
+                              }),
+                        ),
+                      ),
+                    ),
+                    PopupMenuButton<Keys>(
+                      constraints: BoxConstraints(
+                        maxHeight: Get.height * 0.5,
+                        minWidth: Get.width * 0.18,
+                      ),
+                      enabled: controller.trackTypes.isNotEmpty,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text("Keys"),
+                          Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.grey.shade400,
                           ),
-                          itemBuilder: (BuildContext context) => [
-                                PopupMenuItem(
-                                    enabled: false,
-                                    child: Column(
-                                      spacing: 10,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          "Write the bpm range",
-                                          style: TextStyle(
-                                              color: Colors.grey.shade400),
-                                        ),
-                                        Row(
-                                          spacing: 10,
-                                          children: [
-                                            Expanded(
-                                              child: TextField(
-                                                controller: controller.minBpm,
-                                                onChanged:
-                                                    controller.onChangeBpm,
-                                                decoration: InputDecoration(
-                                                  hintText: "Min : 0",
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
+                        ],
+                      ),
+                      itemBuilder: (BuildContext context) => List.generate(
+                        controller.keys.length,
+                        (index) => PopupMenuItem<Keys>(
+                          value: controller.keys[index],
+                          child: GetBuilder<TracksController>(
+                              id: controller.keys[index].name,
+                              builder: (_) {
+                                return CheckboxListTile(
+                                    title: Text(controller.keys[index].name
+                                        .toUpperCase()
+                                        .replaceFirst("_", "#")),
+                                    value: controller.selectedKey.any(
+                                        (k) => k == controller.keys[index]),
+                                    onChanged: (v) {
+                                      controller
+                                          .selectKey(controller.keys[index]);
+                                    });
+                              }),
+                        ),
+                      ),
+                    ),
+                    PopupMenuButton(
+                        constraints: BoxConstraints(
+                          maxHeight: Get.height * 0.5,
+                          minWidth: Get.width * 0.18,
+                        ),
+                        enabled: true,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text("Bpm"),
+                            Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.grey.shade400,
+                            ),
+                          ],
+                        ),
+                        itemBuilder: (BuildContext context) => [
+                              PopupMenuItem(
+                                  enabled: false,
+                                  child: Column(
+                                    spacing: 10,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "Write the bpm range",
+                                        style: TextStyle(
+                                            color: Colors.grey.shade400),
+                                      ),
+                                      Row(
+                                        spacing: 10,
+                                        children: [
+                                          Expanded(
+                                            child: TextField(
+                                              controller: controller.minBpm,
+                                              onChanged: controller.onChangeBpm,
+                                              decoration: InputDecoration(
+                                                hintText: "Min : 0",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
                                                 ),
                                               ),
                                             ),
-                                            const Text("To"),
-                                            Expanded(
-                                              child: TextField(
-                                                controller: controller.maxBpm,
-                                                onChanged:
-                                                    controller.onChangeBpm,
-                                                decoration: InputDecoration(
-                                                  hintText: "max : 200",
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
+                                          ),
+                                          const Text("To"),
+                                          Expanded(
+                                            child: TextField(
+                                              controller: controller.maxBpm,
+                                              onChanged: controller.onChangeBpm,
+                                              decoration: InputDecoration(
+                                                hintText: "max : 200",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    )),
-                              ])
-                    ],
-                  ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  )),
+                            ])
+                  ]),
                   Wrap(
                     spacing: 10,
                     runSpacing: 10,

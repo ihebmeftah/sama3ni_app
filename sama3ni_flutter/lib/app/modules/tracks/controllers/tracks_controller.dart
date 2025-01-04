@@ -16,21 +16,26 @@ class TracksController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
+    if (Get.parameters["genre"] != null) {
+      Category category = Get.put<CategoriesController>(CategoriesController())
+          .categories
+          .firstWhere(
+              (element) => element.id.toString() == Get.parameters["genre"]);
+      selectedCategory.add(category);
+    }
     await fetchTracks();
-
     super.onInit();
   }
 
   Future<void> fetchTracks() async {
     try {
       tracks.value = await client.tracks.getTrack();
-      if (Get.parameters["genre"] != null) {
-        Category category = Get.find<CategoriesController>()
-            .categories
-            .firstWhere(
-                (element) => element.id.toString() == Get.parameters["genre"]);
-        selectedCategory.add(category);
+      for (var t in tracks) {
+        if (!categories.any((c) => c.id == t.genreId)) {
+          categories.add(t.genre!);
+        }
       }
+
       change(null, status: RxStatus.success());
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
@@ -50,6 +55,7 @@ class TracksController extends GetxController with StateMixin {
   final List<Keys> selectedKey = [];
 
   List<Category> selectedCategory = <Category>[];
+  RxList<Category> categories = <Category>[].obs;
 
   void selectCategory(Category category) {
     if (selectedCategory.contains(category)) {

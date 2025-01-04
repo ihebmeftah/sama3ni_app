@@ -55,46 +55,44 @@ class TracksView extends GetView<TracksController> {
                   Wrap(
                     spacing: 20,
                     children: [
-                      GetX<CategoriesController>(
-                          init: CategoriesController(),
-                          builder: (c) {
-                            return PopupMenuButton<Category>(
-                              enabled: c.categories.isNotEmpty,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text("Genre"),
-                                  Icon(
-                                    Icons.arrow_drop_down,
-                                    color: Colors.grey.shade400,
-                                  ),
-                                ],
+                      GetX<TracksController>(builder: (_) {
+                        return PopupMenuButton<Category>(
+                          enabled: controller.categories.isNotEmpty,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text("Genre"),
+                              Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.grey.shade400,
                               ),
-                              onSelected: (Category item) {},
-                              itemBuilder: (BuildContext context) =>
-                                  List.generate(
-                                c.categories.length,
-                                (index) => PopupMenuItem<Category>(
-                                  value: c.categories[index],
-                                  child: GetBuilder<TracksController>(
-                                      id: c.categories[index].id,
-                                      builder: (_) {
-                                        return CheckboxListTile(
-                                            title:
-                                                Text(c.categories[index].name),
-                                            value: controller.selectedCategory
-                                                .any((cat) =>
-                                                    cat.id ==
-                                                    c.categories[index].id),
-                                            onChanged: (v) {
-                                              controller.selectCategory(
-                                                  c.categories[index]);
-                                            });
-                                      }),
-                                ),
-                              ),
-                            );
-                          }),
+                            ],
+                          ),
+                          onSelected: (Category item) {},
+                          itemBuilder: (BuildContext context) => List.generate(
+                            controller.categories.length,
+                            (index) => PopupMenuItem<Category>(
+                              value: controller.categories[index],
+                              child: GetBuilder<TracksController>(
+                                  id: controller.categories[index].id,
+                                  builder: (_) {
+                                    return CheckboxListTile(
+                                        title: Text(
+                                            controller.categories[index].name),
+                                        value: controller.selectedCategory.any(
+                                            (cat) =>
+                                                cat.id ==
+                                                controller
+                                                    .categories[index].id),
+                                        onChanged: (v) {
+                                          controller.selectCategory(
+                                              controller.categories[index]);
+                                        });
+                                  }),
+                            ),
+                          ),
+                        );
+                      }),
                       PopupMenuButton<TrackType>(
                         constraints: BoxConstraints(
                           minHeight: Get.height * 0.5,

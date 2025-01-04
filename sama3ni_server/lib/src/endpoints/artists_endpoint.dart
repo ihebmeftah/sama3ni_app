@@ -76,7 +76,7 @@ class ArtistsEndpoint extends Endpoint with Fileuploader {
   }
 
   Future<Artist> updateCoverPhoto(
-      Session session, ByteData coverPhoto, fileName) async {
+      Session session, ByteData coverPhoto, String fileName) async {
     if (!await session.isUserSignedIn) {
       throw AppException(
         message: "This endpoint requires authentication",

@@ -109,7 +109,7 @@ class Endpoints extends _i1.EndpointDispatch {
             ),
             'fileName': _i1.ParameterDescription(
               name: 'fileName',
-              type: _i1.getType<dynamic>(),
+              type: _i1.getType<String>(),
               nullable: false,
             ),
           },

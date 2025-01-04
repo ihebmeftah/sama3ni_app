@@ -308,6 +308,11 @@ class TracksView extends GetView<TracksController> {
           sliver: GetX<TracksController>(builder: (c) {
             return SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: switch (Get.width) {
+                    <= 360 => 0.85,
+                    <= 1131 => 0.9,
+                    _ => 1
+                  },
                   crossAxisCount: switch (Get.width) {
                     <= 650 => 2,
                     <= 900 => 3,
@@ -324,9 +329,11 @@ class TracksView extends GetView<TracksController> {
                       child: Padding(
                         padding: const EdgeInsets.all(12),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           spacing: 10,
                           children: [
                             Container(
+                              margin: const EdgeInsets.all(5),
                               padding: const EdgeInsets.all(5),
                               height: switch (Get.width) {
                                 <= 650 => Get.width * 0.25,
@@ -349,32 +356,27 @@ class TracksView extends GetView<TracksController> {
                                     icon: const Icon(Icons.favorite)),
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  controller.tracks[index].title,
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Colors.grey.shade400,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 12.5,
-                                  ),
-                                ),
-                                Text(
-                                  controller.tracks[index].artist!.displayName,
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Colors.grey.shade400,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12.5,
-                                  ),
-                                ),
-                              ],
+                            Text(
+                              controller.tracks[index].title,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.grey.shade400,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12.5,
+                              ),
+                            ),
+                            Text(
+                              controller.tracks[index].artist!.displayName,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.grey.shade400,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12.5,
+                              ),
                             ),
                           ],
                         ),

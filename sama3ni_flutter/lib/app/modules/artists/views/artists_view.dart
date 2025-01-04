@@ -18,66 +18,10 @@ class ArtistsView extends GetView<ArtistsController> {
       ),
       child: controller.obx((s) {
         return LayoutBuilder(builder: (context, constraints) {
-          return /* constraints.biggest.width < 800
-              ? GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 0.9,
-                      crossAxisCount: GetPlatform.isMobile
-                          ? 2
-                          : switch (constraints.biggest.width) {
-                              <= 600 => 3,
-                              _ => 4
-                            }),
-                  itemBuilder: (context, index) => Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const CircleAvatar(
-                                radius: 40,
-                              ),
-                              TextButton.icon(
-                                onPressed: () =>
-                                    Get.toNamed("${Routes.ARTISTS}/$index"),
-                                label: const Icon(
-                                  Icons.verified,
-                                  color: Colors.blue,
-                                  size: 18,
-                                ),
-                                icon: const Text(
-                                  "Iheb Beats",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              const Text(
-                                "tunis, Tunisia",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Colors.blue.shade800,
-                                  foregroundColor: Colors.white,
-                                ),
-                                onPressed: () =>
-                                    Get.toNamed("${Routes.ARTISTS}/$index"),
-                                child: const Text('Visit'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ))
-              :  */
-              ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
+          return ListView.separated(
+            padding: GetPlatform.isMobile
+                ? null
+                : const EdgeInsets.symmetric(horizontal: 50),
             itemCount: controller.artists.length,
             separatorBuilder: (context, index) => Divider(
               color: Colors.grey.shade900,
@@ -105,12 +49,15 @@ class ArtistsView extends GetView<ArtistsController> {
                           color: Colors.blue,
                           size: 18,
                         ),
-                        icon: Text(
-                          controller.artists[index].displayName.capitalize!,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600),
+                        icon: Flexible(
+                          child: Text(
+                            controller.artists[index].displayName.capitalize!,
+                            maxLines: 1,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600),
+                          ),
                         ),
                       ),
                       if (controller.artists[index].address != null)
@@ -189,7 +136,7 @@ class ArtistsView extends GetView<ArtistsController> {
                 ),
                 const SizedBox(width: 20),
                 Visibility(
-                  visible: Get.width > 390,
+                  visible: Get.width > 800,
                   child: Expanded(
                     flex: 3,
                     child: Column(

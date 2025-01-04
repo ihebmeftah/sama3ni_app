@@ -122,16 +122,15 @@ class ArtistsView extends GetView<ArtistsController> {
                               fontWeight: FontWeight.w400),
                         ),
                       const SizedBox(height: 10),
-                      if (controller.artists[index].bio != null)
-                        Text(
-                          controller.artists[index].bio ??
-                              "This artist has no bio yet",
-                          maxLines: 3,
-                          style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      Text(
+                        controller.artists[index].bio ??
+                            "This artist has no bio yet",
+                        maxLines: !sessionManager.isSignedIn ? 8 : 3,
+                        style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
+                      ),
                       const SizedBox(height: 10),
                       if (sessionManager.isSignedIn)
                         Row(

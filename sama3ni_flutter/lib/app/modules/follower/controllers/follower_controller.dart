@@ -9,7 +9,6 @@ class FollowerController extends GetxController with StateMixin {
   @override
   Future<void> onInit() async {
     await getFollowing();
-    change(null, status: RxStatus.success());
     super.onInit();
   }
 
@@ -19,6 +18,19 @@ class FollowerController extends GetxController with StateMixin {
           await client.follower.getFollowers(int.parse(Get.parameters["id"]!)));
       followers(
           await client.follower.getFollowing(int.parse(Get.parameters["id"]!)));
+      if (Get.parameters["is"] != "follower") {
+        if (following.isEmpty) {
+          change(null, status: RxStatus.empty());
+        } else {
+          change(null, status: RxStatus.success());
+        }
+      } else {
+        if (followers.isEmpty) {
+          change(null, status: RxStatus.empty());
+        } else {
+          change(null, status: RxStatus.success());
+        }
+      }
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
     }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppEmpty extends StatelessWidget {
-  const AppEmpty({super.key});
-
+  const AppEmpty({super.key, this.title});
+  final String? title;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -12,9 +12,9 @@ class AppEmpty extends StatelessWidget {
         spacing: 20,
         children: [
           Image.asset("assets/images/iconempty.png"),
-          const Text(
-            "No data found",
-            style: TextStyle(
+          Text(
+            title ?? "No data found",
+            style: const TextStyle(
                 fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white),
           ),
         ],

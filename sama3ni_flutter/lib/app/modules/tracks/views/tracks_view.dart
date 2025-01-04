@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:sama3ni_client/sama3ni_client.dart';
-import 'package:sama3ni_flutter/app/modules/categories/controllers/categories_controller.dart';
 
 import '../controllers/tracks_controller.dart';
 

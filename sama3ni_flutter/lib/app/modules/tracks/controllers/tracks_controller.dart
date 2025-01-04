@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:sama3ni_client/sama3ni_client.dart';
 import 'package:sama3ni_flutter/main.dart';
 
+import '../../categories/controllers/categories_controller.dart';
+
 class TracksController extends GetxController with StateMixin {
   final tracks = <Track>[].obs;
   final minBpm = TextEditingController(), maxBpm = TextEditingController();
@@ -14,6 +16,13 @@ class TracksController extends GetxController with StateMixin {
 
   @override
   void onInit() {
+    if (Get.parameters["genre"] != null) {
+      Category category = Get.find<CategoriesController>()
+          .categories
+          .firstWhere(
+              (element) => element.id.toString() == Get.parameters["genre"]);
+      selectedCategory.add(category);
+    }
     fetchTracks();
     super.onInit();
   }

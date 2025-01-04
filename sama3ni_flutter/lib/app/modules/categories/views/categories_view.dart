@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_randomcolor/flutter_randomcolor.dart';
 
 import 'package:get/get.dart';
+import 'package:sama3ni_flutter/app/routes/app_pages.dart';
 
 import '../controllers/categories_controller.dart';
 
@@ -28,18 +29,23 @@ class CategoriesView extends GetView<CategoriesController> {
               ),
               itemCount: controller.categories.length,
               itemBuilder: (context, index) {
-                return Container(
-                    color: RandomColor.getColorObject(Options(
-                      luminosity: Luminosity.dark,
-                    )),
-                    width: 300,
-                    child: Center(
-                      child: Text(
-                        controller.categories[index].name,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18),
-                      ),
-                    ));
+                return GestureDetector(
+                  onTap: () => Get.toNamed(Routes.TRACKS, parameters: {
+                    "genre": controller.categories[index].id.toString()
+                  }),
+                  child: Container(
+                      color: RandomColor.getColorObject(Options(
+                        luminosity: Luminosity.dark,
+                      )),
+                      width: 300,
+                      child: Center(
+                        child: Text(
+                          controller.categories[index].name,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 18),
+                        ),
+                      )),
+                );
               });
         }));
   }

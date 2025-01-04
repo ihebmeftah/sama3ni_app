@@ -133,54 +133,58 @@ class ArtistsView extends GetView<ArtistsController> {
                               fontWeight: FontWeight.w400),
                         ),
                       const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                                onPressed: () => Get.toNamed(
-                                    "${Routes.ARTISTS}/${controller.artists[index].id}"),
-                                child: const Text('Visit')),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.grey.shade600),
-                                onPressed: () {},
-                                child: const Text('Message')),
-                          )
-                        ],
-                      ),
+                      if (sessionManager.isSignedIn)
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                  onPressed: () => Get.toNamed(
+                                      "${Routes.ARTISTS}/${controller.artists[index].id}"),
+                                  child: const Text('Visit')),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.grey.shade600),
+                                  onPressed: () {},
+                                  child: const Text('Message')),
+                            )
+                          ],
+                        ),
                       const SizedBox(height: 20),
-                      GetBuilder<ArtistsController>(
-                          id: index,
-                          builder: (_) {
-                            return ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                  iconColor: Colors.white,
-                                  backgroundColor: controller
-                                          .artists[index].following!
-                                          .any((a) =>
+                      if (sessionManager.isSignedIn)
+                        GetBuilder<ArtistsController>(
+                            id: index,
+                            builder: (_) {
+                              return ElevatedButton.icon(
+                                style: ElevatedButton.styleFrom(
+                                    iconColor: Colors.white,
+                                    backgroundColor: controller
+                                            .artists[index].following!
+                                            .any((a) =>
+                                                a.followerId ==
+                                                sessionManager.signedInUser?.id)
+                                        ? Colors.grey
+                                        : null),
+                                onPressed: () =>
+                                    controller.folllowArtist(index),
+                                icon: Icon(controller.artists[index].following!
+                                        .any((a) =>
+                                            a.followerId ==
+                                            sessionManager.signedInUser?.id)
+                                    ? Icons.remove
+                                    : Icons.add),
+                                label: Text(
+                                  controller.artists[index].following!.any(
+                                          (a) =>
                                               a.followerId ==
                                               sessionManager.signedInUser?.id)
-                                      ? Colors.grey
-                                      : null),
-                              onPressed: () => controller.folllowArtist(index),
-                              icon: Icon(controller.artists[index].following!
-                                      .any((a) =>
-                                          a.followerId ==
-                                          sessionManager.signedInUser?.id)
-                                  ? Icons.remove
-                                  : Icons.add),
-                              label: Text(
-                                controller.artists[index].following!.any((a) =>
-                                        a.followerId ==
-                                        sessionManager.signedInUser?.id)
-                                    ? "Unfollow"
-                                    : 'Follow',
-                              ),
-                            );
-                          }),
+                                      ? "Unfollow"
+                                      : 'Follow',
+                                ),
+                              );
+                            }),
                     ],
                   ),
                 ),

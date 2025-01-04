@@ -227,8 +227,8 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'artistId': _i1.ParameterDescription(
               name: 'artistId',
-              type: _i1.getType<int?>(),
-              nullable: true,
+              type: _i1.getType<int>(),
+              nullable: false,
             )
           },
           call: (
@@ -245,8 +245,8 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'artistId': _i1.ParameterDescription(
               name: 'artistId',
-              type: _i1.getType<int?>(),
-              nullable: true,
+              type: _i1.getType<int>(),
+              nullable: false,
             )
           },
           call: (
@@ -292,25 +292,6 @@ class Endpoints extends _i1.EndpointDispatch {
               (endpoints['follower'] as _i4.FollowerEndpoint).unfollowArtist(
             session,
             params['follower'],
-          ),
-        ),
-        'unfollowArtistByArtistId': _i1.MethodConnector(
-          name: 'unfollowArtistByArtistId',
-          params: {
-            'artistId': _i1.ParameterDescription(
-              name: 'artistId',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['follower'] as _i4.FollowerEndpoint)
-                  .unfollowArtistByArtistId(
-            session,
-            params['artistId'],
           ),
         ),
       },

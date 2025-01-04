@@ -15,10 +15,10 @@ class FollowerController extends GetxController with StateMixin {
 
   Future<void> getFollowing() async {
     try {
-      following(await client.follower
-          .getFollowers(int.tryParse(Get.parameters["id"]!)));
-      followers(await client.follower
-          .getFollowing(int.tryParse(Get.parameters["id"]!)));
+      following(
+          await client.follower.getFollowers(int.parse(Get.parameters["id"]!)));
+      followers(
+          await client.follower.getFollowing(int.parse(Get.parameters["id"]!)));
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));
     }

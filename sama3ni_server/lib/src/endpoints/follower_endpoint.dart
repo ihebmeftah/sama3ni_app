@@ -4,18 +4,8 @@ import 'package:serverpod/serverpod.dart';
 import 'package:serverpod_auth_server/serverpod_auth_server.dart';
 
 class FollowerEndpoint extends Endpoint {
-  @override
-  bool get requireLogin => true;
-  Future<List<Follower>> getFollowing(Session session, [int? artistId]) async {
-    if (artistId != null) {
-      final artist = await ArtistsEndpoint().getArtistById(session, artistId);
-      return await Follower.db.find(session,
-          include: Follower.include(
-              following: Artist.include(userInfo: UserInfo.include()),
-              follower: Artist.include(userInfo: UserInfo.include())),
-          where: (x) => x.followingId.equals(artist.id!));
-    }
-    final artist = await ArtistsEndpoint().getLoggedArtist(session);
+  Future<List<Follower>> getFollowing(Session session, int artistId) async {
+    final artist = await ArtistsEndpoint().getArtistById(session, artistId);
     return await Follower.db.find(session,
         include: Follower.include(
             following: Artist.include(userInfo: UserInfo.include()),
@@ -23,16 +13,8 @@ class FollowerEndpoint extends Endpoint {
         where: (x) => x.followingId.equals(artist.id!));
   }
 
-  Future<List<Follower>> getFollowers(Session session, [int? artistId]) async {
-    if (artistId != null) {
-      final artist = await ArtistsEndpoint().getArtistById(session, artistId);
-      return await Follower.db.find(session,
-          include: Follower.include(
-              following: Artist.include(userInfo: UserInfo.include()),
-              follower: Artist.include(userInfo: UserInfo.include())),
-          where: (x) => x.followerId.equals(artist.id!));
-    }
-    final artist = await ArtistsEndpoint().getLoggedArtist(session);
+  Future<List<Follower>> getFollowers(Session session, int artistId) async {
+    final artist = await ArtistsEndpoint().getArtistById(session, artistId);
     return await Follower.db.find(session,
         include: Follower.include(
             following: Artist.include(userInfo: UserInfo.include()),
@@ -54,23 +36,12 @@ class FollowerEndpoint extends Endpoint {
   }
 
   Future<Follower> unfollowArtist(Session session, Follower follower) async {
+    await ArtistsEndpoint().getLoggedArtist(session);
     final f = await Follower.db.findById(session, follower.id!);
     if (f == null) {
       throw AppException(
           message: "follower not found", errorType: ExceptionType.notFound);
     }
     return await Follower.db.deleteRow(session, follower);
-  }
-
-  Future<List<Follower>> unfollowArtistByArtistId(
-      Session session, int artistId) async {
-    final f = await Follower.db
-        .findFirstRow(session, where: (ww) => ww.followingId.equals(artistId));
-    if (f == null) {
-      throw AppException(
-          message: "follower not found", errorType: ExceptionType.notFound);
-    }
-    return await Follower.db
-        .deleteWhere(session, where: (ww) => ww.followingId.equals(artistId));
   }
 }

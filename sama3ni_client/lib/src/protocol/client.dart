@@ -128,14 +128,14 @@ class EndpointFollower extends _i1.EndpointRef {
   @override
   String get name => 'follower';
 
-  _i2.Future<List<_i6.Follower>> getFollowing([int? artistId]) =>
+  _i2.Future<List<_i6.Follower>> getFollowing(int artistId) =>
       caller.callServerEndpoint<List<_i6.Follower>>(
         'follower',
         'getFollowing',
         {'artistId': artistId},
       );
 
-  _i2.Future<List<_i6.Follower>> getFollowers([int? artistId]) =>
+  _i2.Future<List<_i6.Follower>> getFollowers(int artistId) =>
       caller.callServerEndpoint<List<_i6.Follower>>(
         'follower',
         'getFollowers',
@@ -154,13 +154,6 @@ class EndpointFollower extends _i1.EndpointRef {
         'follower',
         'unfollowArtist',
         {'follower': follower},
-      );
-
-  _i2.Future<List<_i6.Follower>> unfollowArtistByArtistId(int artistId) =>
-      caller.callServerEndpoint<List<_i6.Follower>>(
-        'follower',
-        'unfollowArtistByArtistId',
-        {'artistId': artistId},
       );
 }
 

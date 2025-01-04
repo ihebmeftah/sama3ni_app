@@ -9,7 +9,7 @@ import '../../../../main.dart';
 class ArtistsProfileController extends GetxController with StateMixin {
   final String id = Get.parameters["id"]!;
   bool isMe =
-      Get.parameters["id"]! == sessionManager.signedInUser!.id.toString();
+      Get.parameters["id"]! == sessionManager.signedInUser?.id.toString();
   late Artist artist;
   final tracks = <Track>[].obs;
   @override

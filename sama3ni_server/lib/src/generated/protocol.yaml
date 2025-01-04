@@ -14,7 +14,6 @@ follower:
   - getFollowers:
   - followArtist:
   - unfollowArtist:
-  - unfollowArtistByArtistId:
 tracks:
   - getTrack:
   - getTopsTracks:

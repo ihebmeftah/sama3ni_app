@@ -29,8 +29,11 @@ class DefaultLayoutController extends GetxController {
     } else {
       showNav = true;
     }
-    if (navItems.any((element) => element.route == r.current)) {
-      current = navItems.firstWhere((element) => element.route == r.current);
+    final c = navItems.firstWhereOrNull((element) {
+      return element.route.contains(r.current);
+    });
+    if (c != null) {
+      current = c;
     } else {
       current = null;
     }

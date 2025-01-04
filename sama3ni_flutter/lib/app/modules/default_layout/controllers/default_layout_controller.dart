@@ -9,9 +9,11 @@ class DefaultLayoutController extends GetxController {
     (title: "Home", route: Routes.HOME),
     (title: "Artists", route: Routes.ARTISTS),
     (title: "Tracks", route: Routes.TRACKS),
+    (title: "Categories", route: Routes.CATEGORIES),
     // (title: "Sound kits", route: null),
   ];
-  ({String title, String? route})? current = (title: "Home", route: Routes.HOME);
+  ({String title, String? route})? current =
+      (title: "Home", route: Routes.HOME);
 
   void logout() async {
     final isLoggedOut = await sessionManager.signOutDevice();

@@ -319,6 +319,15 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'tracks',
       endpoint: endpoints['tracks']!,
       methodConnectors: {
+        'getTrack': _i1.MethodConnector(
+          name: 'getTrack',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['tracks'] as _i5.TracksEndpoint).getTrack(session),
+        ),
         'getTopsTracks': _i1.MethodConnector(
           name: 'getTopsTracks',
           params: {},

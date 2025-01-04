@@ -171,6 +171,13 @@ class EndpointTracks extends _i1.EndpointRef {
   @override
   String get name => 'tracks';
 
+  _i2.Future<List<_i7.Track>> getTrack() =>
+      caller.callServerEndpoint<List<_i7.Track>>(
+        'tracks',
+        'getTrack',
+        {},
+      );
+
   _i2.Future<List<_i7.Track>> getTopsTracks() =>
       caller.callServerEndpoint<List<_i7.Track>>(
         'tracks',

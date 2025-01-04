@@ -305,84 +305,84 @@ class TracksView extends GetView<TracksController> {
             horizontal: MediaQuery.sizeOf(context).width * 0.07,
             vertical: MediaQuery.sizeOf(context).width * 0.015,
           ),
-          sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: switch (Get.width) {
-                  <= 650 => 2,
-                  <= 900 => 3,
-                  _ => 4
-                },
-              ),
-              delegate:
-                  SliverChildBuilderDelegate(childCount: 50, (context, index) {
-                return ZoomIn(
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    hoverColor: Colors.grey.withValues(alpha: 0.2),
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Column(
-                        spacing: 10,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            height: switch (Get.width) {
-                              <= 650 => Get.width * 0.25,
-                              _ => Get.width * 0.135
-                            },
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey.shade400),
-                                borderRadius: BorderRadius.circular(15),
-                                image: DecorationImage(
-                                    image: AssetImage(index == 1
-                                        ? "assets/images/certifei.jpeg"
-                                        : "assets/images/foralldog.jpg"),
-                                    fit: BoxFit.cover)),
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: IconButton(
-                                  onPressed: () {},
-                                  style: IconButton.styleFrom(
-                                      foregroundColor: Colors.red),
-                                  icon: const Icon(Icons.favorite)),
+          sliver: GetX<TracksController>(builder: (c) {
+            return SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: switch (Get.width) {
+                    <= 650 => 2,
+                    <= 900 => 3,
+                    _ => 4
+                  },
+                ),
+                delegate: SliverChildBuilderDelegate(
+                    childCount: controller.tracks.length, (context, index) {
+                  return ZoomIn(
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(15),
+                      hoverColor: Colors.grey.withValues(alpha: 0.2),
+                      onTap: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          spacing: 10,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              height: switch (Get.width) {
+                                <= 650 => Get.width * 0.25,
+                                _ => Get.width * 0.135
+                              },
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey.shade400),
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          controller.tracks[index].photoUrl!),
+                                      fit: BoxFit.cover)),
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: IconButton(
+                                    onPressed: () {},
+                                    style: IconButton.styleFrom(
+                                        foregroundColor: Colors.red),
+                                    icon: const Icon(Icons.favorite)),
+                              ),
                             ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                index == 1
-                                    ? "Certified Lover Boy"
-                                    : "For All the Dogs",
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  color: Colors.grey.shade400,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12.5,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  controller.tracks[index].title,
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    color: Colors.grey.shade400,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 12.5,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "Drake",
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  color: Colors.grey.shade400,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12.5,
+                                Text(
+                                  controller.tracks[index].artist!.displayName,
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    color: Colors.grey.shade400,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12.5,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              })),
+                  );
+                }));
+          }),
         )
       ],
     ));

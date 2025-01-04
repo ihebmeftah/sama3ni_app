@@ -6,6 +6,16 @@ import 'package:serverpod/server.dart';
 import '../mixin/fileuploader.dart';
 
 class TracksEndpoint extends Endpoint with Fileuploader {
+  Future<List<Track>> getTrack(Session session) async {
+    return await Track.db.find(
+      session,
+      include: Track.include(
+        artist: Artist.include(),
+        genre: Category.include(),
+      ),
+    );
+  }
+
   Future<List<Track>> getTopsTracks(Session session) async {
     return await Track.db.find(
       session,

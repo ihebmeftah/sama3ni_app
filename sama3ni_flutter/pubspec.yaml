@@ -29,7 +29,7 @@ dependencies:
   serverpod_flutter: 2.3.0
   file_picker: ^8.1.7
   animated_text_kit: ^4.2.2
-
+  #infinite_scroll_pagination: ^4.1.0
   hexcolor: ^3.0.1
   http: ^1.2.2
   carousel_slider: ^5.0.0

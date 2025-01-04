@@ -326,7 +326,11 @@ class HomeView extends GetView<HomeController> {
                             children: List.generate(
                               5,
                               (i) => Container(
-                                width: 360,
+                                width: GetPlatform.isMobile
+                                    ? 360
+                                    : i > 2
+                                        ? 400
+                                        : 300,
                                 height: 180,
                                 padding: const EdgeInsets.all(20),
                                 decoration: const BoxDecoration(

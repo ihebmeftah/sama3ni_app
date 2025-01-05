@@ -9,6 +9,11 @@ categories:
   - getCategories:
   - getTopCategories:
   - getCategoryById:
+favoris:
+  - getFavoris:
+  - addFav:
+  - removeFavByTrackId:
+  - removeFav:
 follower:
   - getFollowing:
   - getFollowers:
@@ -16,6 +21,7 @@ follower:
   - unfollowArtist:
 tracks:
   - getTrack:
+  - getTrackById:
   - getTopsTracks:
   - getTracksByArtist:
   - getTracksByCategory:

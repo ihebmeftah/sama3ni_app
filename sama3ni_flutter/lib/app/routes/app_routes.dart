@@ -16,6 +16,7 @@ abstract class Routes {
   static const UPLOAD = _Paths.UPLOAD;
   static const TRACKS = _Paths.TRACKS;
   static const FOLLOWER = _Paths.FOLLOWER;
+  static const FAVORIS = _Paths.FAVORIS;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const UPLOAD = '/upload';
   static const TRACKS = '/tracks';
   static const FOLLOWER = '/follower';
+  static const FAVORIS = '/favoris';
 }

@@ -15,3 +15,4 @@ fields:
   artist: Artist?, relation
   genre: Category?, relation(onDelete=SetNull)
   createdAt: DateTime, default=now
+  favoris: List<Favoris>?, relation(name=track_favoris)

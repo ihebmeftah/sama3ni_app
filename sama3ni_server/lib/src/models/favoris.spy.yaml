@@ -1,0 +1,6 @@
+class: Favoris
+table: favoris
+fields:
+  artist: Artist?, relation(name=artist_favoris)
+  track: Track?, relation(name=track_favoris)
+  createdAt: DateTime, default=now

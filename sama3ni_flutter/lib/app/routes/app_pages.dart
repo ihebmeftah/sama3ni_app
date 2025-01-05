@@ -14,6 +14,7 @@ import '../modules/authentification/views/register_view.dart';
 import '../modules/authentification/views/verifcation_view.dart';
 import '../modules/categories/bindings/categories_binding.dart';
 import '../modules/categories/views/categories_view.dart';
+import '../modules/favoris/views/favoris_view.dart';
 import '../modules/follower/bindings/follower_binding.dart';
 import '../modules/follower/views/follower_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -95,6 +96,10 @@ class AppPages {
       name: _Paths.FOLLOWER,
       page: () => const FollowerView(),
       binding: FollowerBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAVORIS,
+      page: () => const FavorisView(),
     ),
   ];
 }

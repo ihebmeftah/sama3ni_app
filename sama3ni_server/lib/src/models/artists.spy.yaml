@@ -12,6 +12,7 @@ fields:
   coverphotoUrl: String?
   follower: List<Follower>?, relation(name=artist_follower)
   following: List<Follower>?, relation(name=artist_following)
+  favoris: List<Favoris>?, relation(name=artist_favoris)
 
 indexes:
   user_info_id_unique_idx:

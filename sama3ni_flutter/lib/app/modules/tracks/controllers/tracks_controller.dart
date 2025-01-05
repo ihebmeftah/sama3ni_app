@@ -35,7 +35,6 @@ class TracksController extends GetxController with StateMixin {
           categories.add(t.genre!);
         }
       }
-
       change(null, status: RxStatus.success());
     } catch (e) {
       change(null, status: RxStatus.error(e.toString()));

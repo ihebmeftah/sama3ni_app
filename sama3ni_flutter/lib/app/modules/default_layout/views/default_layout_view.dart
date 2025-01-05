@@ -47,7 +47,7 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
           ],
         ),
       ),
-      appBar: (MediaQuery.sizeOf(context).width < 777)
+      appBar: (MediaQuery.sizeOf(context).width < 850)
           ? AppBar()
           : PreferredSize(
               preferredSize: const Size.fromHeight(65),
@@ -135,6 +135,19 @@ class DefaultLayoutView extends GetView<DefaultLayoutController> {
                                     onPressed: () => Get.toNamed(Routes.UPLOAD),
                                     icon: const Icon(Icons.add),
                                     label: const Text("Upload"),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  IconButton(
+                                    style: IconButton.styleFrom(
+                                        foregroundColor: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            side: const BorderSide(width: 1),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        backgroundColor: Colors.pink),
+                                    onPressed: () =>
+                                        Get.toNamed(Routes.FAVORIS),
+                                    icon: const Icon(Icons.favorite_border),
                                   ),
                                   const SizedBox(width: 5),
                                   IconButton(

@@ -12,8 +12,28 @@ class TracksEndpoint extends Endpoint with Fileuploader {
       include: Track.include(
         artist: Artist.include(),
         genre: Category.include(),
+        favoris: Favoris.includeList(),
       ),
     );
+  }
+
+  Future<Track> getTrackById(Session session, int id) async {
+    final track = await Track.db.findById(
+      session,
+      id,
+      include: Track.include(
+        artist: Artist.include(),
+        genre: Category.include(),
+        favoris: Favoris.includeList(),
+      ),
+    );
+    if (track == null) {
+      throw AppException(
+        message: 'Track not found',
+        errorType: ExceptionType.notFound,
+      );
+    }
+    return track;
   }
 
   Future<List<Track>> getTopsTracks(Session session) async {
@@ -22,6 +42,7 @@ class TracksEndpoint extends Endpoint with Fileuploader {
       include: Track.include(
         artist: Artist.include(),
         genre: Category.include(),
+        favoris: Favoris.includeList(),
       ),
       orderBy: (p) => p.playtime,
       orderDescending: true,
@@ -34,7 +55,10 @@ class TracksEndpoint extends Endpoint with Fileuploader {
       final artist = await ArtistsEndpoint().getLoggedArtist(session);
       return await Track.db.find(session,
           include: Track.include(
-              artist: Artist.include(), genre: Category.include()),
+            artist: Artist.include(),
+            genre: Category.include(),
+            favoris: Favoris.includeList(),
+          ),
           where: (x) => x.artistId.equals(artist.id!));
     }
     return await Track.db.find(session,

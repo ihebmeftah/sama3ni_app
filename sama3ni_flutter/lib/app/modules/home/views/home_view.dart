@@ -56,40 +56,31 @@ class HomeView extends GetView<HomeController> {
                   SizedBox(
                     width: 400,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "MUSIC MADE IT BY SAMA3NI",
-                              style: TextStyle(
-                                  color: Colors.grey.shade400,
-                                  fontSize: (22),
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "Yes, THAT beat was bought on BeatStars."
-                                  .toUpperCase(),
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: (24),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            const Text(
-                              "Millions of artists have found their perfect beat on our marketplace.",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: (16),
-                                  fontWeight: FontWeight.w300),
-                            ),
-                          ],
+                        Text(
+                          "MUSIC MADE IT BY SAMA3NI",
+                          style: TextStyle(
+                              color: Colors.grey.shade400,
+                              fontSize: (22),
+                              fontWeight: FontWeight.w500),
                         ),
-                        const SizedBox(height: 10),
-                        ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: const Icon(Icons.explore),
-                            label: const Text('Explore'))
+                        Text(
+                          "Yes, THAT beat was bought on BeatStars."
+                              .toUpperCase(),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: (24),
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const Text(
+                          "Millions of artists have found their perfect beat on our marketplace.",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: (16),
+                              fontWeight: FontWeight.w300),
+                        ),
                       ],
                     ),
                   ),

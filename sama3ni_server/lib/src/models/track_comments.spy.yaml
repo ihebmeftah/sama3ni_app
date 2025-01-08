@@ -1,0 +1,7 @@
+class: Comments
+table: comments
+fields:
+  artist: Artist?, relation
+  trackId: int, relation(parent=tracks)
+  comment: String
+  createdAt: DateTime, default=now

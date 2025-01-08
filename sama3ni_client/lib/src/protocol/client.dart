@@ -14,11 +14,12 @@ import 'dart:async' as _i2;
 import 'package:sama3ni_client/src/protocol/artists.dart' as _i3;
 import 'dart:typed_data' as _i4;
 import 'package:sama3ni_client/src/protocol/categories.dart' as _i5;
-import 'package:sama3ni_client/src/protocol/favoris.dart' as _i6;
-import 'package:sama3ni_client/src/protocol/follower.dart' as _i7;
-import 'package:sama3ni_client/src/protocol/tracks.dart' as _i8;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i9;
-import 'protocol.dart' as _i10;
+import 'package:sama3ni_client/src/protocol/track_comments.dart' as _i6;
+import 'package:sama3ni_client/src/protocol/favoris.dart' as _i7;
+import 'package:sama3ni_client/src/protocol/follower.dart' as _i8;
+import 'package:sama3ni_client/src/protocol/tracks.dart' as _i9;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i10;
+import 'protocol.dart' as _i11;
 
 /// {@category Endpoint}
 class EndpointArtists extends _i1.EndpointRef {
@@ -123,35 +124,77 @@ class EndpointCategories extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointCommets extends _i1.EndpointRef {
+  EndpointCommets(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'commets';
+
+  _i2.Future<List<_i6.Comments>> getCommetsByTrack(int trackId) =>
+      caller.callServerEndpoint<List<_i6.Comments>>(
+        'commets',
+        'getCommetsByTrack',
+        {'trackId': trackId},
+      );
+
+  _i2.Future<_i6.Comments> addComment(
+    int trackId,
+    String comment,
+  ) =>
+      caller.callServerEndpoint<_i6.Comments>(
+        'commets',
+        'addComment',
+        {
+          'trackId': trackId,
+          'comment': comment,
+        },
+      );
+
+  _i2.Future<_i6.Comments> removeComment(_i6.Comments c) =>
+      caller.callServerEndpoint<_i6.Comments>(
+        'commets',
+        'removeComment',
+        {'c': c},
+      );
+
+  _i2.Future<_i6.Comments> getCommentById(int commentId) =>
+      caller.callServerEndpoint<_i6.Comments>(
+        'commets',
+        'getCommentById',
+        {'commentId': commentId},
+      );
+}
+
+/// {@category Endpoint}
 class EndpointFavoris extends _i1.EndpointRef {
   EndpointFavoris(_i1.EndpointCaller caller) : super(caller);
 
   @override
   String get name => 'favoris';
 
-  _i2.Future<List<_i6.Favoris>> getFavoris() =>
-      caller.callServerEndpoint<List<_i6.Favoris>>(
+  _i2.Future<List<_i7.Favoris>> getFavoris() =>
+      caller.callServerEndpoint<List<_i7.Favoris>>(
         'favoris',
         'getFavoris',
         {},
       );
 
-  _i2.Future<_i6.Favoris> addFav(int trackId) =>
-      caller.callServerEndpoint<_i6.Favoris>(
+  _i2.Future<_i7.Favoris> addFav(int trackId) =>
+      caller.callServerEndpoint<_i7.Favoris>(
         'favoris',
         'addFav',
         {'trackId': trackId},
       );
 
-  _i2.Future<_i6.Favoris> removeFavByTrackId(int trackId) =>
-      caller.callServerEndpoint<_i6.Favoris>(
+  _i2.Future<_i7.Favoris> removeFavByTrackId(int trackId) =>
+      caller.callServerEndpoint<_i7.Favoris>(
         'favoris',
         'removeFavByTrackId',
         {'trackId': trackId},
       );
 
-  _i2.Future<_i6.Favoris> removeFav(_i6.Favoris fav) =>
-      caller.callServerEndpoint<_i6.Favoris>(
+  _i2.Future<_i7.Favoris> removeFav(_i7.Favoris fav) =>
+      caller.callServerEndpoint<_i7.Favoris>(
         'favoris',
         'removeFav',
         {'fav': fav},
@@ -165,29 +208,29 @@ class EndpointFollower extends _i1.EndpointRef {
   @override
   String get name => 'follower';
 
-  _i2.Future<List<_i7.Follower>> getFollowing(int artistId) =>
-      caller.callServerEndpoint<List<_i7.Follower>>(
+  _i2.Future<List<_i8.Follower>> getFollowing(int artistId) =>
+      caller.callServerEndpoint<List<_i8.Follower>>(
         'follower',
         'getFollowing',
         {'artistId': artistId},
       );
 
-  _i2.Future<List<_i7.Follower>> getFollowers(int artistId) =>
-      caller.callServerEndpoint<List<_i7.Follower>>(
+  _i2.Future<List<_i8.Follower>> getFollowers(int artistId) =>
+      caller.callServerEndpoint<List<_i8.Follower>>(
         'follower',
         'getFollowers',
         {'artistId': artistId},
       );
 
-  _i2.Future<_i7.Follower> followArtist(int artistId) =>
-      caller.callServerEndpoint<_i7.Follower>(
+  _i2.Future<_i8.Follower> followArtist(int artistId) =>
+      caller.callServerEndpoint<_i8.Follower>(
         'follower',
         'followArtist',
         {'artistId': artistId},
       );
 
-  _i2.Future<_i7.Follower> unfollowArtist(_i7.Follower follower) =>
-      caller.callServerEndpoint<_i7.Follower>(
+  _i2.Future<_i8.Follower> unfollowArtist(_i8.Follower follower) =>
+      caller.callServerEndpoint<_i8.Follower>(
         'follower',
         'unfollowArtist',
         {'follower': follower},
@@ -201,43 +244,43 @@ class EndpointTracks extends _i1.EndpointRef {
   @override
   String get name => 'tracks';
 
-  _i2.Future<List<_i8.Track>> getTrack() =>
-      caller.callServerEndpoint<List<_i8.Track>>(
+  _i2.Future<List<_i9.Track>> getTrack() =>
+      caller.callServerEndpoint<List<_i9.Track>>(
         'tracks',
         'getTrack',
         {},
       );
 
-  _i2.Future<_i8.Track> getTrackById(int id) =>
-      caller.callServerEndpoint<_i8.Track>(
+  _i2.Future<_i9.Track> getTrackById(int id) =>
+      caller.callServerEndpoint<_i9.Track>(
         'tracks',
         'getTrackById',
         {'id': id},
       );
 
-  _i2.Future<List<_i8.Track>> getTopsTracks() =>
-      caller.callServerEndpoint<List<_i8.Track>>(
+  _i2.Future<List<_i9.Track>> getTopsTracks() =>
+      caller.callServerEndpoint<List<_i9.Track>>(
         'tracks',
         'getTopsTracks',
         {},
       );
 
-  _i2.Future<List<_i8.Track>> getTracksByArtist([int? artistId]) =>
-      caller.callServerEndpoint<List<_i8.Track>>(
+  _i2.Future<List<_i9.Track>> getTracksByArtist([int? artistId]) =>
+      caller.callServerEndpoint<List<_i9.Track>>(
         'tracks',
         'getTracksByArtist',
         {'artistId': artistId},
       );
 
-  _i2.Future<List<_i8.Track>> getTracksByCategory(int categoryId) =>
-      caller.callServerEndpoint<List<_i8.Track>>(
+  _i2.Future<List<_i9.Track>> getTracksByCategory(int categoryId) =>
+      caller.callServerEndpoint<List<_i9.Track>>(
         'tracks',
         'getTracksByCategory',
         {'categoryId': categoryId},
       );
 
-  _i2.Future<_i8.Track> createTrack(_i8.Track track) =>
-      caller.callServerEndpoint<_i8.Track>(
+  _i2.Future<_i9.Track> createTrack(_i9.Track track) =>
+      caller.callServerEndpoint<_i9.Track>(
         'tracks',
         'createTrack',
         {'track': track},
@@ -246,10 +289,10 @@ class EndpointTracks extends _i1.EndpointRef {
 
 class Modules {
   Modules(Client client) {
-    auth = _i9.Caller(client);
+    auth = _i10.Caller(client);
   }
 
-  late final _i9.Caller auth;
+  late final _i10.Caller auth;
 }
 
 class Client extends _i1.ServerpodClientShared {
@@ -268,7 +311,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i10.Protocol(),
+          _i11.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -280,6 +323,7 @@ class Client extends _i1.ServerpodClientShared {
         ) {
     artists = EndpointArtists(this);
     categories = EndpointCategories(this);
+    commets = EndpointCommets(this);
     favoris = EndpointFavoris(this);
     follower = EndpointFollower(this);
     tracks = EndpointTracks(this);
@@ -289,6 +333,8 @@ class Client extends _i1.ServerpodClientShared {
   late final EndpointArtists artists;
 
   late final EndpointCategories categories;
+
+  late final EndpointCommets commets;
 
   late final EndpointFavoris favoris;
 
@@ -302,6 +348,7 @@ class Client extends _i1.ServerpodClientShared {
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
         'artists': artists,
         'categories': categories,
+        'commets': commets,
         'favoris': favoris,
         'follower': follower,
         'tracks': tracks,

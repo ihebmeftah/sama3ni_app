@@ -12,14 +12,16 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/artists_endpoint.dart' as _i2;
 import '../endpoints/categories_enpoint.dart' as _i3;
-import '../endpoints/favoris_endpoint.dart' as _i4;
-import '../endpoints/follower_endpoint.dart' as _i5;
-import '../endpoints/tracks_endpoint.dart' as _i6;
-import 'dart:typed_data' as _i7;
-import 'package:sama3ni_server/src/generated/favoris.dart' as _i8;
-import 'package:sama3ni_server/src/generated/follower.dart' as _i9;
-import 'package:sama3ni_server/src/generated/tracks.dart' as _i10;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i11;
+import '../endpoints/commets_endpoint.dart' as _i4;
+import '../endpoints/favoris_endpoint.dart' as _i5;
+import '../endpoints/follower_endpoint.dart' as _i6;
+import '../endpoints/tracks_endpoint.dart' as _i7;
+import 'dart:typed_data' as _i8;
+import 'package:sama3ni_server/src/generated/track_comments.dart' as _i9;
+import 'package:sama3ni_server/src/generated/favoris.dart' as _i10;
+import 'package:sama3ni_server/src/generated/follower.dart' as _i11;
+import 'package:sama3ni_server/src/generated/tracks.dart' as _i12;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i13;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -37,19 +39,25 @@ class Endpoints extends _i1.EndpointDispatch {
           'categories',
           null,
         ),
-      'favoris': _i4.FavorisEndpoint()
+      'commets': _i4.CommetsEndpoint()
+        ..initialize(
+          server,
+          'commets',
+          null,
+        ),
+      'favoris': _i5.FavorisEndpoint()
         ..initialize(
           server,
           'favoris',
           null,
         ),
-      'follower': _i5.FollowerEndpoint()
+      'follower': _i6.FollowerEndpoint()
         ..initialize(
           server,
           'follower',
           null,
         ),
-      'tracks': _i6.TracksEndpoint()
+      'tracks': _i7.TracksEndpoint()
         ..initialize(
           server,
           'tracks',
@@ -112,7 +120,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'coverPhoto': _i1.ParameterDescription(
               name: 'coverPhoto',
-              type: _i1.getType<_i7.ByteData>(),
+              type: _i1.getType<_i8.ByteData>(),
               nullable: false,
             ),
             'fileName': _i1.ParameterDescription(
@@ -226,6 +234,90 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
+    connectors['commets'] = _i1.EndpointConnector(
+      name: 'commets',
+      endpoint: endpoints['commets']!,
+      methodConnectors: {
+        'getCommetsByTrack': _i1.MethodConnector(
+          name: 'getCommetsByTrack',
+          params: {
+            'trackId': _i1.ParameterDescription(
+              name: 'trackId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['commets'] as _i4.CommetsEndpoint).getCommetsByTrack(
+            session,
+            params['trackId'],
+          ),
+        ),
+        'addComment': _i1.MethodConnector(
+          name: 'addComment',
+          params: {
+            'trackId': _i1.ParameterDescription(
+              name: 'trackId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'comment': _i1.ParameterDescription(
+              name: 'comment',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['commets'] as _i4.CommetsEndpoint).addComment(
+            session,
+            params['trackId'],
+            params['comment'],
+          ),
+        ),
+        'removeComment': _i1.MethodConnector(
+          name: 'removeComment',
+          params: {
+            'c': _i1.ParameterDescription(
+              name: 'c',
+              type: _i1.getType<_i9.Comments>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['commets'] as _i4.CommetsEndpoint).removeComment(
+            session,
+            params['c'],
+          ),
+        ),
+        'getCommentById': _i1.MethodConnector(
+          name: 'getCommentById',
+          params: {
+            'commentId': _i1.ParameterDescription(
+              name: 'commentId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['commets'] as _i4.CommetsEndpoint).getCommentById(
+            session,
+            params['commentId'],
+          ),
+        ),
+      },
+    );
     connectors['favoris'] = _i1.EndpointConnector(
       name: 'favoris',
       endpoint: endpoints['favoris']!,
@@ -237,7 +329,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['favoris'] as _i4.FavorisEndpoint).getFavoris(session),
+              (endpoints['favoris'] as _i5.FavorisEndpoint).getFavoris(session),
         ),
         'addFav': _i1.MethodConnector(
           name: 'addFav',
@@ -252,7 +344,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['favoris'] as _i4.FavorisEndpoint).addFav(
+              (endpoints['favoris'] as _i5.FavorisEndpoint).addFav(
             session,
             params['trackId'],
           ),
@@ -270,7 +362,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['favoris'] as _i4.FavorisEndpoint).removeFavByTrackId(
+              (endpoints['favoris'] as _i5.FavorisEndpoint).removeFavByTrackId(
             session,
             params['trackId'],
           ),
@@ -280,7 +372,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'fav': _i1.ParameterDescription(
               name: 'fav',
-              type: _i1.getType<_i8.Favoris>(),
+              type: _i1.getType<_i10.Favoris>(),
               nullable: false,
             )
           },
@@ -288,7 +380,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['favoris'] as _i4.FavorisEndpoint).removeFav(
+              (endpoints['favoris'] as _i5.FavorisEndpoint).removeFav(
             session,
             params['fav'],
           ),
@@ -312,7 +404,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['follower'] as _i5.FollowerEndpoint).getFollowing(
+              (endpoints['follower'] as _i6.FollowerEndpoint).getFollowing(
             session,
             params['artistId'],
           ),
@@ -330,7 +422,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['follower'] as _i5.FollowerEndpoint).getFollowers(
+              (endpoints['follower'] as _i6.FollowerEndpoint).getFollowers(
             session,
             params['artistId'],
           ),
@@ -348,7 +440,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['follower'] as _i5.FollowerEndpoint).followArtist(
+              (endpoints['follower'] as _i6.FollowerEndpoint).followArtist(
             session,
             params['artistId'],
           ),
@@ -358,7 +450,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'follower': _i1.ParameterDescription(
               name: 'follower',
-              type: _i1.getType<_i9.Follower>(),
+              type: _i1.getType<_i11.Follower>(),
               nullable: false,
             )
           },
@@ -366,7 +458,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['follower'] as _i5.FollowerEndpoint).unfollowArtist(
+              (endpoints['follower'] as _i6.FollowerEndpoint).unfollowArtist(
             session,
             params['follower'],
           ),
@@ -384,7 +476,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['tracks'] as _i6.TracksEndpoint).getTrack(session),
+              (endpoints['tracks'] as _i7.TracksEndpoint).getTrack(session),
         ),
         'getTrackById': _i1.MethodConnector(
           name: 'getTrackById',
@@ -399,7 +491,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['tracks'] as _i6.TracksEndpoint).getTrackById(
+              (endpoints['tracks'] as _i7.TracksEndpoint).getTrackById(
             session,
             params['id'],
           ),
@@ -411,7 +503,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['tracks'] as _i6.TracksEndpoint)
+              (endpoints['tracks'] as _i7.TracksEndpoint)
                   .getTopsTracks(session),
         ),
         'getTracksByArtist': _i1.MethodConnector(
@@ -427,7 +519,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['tracks'] as _i6.TracksEndpoint).getTracksByArtist(
+              (endpoints['tracks'] as _i7.TracksEndpoint).getTracksByArtist(
             session,
             params['artistId'],
           ),
@@ -445,7 +537,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['tracks'] as _i6.TracksEndpoint).getTracksByCategory(
+              (endpoints['tracks'] as _i7.TracksEndpoint).getTracksByCategory(
             session,
             params['categoryId'],
           ),
@@ -455,7 +547,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'track': _i1.ParameterDescription(
               name: 'track',
-              type: _i1.getType<_i10.Track>(),
+              type: _i1.getType<_i12.Track>(),
               nullable: false,
             )
           },
@@ -463,13 +555,13 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['tracks'] as _i6.TracksEndpoint).createTrack(
+              (endpoints['tracks'] as _i7.TracksEndpoint).createTrack(
             session,
             params['track'],
           ),
         ),
       },
     );
-    modules['serverpod_auth'] = _i11.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i13.Endpoints()..initializeEndpoints(server);
   }
 }

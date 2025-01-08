@@ -20,12 +20,14 @@ import 'exceptions/appexception.dart' as _i8;
 import 'exceptions/exceptiontype.enum.dart' as _i9;
 import 'favoris.dart' as _i10;
 import 'follower.dart' as _i11;
-import 'tracks.dart' as _i12;
-import 'package:sama3ni_server/src/generated/artists.dart' as _i13;
-import 'package:sama3ni_server/src/generated/categories.dart' as _i14;
-import 'package:sama3ni_server/src/generated/favoris.dart' as _i15;
-import 'package:sama3ni_server/src/generated/follower.dart' as _i16;
-import 'package:sama3ni_server/src/generated/tracks.dart' as _i17;
+import 'track_comments.dart' as _i12;
+import 'tracks.dart' as _i13;
+import 'package:sama3ni_server/src/generated/artists.dart' as _i14;
+import 'package:sama3ni_server/src/generated/categories.dart' as _i15;
+import 'package:sama3ni_server/src/generated/track_comments.dart' as _i16;
+import 'package:sama3ni_server/src/generated/favoris.dart' as _i17;
+import 'package:sama3ni_server/src/generated/follower.dart' as _i18;
+import 'package:sama3ni_server/src/generated/tracks.dart' as _i19;
 export 'artists.dart';
 export 'categories.dart';
 export 'enums/keys.dart';
@@ -34,6 +36,7 @@ export 'exceptions/appexception.dart';
 export 'exceptions/exceptiontype.enum.dart';
 export 'favoris.dart';
 export 'follower.dart';
+export 'track_comments.dart';
 export 'tracks.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
@@ -209,6 +212,84 @@ class Protocol extends _i1.SerializationManagerServer {
       indexes: [
         _i2.IndexDefinition(
           indexName: 'categories_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        )
+      ],
+      managed: true,
+    ),
+    _i2.TableDefinition(
+      name: 'comments',
+      dartName: 'Comments',
+      schema: 'public',
+      module: 'sama3ni',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'comments_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'artistId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'trackId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'comment',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'createdAt',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+          columnDefault: 'CURRENT_TIMESTAMP',
+        ),
+      ],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'comments_fk_0',
+          columns: ['artistId'],
+          referenceTable: 'artists',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'comments_fk_1',
+          columns: ['trackId'],
+          referenceTable: 'tracks',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'comments_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -528,8 +609,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i11.Follower) {
       return _i11.Follower.fromJson(data) as T;
     }
-    if (t == _i12.Track) {
-      return _i12.Track.fromJson(data) as T;
+    if (t == _i12.Comments) {
+      return _i12.Comments.fromJson(data) as T;
+    }
+    if (t == _i13.Track) {
+      return _i13.Track.fromJson(data) as T;
     }
     if (t == _i1.getType<_i4.Artist?>()) {
       return (data != null ? _i4.Artist.fromJson(data) : null) as T;
@@ -555,8 +639,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i11.Follower?>()) {
       return (data != null ? _i11.Follower.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i12.Track?>()) {
-      return (data != null ? _i12.Track.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i12.Comments?>()) {
+      return (data != null ? _i12.Comments.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i13.Track?>()) {
+      return (data != null ? _i13.Track.fromJson(data) : null) as T;
     }
     if (t == List<String>) {
       return (data as List).map((e) => deserialize<String>(e)).toList()
@@ -582,24 +669,28 @@ class Protocol extends _i1.SerializationManagerServer {
           ? (data as List).map((e) => deserialize<_i10.Favoris>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i13.Artist>) {
-      return (data as List).map((e) => deserialize<_i13.Artist>(e)).toList()
+    if (t == List<_i14.Artist>) {
+      return (data as List).map((e) => deserialize<_i14.Artist>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i14.Category>) {
-      return (data as List).map((e) => deserialize<_i14.Category>(e)).toList()
+    if (t == List<_i15.Category>) {
+      return (data as List).map((e) => deserialize<_i15.Category>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i15.Favoris>) {
-      return (data as List).map((e) => deserialize<_i15.Favoris>(e)).toList()
+    if (t == List<_i16.Comments>) {
+      return (data as List).map((e) => deserialize<_i16.Comments>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i16.Follower>) {
-      return (data as List).map((e) => deserialize<_i16.Follower>(e)).toList()
+    if (t == List<_i17.Favoris>) {
+      return (data as List).map((e) => deserialize<_i17.Favoris>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i17.Track>) {
-      return (data as List).map((e) => deserialize<_i17.Track>(e)).toList()
+    if (t == List<_i18.Follower>) {
+      return (data as List).map((e) => deserialize<_i18.Follower>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i19.Track>) {
+      return (data as List).map((e) => deserialize<_i19.Track>(e)).toList()
           as dynamic;
     }
     try {
@@ -639,7 +730,10 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i11.Follower) {
       return 'Follower';
     }
-    if (data is _i12.Track) {
+    if (data is _i12.Comments) {
+      return 'Comments';
+    }
+    if (data is _i13.Track) {
       return 'Track';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -683,8 +777,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'Follower') {
       return deserialize<_i11.Follower>(data['data']);
     }
+    if (dataClassName == 'Comments') {
+      return deserialize<_i12.Comments>(data['data']);
+    }
     if (dataClassName == 'Track') {
-      return deserialize<_i12.Track>(data['data']);
+      return deserialize<_i13.Track>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -720,8 +817,10 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i10.Favoris.t;
       case _i11.Follower:
         return _i11.Follower.t;
-      case _i12.Track:
-        return _i12.Track.t;
+      case _i12.Comments:
+        return _i12.Comments.t;
+      case _i13.Track:
+        return _i13.Track.t;
     }
     return null;
   }

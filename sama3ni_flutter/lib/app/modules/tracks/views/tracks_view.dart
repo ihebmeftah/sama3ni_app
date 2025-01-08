@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sama3ni_client/sama3ni_client.dart';
 import 'package:sama3ni_flutter/app/modules/favoris/controllers/favoris_controller.dart';
+import 'package:sama3ni_flutter/app/routes/app_pages.dart';
+import 'package:sama3ni_flutter/main.dart';
 
 import '../controllers/tracks_controller.dart';
 
@@ -319,7 +321,8 @@ class TracksView extends GetView<TracksController> {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(15),
                       hoverColor: Colors.grey.withValues(alpha: 0.2),
-                      onTap: () {},
+                      onTap: () => Get.toNamed(
+                          "${Routes.TRACKS}/${controller.tracks[index].id}"),
                       child: Padding(
                         padding: const EdgeInsets.all(12),
                         child: Column(
@@ -341,41 +344,54 @@ class TracksView extends GetView<TracksController> {
                                       image: NetworkImage(
                                           controller.tracks[index].photoUrl!),
                                       fit: BoxFit.cover)),
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: GetX<FavorisController>(
-                                    init: FavorisController(),
-                                    builder: (favControllere) {
-                                      return IconButton(
-                                          onPressed: () {
-                                            if (favControllere.fav.any((e) =>
-                                                e.trackId ==
-                                                controller.tracks[index].id)) {
-                                              favControllere.removeFavByTrackId(
-                                                  controller.tracks[index].id!);
-                                            } else {
-                                              favControllere.addFav(
-                                                  controller.tracks[index].id!);
-                                            }
-                                          },
-                                          style: IconButton.styleFrom(
-                                              foregroundColor: favControllere
-                                                      .fav
-                                                      .any((e) =>
+                              child: !sessionManager.isSignedIn
+                                  ? null
+                                  : Align(
+                                      alignment: Alignment.topRight,
+                                      child: GetX<FavorisController>(
+                                          init: FavorisController(),
+                                          builder: (favControllere) {
+                                            return IconButton(
+                                                onPressed: () {
+                                                  if (favControllere.fav.any(
+                                                      (e) =>
                                                           e.trackId ==
                                                           controller
-                                                              .tracks[index].id)
-                                                  ? Colors.red
-                                                  : Colors.grey.shade400),
-                                          icon: Icon(favControllere.fav.any(
-                                                  (e) =>
-                                                      e.trackId ==
-                                                      controller
-                                                          .tracks[index].id)
-                                              ? Icons.favorite
-                                              : Icons.favorite_border));
-                                    }),
-                              ),
+                                                              .tracks[index]
+                                                              .id)) {
+                                                    favControllere
+                                                        .removeFavByTrackId(
+                                                            controller
+                                                                .tracks[index]
+                                                                .id!);
+                                                  } else {
+                                                    favControllere.addFav(
+                                                        controller
+                                                            .tracks[index].id!);
+                                                  }
+                                                },
+                                                style: IconButton.styleFrom(
+                                                    foregroundColor:
+                                                        favControllere.fav.any(
+                                                                (e) =>
+                                                                    e.trackId ==
+                                                                    controller
+                                                                        .tracks[
+                                                                            index]
+                                                                        .id)
+                                                            ? Colors.red
+                                                            : Colors
+                                                                .grey.shade400),
+                                                icon: Icon(favControllere.fav
+                                                        .any((e) =>
+                                                            e.trackId ==
+                                                            controller
+                                                                .tracks[index]
+                                                                .id)
+                                                    ? Icons.favorite
+                                                    : Icons.favorite_border));
+                                          }),
+                                    ),
                             ),
                             Text(
                               controller.tracks[index].title,

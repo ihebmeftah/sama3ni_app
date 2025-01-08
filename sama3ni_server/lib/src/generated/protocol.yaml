@@ -9,6 +9,11 @@ categories:
   - getCategories:
   - getTopCategories:
   - getCategoryById:
+commets:
+  - getCommetsByTrack:
+  - addComment:
+  - removeComment:
+  - getCommentById:
 favoris:
   - getFavoris:
   - addFav:

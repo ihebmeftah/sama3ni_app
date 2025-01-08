@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:sama3ni_flutter/app/modules/tracks/bindings/track_details_binding.dart';
+import 'package:sama3ni_flutter/app/modules/tracks/views/track_details_view.dart';
 
 import '../middlewares/auth_middlewares.dart';
 import '../modules/artists/bindings/artists_binding.dart';
@@ -91,6 +93,13 @@ class AppPages {
       name: _Paths.TRACKS,
       page: () => const TracksView(),
       binding: TracksBinding(),
+      children: [
+          GetPage(
+      name: '/:id',
+      page: () => const TrackDetailsView(),
+      binding: TrackDetailsBinding(),
+    ),
+      ]
     ),
     GetPage(
       name: _Paths.FOLLOWER,

@@ -22,8 +22,10 @@ class FollowerView extends GetView<FollowerController> {
               vertical: MediaQuery.sizeOf(context).width * 0.015,
             ),
             child: controller.obx(
-                (state) => ListView.builder(
+                (state) => ListView.separated(
                     itemCount: data.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 10),
                     itemBuilder: (context, index) {
                       return Column(
                         spacing: 10,

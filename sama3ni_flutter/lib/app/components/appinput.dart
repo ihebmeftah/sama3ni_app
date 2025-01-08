@@ -5,7 +5,7 @@ import 'package:textfield_tags/textfield_tags.dart';
 class AppInput extends StatelessWidget {
   const AppInput({
     super.key,
-    required this.name,
+     this.name,
     this.ctr,
     this.isPasssword = false,
     this.isEmail = false,

@@ -8,18 +8,18 @@ import 'package:sama3ni_flutter/app/modules/artists/controllers/artists_profile_
 import 'package:sama3ni_flutter/main.dart';
 
 class ProfileController extends GetxController {
-  static final _artistProfileCtr = Get.find<ArtistsProfileController>();
+  static final artistProfileCtr = Get.find<ArtistsProfileController>();
 
   final formProfile = GlobalKey<FormState>();
   final username = TextEditingController(
-          text: _artistProfileCtr.artist.userInfo!.userName),
-      address = TextEditingController(text: _artistProfileCtr.artist.address),
-      bio = TextEditingController(text: _artistProfileCtr.artist.bio),
-      ig = TextEditingController(text: _artistProfileCtr.artist.iglink),
+          text: artistProfileCtr.artist.userInfo!.userName),
+      address = TextEditingController(text: artistProfileCtr.artist.address),
+      bio = TextEditingController(text: artistProfileCtr.artist.bio),
+      ig = TextEditingController(text: artistProfileCtr.artist.iglink),
       youtube =
-          TextEditingController(text: _artistProfileCtr.artist.youtubelink),
+          TextEditingController(text: artistProfileCtr.artist.youtubelink),
       soundcloud =
-          TextEditingController(text: _artistProfileCtr.artist.soundcloudlink);
+          TextEditingController(text: artistProfileCtr.artist.soundcloudlink);
   void pickImage() async {
     FilePickerResult? result = await FilePicker.platform
         .pickFiles(type: FileType.image, withData: true);
@@ -44,7 +44,7 @@ class ProfileController extends GetxController {
             ytb: youtube.text,
             sc: soundcloud.text);
         Get.back();
-        _artistProfileCtr.getArtistById();
+        artistProfileCtr.getArtistById();
       }
     } catch (e) {
       log(e.toString());

@@ -49,11 +49,11 @@ class ArtistAboutWidget extends GetView<ArtistsProfileController> {
                   foregroundColor: Colors.grey.shade200,
                   iconColor: Colors.grey.shade200,
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (GetPlatform.isMobile) {
                     Get.toNamed(Routes.PROFILE);
                   } else {
-                    showDialog(
+                    await showDialog(
                       context: context,
                       barrierDismissible: false,
                       builder: (BuildContext context) {
@@ -73,7 +73,9 @@ class ArtistAboutWidget extends GetView<ArtistsProfileController> {
                               child: const ProfileView()),
                         );
                       },
-                    );
+                    ).whenComplete(() {
+                      controller.getArtistById();
+                    });
                   }
                 },
                 label: const Text('Edit Profile'),

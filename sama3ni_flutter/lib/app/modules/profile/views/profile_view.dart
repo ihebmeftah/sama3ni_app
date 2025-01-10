@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:sama3ni_flutter/app/modules/artists/controllers/artists_controller.dart';
+import 'package:sama3ni_flutter/app/modules/artists/controllers/artists_profile_controller.dart';
 import 'package:sama3ni_flutter/main.dart';
 
 import '../../../components/appinput.dart';
@@ -40,8 +42,11 @@ class ProfileView extends GetView<ProfileController> {
                               width: 200,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: NetworkImage(sessionManager
-                                          .signedInUser!.imageUrl!)),
+                                      image: NetworkImage(
+                                          Get.find<ArtistsProfileController>()
+                                              .artist
+                                              .userInfo!
+                                              .imageUrl!)),
                                   color: Colors.green,
                                   borderRadius: BorderRadius.circular(10)));
                         }),

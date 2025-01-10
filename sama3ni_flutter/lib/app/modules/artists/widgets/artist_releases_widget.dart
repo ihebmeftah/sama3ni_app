@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sama3ni_flutter/app/components/appempty.dart';
 
+import '../../../../main.dart';
+import '../../favoris/controllers/favoris_controller.dart';
 import '../controllers/artists_profile_controller.dart';
 
 class ArtistRealeasesWidget extends GetView<ArtistsProfileController> {
@@ -75,11 +77,53 @@ class ArtistRealeasesWidget extends GetView<ArtistsProfileController> {
                                     icon: const Icon(Icons.play_arrow),
                                   ),
                                   const SizedBox(width: 10),
-                                  IconButton(
-                                      onPressed: () {},
-                                      style: IconButton.styleFrom(
-                                          foregroundColor: Colors.red),
-                                      icon: const Icon(Icons.favorite)),
+                                  if (sessionManager.isSignedIn)
+                                    Align(
+                                      alignment: Alignment.topRight,
+                                      child: GetX<FavorisController>(
+                                          init: FavorisController(),
+                                          builder: (favControllere) {
+                                            return IconButton(
+                                                onPressed: () {
+                                                  if (favControllere.fav.any(
+                                                      (e) =>
+                                                          e.trackId ==
+                                                          controller
+                                                              .tracks[index]
+                                                              .id)) {
+                                                    favControllere
+                                                        .removeFavByTrackId(
+                                                            controller
+                                                                .tracks[index]
+                                                                .id!);
+                                                  } else {
+                                                    favControllere.addFav(
+                                                        controller
+                                                            .tracks[index].id!);
+                                                  }
+                                                },
+                                                style: IconButton.styleFrom(
+                                                    foregroundColor:
+                                                        favControllere.fav.any(
+                                                                (e) =>
+                                                                    e.trackId ==
+                                                                    controller
+                                                                        .tracks[
+                                                                            index]
+                                                                        .id)
+                                                            ? Colors.red
+                                                            : Colors
+                                                                .grey.shade400),
+                                                icon: Icon(favControllere.fav
+                                                        .any((e) =>
+                                                            e.trackId ==
+                                                            controller
+                                                                .tracks[index]
+                                                                .id)
+                                                    ? Icons.favorite
+                                                    : Icons.favorite_border));
+                                          }),
+                                    ),
                                   const SizedBox(width: 10),
                                   IconButton(
                                     onPressed: () {},
